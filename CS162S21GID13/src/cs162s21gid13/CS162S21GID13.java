@@ -16,7 +16,11 @@ public class CS162S21GID13 {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        System.out.println("hello world!");
+       // Patient obj = new Patient();
+        //o/bj.setVisible(true);
+        
+        LoginFrame obj1 = new LoginFrame();
+        obj1.setVisible(true);
     }
     
 }
