@@ -1086,7 +1086,7 @@ public class PatientFrame extends javax.swing.JFrame {
         frame.setVisible(true);
     }//GEN-LAST:event_jPanel4MouseClicked
 
-<<<<<<< Updated upstream
+
     private void jPanel22MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel22MousePressed
         // TODO add your handling code here:
         jTabbedPane1.setSelectedIndex(7);
@@ -1114,11 +1114,11 @@ public class PatientFrame extends javax.swing.JFrame {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
-=======
+
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel6MouseClicked
->>>>>>> Stashed changes
+
 
     /**
      * @param args the command line arguments
