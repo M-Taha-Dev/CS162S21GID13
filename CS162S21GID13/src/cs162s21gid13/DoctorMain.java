@@ -157,7 +157,7 @@ public class DoctorMain extends javax.swing.JFrame {
                 jLabel5MouseClicked(evt);
             }
         });
-        jPanel9.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 22, 180, -1));
+        jPanel9.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 4, 180, 40));
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cs162s21gid13/Contact icon.png"))); // NOI18N
         jLabel10.addMouseListener(new java.awt.event.MouseAdapter() {
