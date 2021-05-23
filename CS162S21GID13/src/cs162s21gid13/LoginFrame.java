@@ -91,7 +91,6 @@ public class LoginFrame extends javax.swing.JFrame {
         jSeparator22 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1320, 910));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel3.setBackground(new java.awt.Color(0, 51, 153));
@@ -294,7 +293,12 @@ public class LoginFrame extends javax.swing.JFrame {
         });
 
         jComboBox2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Doctor", "PharmacyManager", "Blood Bank Manager", "Procurement Manager", "Repair Manager", "Admin" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Doctor", "Lab Doctor", "PharmacyManager", "Blood Bank Manager", "Procurement Manager", "Repair Manager", "Admin" }));
+        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
         jPanel18.setLayout(jPanel18Layout);
@@ -559,6 +563,41 @@ public class LoginFrame extends javax.swing.JFrame {
             frame.setVisible(true);
             this.setVisible(false);
         }
+        else if (jComboBox2.getSelectedItem().equals("Doctor"))
+        {
+            DoctorMain frame = new DoctorMain();
+            this.setVisible(false);
+            
+            frame.setVisible(true);
+        }
+        else if (jComboBox2.getSelectedItem().equals("Lab Doctor")) 
+        {
+            LabDocForm frame = new LabDocForm();
+            this.setVisible(false);
+            
+            frame.setVisible(true);
+        } 
+        else if(jComboBox2.getSelectedItem().equals("PharmacyManager")) 
+        {
+                PharmicyManagerForm frame = new PharmicyManagerForm();
+                this.setVisible(false);
+            
+            frame.setVisible(true);
+        }
+        else if (jComboBox2.getSelectedItem().equals("Admin"))
+        {
+            AdminForm frame = new AdminForm();
+            this.setVisible(false);
+            
+            frame.setVisible(true);
+        }
+        else if(jComboBox2.getSelectedItem().equals("Repair Manager"))
+        {
+            RepairManagerForm frame  = new RepairManagerForm();
+            this.setVisible(false);
+            
+            frame.setVisible(true);
+        }
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jTextField13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField13ActionPerformed
@@ -592,6 +631,10 @@ public class LoginFrame extends javax.swing.JFrame {
     private void jTextField19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField19ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField19ActionPerformed
+
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox2ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -198,6 +198,11 @@ public class PatientFrame extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Prescription");
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel6MouseClicked(evt);
+            }
+        });
         jPanel6.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, 170, 73));
 
         jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 390, -1));
@@ -209,9 +214,7 @@ public class PatientFrame extends javax.swing.JFrame {
             }
         });
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel7.setIcon(new javax.swing.ImageIcon("C:\\Users\\DELL\\Desktop\\Final Term Project\\CS162S21GID13\\CS162S21GID13\\src\\cs162s21gid13\\HistoryWhite.png")); // NOI18N
-        jPanel7.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, -1, 84));
+        jPanel7.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, 60, 84));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
@@ -1083,6 +1086,7 @@ public class PatientFrame extends javax.swing.JFrame {
         frame.setVisible(true);
     }//GEN-LAST:event_jPanel4MouseClicked
 
+<<<<<<< Updated upstream
     private void jPanel22MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel22MousePressed
         // TODO add your handling code here:
         jTabbedPane1.setSelectedIndex(7);
@@ -1110,6 +1114,11 @@ public class PatientFrame extends javax.swing.JFrame {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+=======
+    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel6MouseClicked
+>>>>>>> Stashed changes
 
     /**
      * @param args the command line arguments
