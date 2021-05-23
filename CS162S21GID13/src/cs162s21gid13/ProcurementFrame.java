@@ -64,10 +64,10 @@ public class ProcurementFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel3.setBackground(new java.awt.Color(0, 51, 153));
+        jPanel3.setBackground(new java.awt.Color(102, 102, 102));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel5.setBackground(new java.awt.Color(0, 51, 153));
+        jPanel5.setBackground(new java.awt.Color(102, 102, 102));
         jPanel5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jPanel5MouseClicked(evt);
@@ -86,7 +86,7 @@ public class ProcurementFrame extends javax.swing.JFrame {
 
         jPanel3.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, 390, -1));
 
-        jPanel6.setBackground(new java.awt.Color(0, 51, 153));
+        jPanel6.setBackground(new java.awt.Color(102, 102, 102));
         jPanel6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jPanel6MouseClicked(evt);
@@ -105,7 +105,7 @@ public class ProcurementFrame extends javax.swing.JFrame {
 
         jPanel3.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 370, 390, -1));
 
-        jPanel7.setBackground(new java.awt.Color(0, 51, 153));
+        jPanel7.setBackground(new java.awt.Color(102, 102, 102));
         jPanel7.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jPanel7MouseClicked(evt);
@@ -124,7 +124,7 @@ public class ProcurementFrame extends javax.swing.JFrame {
 
         jPanel3.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 670, 390, -1));
 
-        jPanel12.setBackground(new java.awt.Color(0, 51, 153));
+        jPanel12.setBackground(new java.awt.Color(102, 102, 102));
         jPanel12.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jPanel12MouseClicked(evt);
@@ -143,7 +143,7 @@ public class ProcurementFrame extends javax.swing.JFrame {
 
         jPanel3.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 580, 390, -1));
 
-        jPanel18.setBackground(new java.awt.Color(0, 51, 153));
+        jPanel18.setBackground(new java.awt.Color(102, 102, 102));
         jPanel18.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jPanel18MouseClicked(evt);
@@ -164,9 +164,11 @@ public class ProcurementFrame extends javax.swing.JFrame {
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 390, 900));
 
+        jTabbedPane1.setBackground(new java.awt.Color(153, 255, 153));
+
         jPanel9.setBackground(new java.awt.Color(255, 255, 255));
 
-        jPanel10.setBackground(new java.awt.Color(102, 204, 255));
+        jPanel10.setBackground(new java.awt.Color(153, 255, 153));
         jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel19.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -205,7 +207,7 @@ public class ProcurementFrame extends javax.swing.JFrame {
 
         jPanel11.setBackground(new java.awt.Color(255, 255, 255));
 
-        jPanel13.setBackground(new java.awt.Color(102, 204, 255));
+        jPanel13.setBackground(new java.awt.Color(153, 255, 153));
         jPanel13.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel20.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -244,7 +246,7 @@ public class ProcurementFrame extends javax.swing.JFrame {
 
         jPanel14.setBackground(new java.awt.Color(255, 255, 255));
 
-        jPanel15.setBackground(new java.awt.Color(102, 204, 255));
+        jPanel15.setBackground(new java.awt.Color(153, 255, 153));
         jPanel15.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel21.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -283,7 +285,7 @@ public class ProcurementFrame extends javax.swing.JFrame {
 
         jPanel16.setBackground(new java.awt.Color(255, 255, 255));
 
-        jPanel17.setBackground(new java.awt.Color(102, 204, 255));
+        jPanel17.setBackground(new java.awt.Color(153, 255, 153));
         jPanel17.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel22.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
