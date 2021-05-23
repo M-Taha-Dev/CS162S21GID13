@@ -330,10 +330,12 @@ public class PatientFrame extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 390, 910));
 
+        jTabbedPane1.setBackground(new java.awt.Color(0, 0, 0));
+
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBackground(new java.awt.Color(102, 102, 255));
+        jPanel2.setBackground(new java.awt.Color(0, 0, 0));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel19.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -511,7 +513,7 @@ public class PatientFrame extends javax.swing.JFrame {
         jPanel12.setBackground(new java.awt.Color(255, 255, 255));
         jPanel12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel33.setBackground(new java.awt.Color(102, 102, 255));
+        jPanel33.setBackground(new java.awt.Color(0, 0, 0));
         jPanel33.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel20.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -553,7 +555,7 @@ public class PatientFrame extends javax.swing.JFrame {
         jPanel34.setBackground(new java.awt.Color(255, 255, 255));
         jPanel34.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel35.setBackground(new java.awt.Color(102, 102, 255));
+        jPanel35.setBackground(new java.awt.Color(0, 0, 0));
         jPanel35.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel21.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -621,7 +623,7 @@ public class PatientFrame extends javax.swing.JFrame {
         jPanel36.setBackground(new java.awt.Color(255, 255, 255));
         jPanel36.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel37.setBackground(new java.awt.Color(102, 102, 255));
+        jPanel37.setBackground(new java.awt.Color(0, 0, 0));
         jPanel37.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel22.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -684,7 +686,7 @@ public class PatientFrame extends javax.swing.JFrame {
         jPanel38.setBackground(new java.awt.Color(255, 255, 255));
         jPanel38.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel39.setBackground(new java.awt.Color(102, 102, 255));
+        jPanel39.setBackground(new java.awt.Color(0, 0, 0));
         jPanel39.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel23.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -746,7 +748,7 @@ public class PatientFrame extends javax.swing.JFrame {
 
         jPanel40.setBackground(new java.awt.Color(255, 255, 255));
 
-        jPanel41.setBackground(new java.awt.Color(102, 102, 255));
+        jPanel41.setBackground(new java.awt.Color(0, 0, 0));
         jPanel41.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel24.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -861,7 +863,7 @@ public class PatientFrame extends javax.swing.JFrame {
         jPanel42.setBackground(new java.awt.Color(255, 255, 255));
         jPanel42.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel43.setBackground(new java.awt.Color(102, 102, 255));
+        jPanel43.setBackground(new java.awt.Color(0, 0, 0));
         jPanel43.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel25.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -910,7 +912,7 @@ public class PatientFrame extends javax.swing.JFrame {
         jPanel28.setBackground(new java.awt.Color(255, 255, 255));
         jPanel28.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel44.setBackground(new java.awt.Color(102, 102, 255));
+        jPanel44.setBackground(new java.awt.Color(0, 0, 0));
         jPanel44.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel34.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -1023,7 +1025,7 @@ public class PatientFrame extends javax.swing.JFrame {
         jPanel29.setBackground(new java.awt.Color(255, 255, 255));
         jPanel29.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel45.setBackground(new java.awt.Color(102, 102, 255));
+        jPanel45.setBackground(new java.awt.Color(0, 0, 0));
         jPanel45.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel35.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -1083,7 +1085,7 @@ public class PatientFrame extends javax.swing.JFrame {
         jPanel30.setBackground(new java.awt.Color(255, 255, 255));
         jPanel30.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel46.setBackground(new java.awt.Color(102, 102, 255));
+        jPanel46.setBackground(new java.awt.Color(0, 0, 0));
         jPanel46.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel36.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -1149,7 +1151,7 @@ public class PatientFrame extends javax.swing.JFrame {
         jPanel31.setBackground(new java.awt.Color(255, 255, 255));
         jPanel31.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel47.setBackground(new java.awt.Color(102, 102, 255));
+        jPanel47.setBackground(new java.awt.Color(0, 0, 0));
         jPanel47.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel37.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N

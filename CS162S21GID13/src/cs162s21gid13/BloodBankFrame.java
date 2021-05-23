@@ -576,7 +576,7 @@ public class BloodBankFrame extends javax.swing.JFrame {
         });
         jPanel16.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 560, 126, 43));
 
-        jTextField1.setText("Search Medicine");
+        jTextField1.setText("Search Donor");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
