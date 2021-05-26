@@ -18,11 +18,19 @@ public class MedicineBill {
 	private String doctorID;
 	private double totalCost;
 	private Timestamp billDate;
+        private List<Medicine> medList = new ArrayList<>();
+        
+                
 
 	// Getters
-	public String getBillTag() {
-		return billTag;
+        
+	public List<Medicine> getMedList() {
+		return medList;
 	}
+
+    public String getBillTag() {
+        return billTag;
+    }
 	public Timestamp getBillDate() {
 		return billDate;
 	}
@@ -40,9 +48,14 @@ public class MedicineBill {
 	}
 
 	// Setters
-	public void setBillTag(String billTag) {
-		this.billTag = billTag;
+        
+	public void setMedList(List<Medicine> medList) {
+		this.medList = medList;
 	}
+
+    public void setBillTag(String billTag) {
+        this.billTag = billTag;
+    }
 	public void setBillDate() {
 		Date dtDate = new Date();
 		String varString  = "";
@@ -61,5 +74,7 @@ public class MedicineBill {
 	public void setPatientID(String patientID) {
 		this.patientID = patientID;
 	}
+        
+        
 }
 

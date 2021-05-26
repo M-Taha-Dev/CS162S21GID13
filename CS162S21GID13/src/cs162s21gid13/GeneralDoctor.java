@@ -1,6 +1,6 @@
 package prt;
 
-public interface LabDoctor {
+public interface GeneralDoctor {
 	void printname();
 	void setName(String name); 
 }
