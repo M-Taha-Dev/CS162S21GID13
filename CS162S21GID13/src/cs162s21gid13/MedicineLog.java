@@ -7,63 +7,107 @@ package cs162s21gid13;
 
 import java.util.ArrayList;
 import java.util.*;
+
 /**
  *
  * @author DELL
  */
 public class MedicineLog {
-   List<Medicine> medicineList = new ArrayList<>();
 
-	// for adding medicine
-	public boolean addMedicine(Medicine obj) {
-		if (obj != null) {
-			
-			medicineList.add(obj);
-			return true;
-		} else {
-			return false;
-		}
-	}
+    List<Medicine> medicineList = new ArrayList<>();
 
-	// for returning index of medicine on basis of their tag
-	public int getMedIndex(String tag) {
+    // for adding medicine
+    public boolean addMedicine(Medicine obj) {
+        if (obj != null) {
 
-		int index = -1;
-		for (int i = 0; i < medicineList.size(); i++) {
-			if (medicineList.get(i).getMedicineTag().equals(tag)) {
-				index = i;
-			}
-		}
-		return index;
-	}
-	
-	//for deleting medicine
-	public void deleteMedicine(int index) {
-			medicineList.remove(index);
-	}
-	
-	//for updating medicine
-	public void updateMedicine(int index, Medicine obj)
-	{
-		if(obj != null) {
-			medicineList.set(index, obj);
-		}
-	}
-	
-	//for viewing medicine details
-	public Medicine getMedicineDetails(int index) {
-		return medicineList.get(index);
-	}
+            medicineList.add(obj);
+            return true;
+        } else {
+            return false;
+        }
+    }
 
-	// for searching medicine
-	public List<Medicine> searchMedicineByName(String name) {
-		List<Medicine> medList = new ArrayList<>();
-		for (int i = 0; i < medicineList.size(); i++) {
-			if (medicineList.get(i).getMedicineName().equals(name)) {
-				medList.add(medicineList.get(i));
-			}
-		}
-		return medList;
-	}
-	     
+    // for returning index of medicine on basis of their tag
+    public int getMedIndex(String tag) {
+
+        int index = -1;
+        for (int i = 0; i < medicineList.size(); i++) {
+            if (medicineList.get(i).getMedicineTag().equals(tag)) {
+                index = i;
+            }
+        }
+        return index;
+    }
+
+    //for deleting medicine
+    public void deleteMedicine(int index) {
+        medicineList.remove(index);
+    }
+
+    //for updating medicine
+    public void updateMedicine(int index, Medicine obj) {
+        if (obj != null) {
+            medicineList.set(index, obj);
+        }
+    }
+
+    //for viewing medicine details
+    public Medicine getMedicineDetails(int index) {
+        return medicineList.get(index);
+    }
+
+    // for searching medicine
+    public List<Medicine> searchMedicineByName(String name) {
+        List<Medicine> medList = new ArrayList<>();
+        for (int i = 0; i < medicineList.size(); i++) {
+            if (medicineList.get(i).getMedicineName().equals(name)) {
+                medList.add(medicineList.get(i));
+            }
+        }
+        return medList;
+    }
+
+    public int medicineCount(String name) {
+        int count = 0;
+        for (int i = 0; i < medicineList.size(); i++) {
+            if (medicineList.get(i).getMedicineName().equals(name)) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public MedicineRequest buildCart(MedicineRequest obj) {
+        MedicineRequest rObj = new MedicineRequest();
+        rObj.setReqStatus("Added to cart");
+        boolean check = false;
+        for (int i = 0; i < obj.getMedReqList().size(); i++) {
+            if (medicineCount(obj.getMedReqList().get(i).getMedicineName()) > 0) {
+                //check = true;
+            } else {
+                check = false;
+                break;
+            }
+        }
+        if (check) {
+            rObj.setReqStatus("Added to cart");
+            for (int i = 0; i < obj.getMedReqList().size(); i++) {
+                for (int k = 0; k < medicineList.size(); k++) {
+
+                    if (obj.getMedReqList().get(i).getMedicineName().equals(medicineList.get(k).getMedicineName())) {
+                        obj.getMedReqList().get(i).setMedicineCost(medicineList.get(k).getMedicineCost());
+                        obj.getMedReqList().get(i).setMedicineName(medicineList.get(k).getMedicineName());
+                        obj.getMedReqList().get(i).setMedicineTag(medicineList.get(k).getMedicineTag());
+                        obj.getMedReqList().get(i).setExpiryDate(medicineList.get(k).getExpiryDate());
+                        medicineList.get(k).setStatus("Added to cart");
+                        break;
+                    }
+                }
+            }
+        } else {
+            rObj.setReqStatus("Failed to process the request");
+        }
+        return obj;
+    }
+
 }

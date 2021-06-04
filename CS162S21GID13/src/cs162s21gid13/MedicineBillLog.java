@@ -24,5 +24,14 @@ public class MedicineBillLog {
 	}
 	//search bill
 //	public boolean searchBill
-	
+	    boolean checkTag(String tag) {
+        boolean check = true;
+        for (int i = 0; i < billList.size(); i++) {
+            if (billList.get(i).getBillTag().equals(tag)) {
+                check = false;
+                break;
+            }
+        }
+        return check;
+    }
 }

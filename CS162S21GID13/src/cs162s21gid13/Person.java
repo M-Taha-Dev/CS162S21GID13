@@ -9,15 +9,15 @@ package cs162s21gid13;
  *
  * @author Ushher
  */
-public class Person 
+public abstract class Person 
 {
-    private String name = null;
-    private String cnic = null;
-    private String phoneNumber = null;
-    private String dateofBirth = null;
-    private String email = null;
+     public String name = null;
+     public String cnic = null;
+     public String phoneNumber = null;
+     public String dateofBirth = null;
+     public String email = null;
 
-    public String getName() {
+  /*  public String getName() {
         return name;
     }
 
@@ -56,7 +56,7 @@ public class Person
     public void setEmail(String email) {
         this.email = email;
     }
-
+*/
    
   
 }

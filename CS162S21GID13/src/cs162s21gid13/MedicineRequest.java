@@ -18,6 +18,7 @@ public class MedicineRequest {
 	private Timestamp reqDate;
 	private String requestId;
 	private String reqStatus;
+        List<String>RequestedMedicine = new ArrayList<>();
 	
 	// Getters
 	public String getReqStatus() {
@@ -72,5 +73,10 @@ public class MedicineRequest {
 		Timestamp dateTimestamp = Timestamp.valueOf(varString);
 		this.reqDate = dateTimestamp;
 	}
+
+    /*public void setReqDate(Timestamp reqDate) {
+        this.reqDate = reqDate;
+    }*/
+        
 
 }

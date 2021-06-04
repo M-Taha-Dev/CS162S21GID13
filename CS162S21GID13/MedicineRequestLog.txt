@@ -1,0 +1,5 @@
+ABC-123,Paracetamol
+ABC-123,Asprin
+ABC-123,Augmenton
+ABC-123,Klaricid
+ABC-113,Paracetamol

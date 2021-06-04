@@ -9,21 +9,26 @@ package cs162s21gid13;
  *
  * @author DELL
  */
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.sound.midi.VoiceStatus;
+import javax.swing.JOptionPane;
 
 
 
 public class MedicineRequestLog {
 	List<MedicineRequest> medReqList = new ArrayList<>();
+        
 
 	// Accept Request
 	public void acceptRequest(String reqId) {
 		for (int i = 0; i < medReqList.size(); i++) {
 			if (medReqList.get(i).getRequestId().equals(reqId)) {
-				medReqList.get(i).setReqStatus("Accepted");
+				medReqList.get(i).setReqStatus("Added to Cart");
 			}
 		}
 	}
@@ -32,7 +37,6 @@ public class MedicineRequestLog {
 	public void addRequest(MedicineRequest obj) {
 		if (obj != null) {
 			medReqList.add(obj);
-			
 		}
 	}
 
@@ -71,7 +75,7 @@ public class MedicineRequestLog {
 		
 		for(int i=0;i<medReqList.size();i++)
 		{
-			if(medReqList.get(i).equals(tag)) {
+			if(medReqList.get(i).getRequestId().equals(tag)) {
 				obj = medReqList.get(i);
 			}
 		}
@@ -89,6 +93,55 @@ public class MedicineRequestLog {
 		}
 		return strList;
 	}
+        
+        //Add medicine to a specific request
+        
+        
+        void addMedicine(String reqNo, String name){
+            for(int i=0;i<medReqList.size();i++){
+                if(medReqList.get(i).getRequestId().equals(reqNo)){
+                    medReqList.get(i).RequestedMedicine.add(name);
+                    //JOptionPane.showMessageDialog(null, "Hello!");
+                    Medicine o = new Medicine();
+                    o.setMedicineName(name);
+                    medReqList.get(i).getMedReqList().add(o);
+                }
+            }
+        }
+        
+        
+        void readRequest(){
+            try{
+                FileReader fr = new FileReader("PharmacyRequests.txt");
+                BufferedReader br = new BufferedReader(fr);
+                String line = br.readLine();
+                while(line!= null){
+                    String arr[] = line.split(",");
+                    MedicineRequest obj = new MedicineRequest();
+                    obj.setRequestId(arr[0]);
+                    obj.setPatientId(arr[1]);
+                    obj.setReqStatus(arr[2]);
+                    medReqList.add(obj);
+                    line = br.readLine();
+                }
+            }catch(Exception ex){
+                System.err.println("Error");
+            }
+        }
+        void readMedicineRequest(){
+            try{
+                FileReader fr =new FileReader("MedicineRequestLog.txt");
+                BufferedReader br = new BufferedReader(fr);
+                String line = br.readLine();
+                while(line != null){
+                    String arr[] = line.split(",");
+                    addMedicine(arr[0], arr[1]);
+                    line = br.readLine();
+                }
+            }catch(IOException IO){
+                System.out.println("Error!");
+            }
+        }
 
 }
 
