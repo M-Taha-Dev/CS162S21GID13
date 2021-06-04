@@ -23,12 +23,12 @@ import javax.swing.JOptionPane;
 public class MedicineRequestLog {
 	List<MedicineRequest> medReqList = new ArrayList<>();
         
-<<<<<<< Updated upstream
 
-=======
+
+
       
         
->>>>>>> Stashed changes
+
 	// Accept Request
 	public void acceptRequest(String reqId) {
 		for (int i = 0; i < medReqList.size(); i++) {

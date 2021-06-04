@@ -11,18 +11,12 @@ package cs162s21gid13;
  */
 public abstract class Person 
 {
-<<<<<<< Updated upstream
+
      public String name = null;
      public String cnic = null;
      public String phoneNumber = null;
      public String dateofBirth = null;
      public String email = null;
-=======
-    private String name = null;
-    private String cnic = null;
-    private String phoneNumber = null;
-    private String dateofBirth = null;
-    private String email = null;
     private String address = null;
     private String age = null;
 
@@ -44,9 +38,8 @@ public abstract class Person
         this.address = address;
     }
     
->>>>>>> Stashed changes
 
-  /*  public String getName() {
+    public String getName() {
         return name;
     }
 
@@ -85,7 +78,7 @@ public abstract class Person
     public void setEmail(String email) {
         this.email = email;
     }
-*/
+
    
   
 }
