@@ -16,6 +16,8 @@ import java.util.List;
 public class MedicalHistory {
    private List<Prescription> presList = new ArrayList<Prescription>();
 
+   
+   //Getter
     public List<Prescription> getPresList() {
         return presList;
     }
@@ -90,7 +92,7 @@ public class MedicalHistory {
         for (int i = 0; i < presList.size(); i++) 
         {
             Prescription get = presList.get(i);
-            if(get.getDateofCheckup() == date)
+            if(get.getDateofCheckup().equals(date))
             {
                 index = i;
                 break;
@@ -100,5 +102,26 @@ public class MedicalHistory {
         
         return index;
     }
+    
+    
+    /**
+     * 
+     * @param index index of the prescription list
+     * @return Prescription Object if Index Valid, Otherwise returns null
+     */
+    public Prescription getPrescription(int index)
+    {
+        if(index >=0 && index <= this.presList.size())
+        {
+            return this.presList.get(index);
+        }
+        else
+        {
+            return null;
+        }
+    }
+    
+    
+    
     
 }

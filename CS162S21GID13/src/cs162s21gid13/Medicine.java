@@ -20,12 +20,19 @@ public class Medicine {
     static private String medicineTag;
     private String status;
     private int medicineCost;
+    private String Potency;
     
     
+<<<<<<< Updated upstream
     //getters
     
     public String getStatus() {
 		return status;
+=======
+    //Getters
+    public String getMedicineName() {
+		return medicineName;
+>>>>>>> Stashed changes
 	}
 
     public String getMedicineName() {
@@ -43,6 +50,11 @@ public class Medicine {
     public int getMedicineCost() {
 		return medicineCost;
 	}
+    
+    
+    public String getPotency() {
+        return Potency;
+    }
     //setters
 
     public void setStatus(String status) {
@@ -64,6 +76,7 @@ public class Medicine {
     public void setMedicineCost(int medicineCost) {
 		this.medicineCost = medicineCost;
 	}
+<<<<<<< Updated upstream
        static public String generateID() {
         char arr[] = new char[9];
         boolean flag = false;
@@ -85,4 +98,13 @@ public class Medicine {
         }
         return var;
     }
+=======
+
+
+    public void setPotency(String Potency) {
+        this.Potency = Potency;
+    }
+    
+    
+>>>>>>> Stashed changes
 }

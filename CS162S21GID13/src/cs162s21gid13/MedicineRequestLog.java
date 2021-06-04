@@ -23,7 +23,12 @@ import javax.swing.JOptionPane;
 public class MedicineRequestLog {
 	List<MedicineRequest> medReqList = new ArrayList<>();
         
+<<<<<<< Updated upstream
 
+=======
+      
+        
+>>>>>>> Stashed changes
 	// Accept Request
 	public void acceptRequest(String reqId) {
 		for (int i = 0; i < medReqList.size(); i++) {
@@ -143,5 +148,18 @@ public class MedicineRequestLog {
             }
         }
 
+        //Getter
+        
+        public MedicineRequest getRequest(int index)
+        {
+            return this.medReqList.get(index);
+        }
+                        
+        public List<MedicineRequest> getList()
+        {
+            return this.medReqList;
+        }
+        
+        
 }
 

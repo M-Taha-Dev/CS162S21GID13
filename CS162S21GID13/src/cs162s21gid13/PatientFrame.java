@@ -5,12 +5,132 @@
  */
 package cs162s21gid13;
 
+import java.util.List;
+import java.util.Stack;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author DELL
  */
 public class PatientFrame extends javax.swing.JFrame {
 
+    
+    /**
+     * Objects which the frame will interact with
+     */
+    
+    Patient patient = new Patient();
+    
+    /**
+     * Functions
+     */
+    
+    ////
+    
+    void createMedicalHistoryTable(Stack<Prescription> presStack) 
+    {
+
+        if(presStack.isEmpty())
+        {
+            Object rowData[] = new Object[4]; 
+            DefaultTableModel model = (DefaultTableModel) this.MedicalHistoryTable.getModel();
+            model.getDataVector().removeAllElements();
+            
+            rowData[1] = "No Data";
+            rowData[2] = "Available";
+            
+            model.addRow(rowData);
+                   
+        }
+        else
+        {
+            Object rowData[] = new Object[4];
+            DefaultTableModel model = (DefaultTableModel) this.MedicalHistoryTable.getModel();
+            model.getDataVector().removeAllElements();
+            for (int i = 0; i < presStack.size(); i++) 
+            {
+                Prescription pres = presStack.pop();
+                rowData[0] = pres.getDoctorID();
+                rowData[1] = pres.getPatientID();
+                rowData[2] = pres.getPrescriptionTag();
+                rowData[3] = pres.getDateofCheckup();
+                model.addRow(rowData);
+            }
+        }
+    }
+    
+    
+    void createPrescription(Stack<Prescription> presStack)
+    {
+        if(presStack.isEmpty())
+        {
+            this.NoDataLabel.setText("No Data Available");
+        }
+        else
+        {
+            Prescription pres = presStack.pop();
+            this.PresDateLabel1.setText(pres.getDateofCheckup() + "");
+            
+            this.PresTagLabel2.setText(pres.getPrescriptionTag());
+            this.PresDoctorIDLabel1.setText(pres.getDoctorID());
+            
+            this.PresPatientIDLabel.setText(pres.getPatientID());
+            this.PresDiagnosisLabel.setText(pres.getDiagnosis());
+            
+            this.PresTestLabel.setText(pres.getTestRecommended());
+            
+            Object rowData[] = new Object[2];
+            DefaultTableModel model = (DefaultTableModel) this.PresMedicinetable.getModel();
+            model.getDataVector().removeAllElements();
+            
+            for (int i = 0; i < pres.getMedList().size(); i++) 
+            {
+                Medicine med = pres.getMedList().get(i);
+                
+                rowData[0] = med.getMedicineName();
+                rowData[1] = med.getPotency();
+                
+                
+                model.addRow(rowData);
+            }
+            
+        }
+        
+    }
+    
+    void createLabTestTable(Stack<LabTest> labtestStack)
+    {
+        if(labtestStack.isEmpty())
+        {
+            Object rowData[] = new Object[4]; 
+            DefaultTableModel model = (DefaultTableModel) this.LabTestTable.getModel();
+            model.getDataVector().removeAllElements();
+            
+            rowData[1] = "No Data";
+            rowData[2] = "Available";
+            
+            
+            model.addRow(rowData);
+        }
+        else
+        {
+            Object rowData[] = new Object[4];
+            DefaultTableModel model = (DefaultTableModel) this.LabTestTable.getModel();
+            model.getDataVector().removeAllElements();
+            for (int i = 0; i < labtestStack.size(); i++) 
+            {
+                LabTest labtest = labtestStack.pop();
+                rowData[0] = labtest.getLabDoctorId();
+                rowData[1] = labtest.getTestName();
+                rowData[2] = labtest.getTestResult();
+                rowData[3] = labtest.getDateofTest();
+                model.addRow(rowData);
+            }
+        }    
+    }
+    
+    
     /**
      * Creates new form Patient
      */
@@ -34,18 +154,18 @@ public class PatientFrame extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jPanel6 = new javax.swing.JPanel();
+        Prespanel = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jPanel7 = new javax.swing.JPanel();
+        presLabel = new javax.swing.JLabel();
+        MedicalHistoryPanel = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jPanel9 = new javax.swing.JPanel();
+        LabResultsPanel = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
+        LabResultsLabel = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
@@ -54,7 +174,7 @@ public class PatientFrame extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         jPanel14 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
+        AccountLabel = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -75,20 +195,33 @@ public class PatientFrame extends javax.swing.JFrame {
         jPanel12 = new javax.swing.JPanel();
         jPanel33 = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jLabel6 = new javax.swing.JLabel();
+        PresTestLabel = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel49 = new javax.swing.JLabel();
+        PresDateLabel1 = new javax.swing.JLabel();
+        NoDataLabel = new javax.swing.JLabel();
+        jLabel50 = new javax.swing.JLabel();
+        jLabel51 = new javax.swing.JLabel();
+        jLabel52 = new javax.swing.JLabel();
+        PresDoctorIDLabel1 = new javax.swing.JLabel();
+        PresPatientIDLabel = new javax.swing.JLabel();
+        PresDiagnosisLabel = new javax.swing.JLabel();
+        jScrollPane13 = new javax.swing.JScrollPane();
+        PresMedicinetable = new javax.swing.JTable();
+        PresTagLabel2 = new javax.swing.JLabel();
         jPanel15 = new javax.swing.JPanel();
         jPanel34 = new javax.swing.JPanel();
         jPanel35 = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
-        jScrollPane7 = new javax.swing.JScrollPane();
-        jTable7 = new javax.swing.JTable();
+        jScrollPane12 = new javax.swing.JScrollPane();
+        MedicalHistoryTable = new javax.swing.JTable();
         jPanel16 = new javax.swing.JPanel();
         jPanel36 = new javax.swing.JPanel();
         jPanel37 = new javax.swing.JPanel();
         jLabel22 = new javax.swing.JLabel();
-        jScrollPane8 = new javax.swing.JScrollPane();
-        jTable8 = new javax.swing.JTable();
+        jScrollPane14 = new javax.swing.JScrollPane();
+        LabTestTable = new javax.swing.JTable();
         jPanel17 = new javax.swing.JPanel();
         jPanel38 = new javax.swing.JPanel();
         jPanel39 = new javax.swing.JPanel();
@@ -100,11 +233,11 @@ public class PatientFrame extends javax.swing.JFrame {
         jPanel41 = new javax.swing.JPanel();
         jLabel24 = new javax.swing.JLabel();
         jLabel43 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
+        ageField = new javax.swing.JTextField();
+        addressField = new javax.swing.JTextField();
+        emailField = new javax.swing.JTextField();
+        passwordField = new javax.swing.JTextField();
+        nameField = new javax.swing.JTextField();
         jLabel44 = new javax.swing.JLabel();
         jLabel45 = new javax.swing.JLabel();
         jLabel46 = new javax.swing.JLabel();
@@ -200,43 +333,43 @@ public class PatientFrame extends javax.swing.JFrame {
 
         jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, 140, 390, -1));
 
-        jPanel6.setBackground(new java.awt.Color(54, 33, 89));
-        jPanel6.addMouseListener(new java.awt.event.MouseAdapter() {
+        Prespanel.setBackground(new java.awt.Color(54, 33, 89));
+        Prespanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel6MouseClicked(evt);
+                PrespanelMouseClicked(evt);
             }
         });
-        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        Prespanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cs162s21gid13/Prescription-48.png"))); // NOI18N
-        jPanel6.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, -1, 84));
+        Prespanel.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, -1, 84));
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("Prescription");
-        jPanel6.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, 170, 73));
+        presLabel.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        presLabel.setForeground(new java.awt.Color(255, 255, 255));
+        presLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        presLabel.setText("Prescription");
+        Prespanel.add(presLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, 170, 73));
 
-        jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 390, -1));
+        jPanel1.add(Prespanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 390, -1));
 
-        jPanel7.setBackground(new java.awt.Color(54, 33, 89));
-        jPanel7.addMouseListener(new java.awt.event.MouseAdapter() {
+        MedicalHistoryPanel.setBackground(new java.awt.Color(54, 33, 89));
+        MedicalHistoryPanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel7MouseClicked(evt);
+                MedicalHistoryPanelMouseClicked(evt);
             }
         });
-        jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        MedicalHistoryPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cs162s21gid13/HistoryWhite.png"))); // NOI18N
-        jPanel7.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, 60, 84));
+        MedicalHistoryPanel.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, 60, 84));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("Medical History");
-        jPanel7.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, 200, 73));
+        MedicalHistoryPanel.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, 200, 73));
 
-        jPanel1.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 390, -1));
+        jPanel1.add(MedicalHistoryPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 390, -1));
 
         jPanel8.setBackground(new java.awt.Color(54, 33, 89));
         jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -252,24 +385,24 @@ public class PatientFrame extends javax.swing.JFrame {
 
         jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 390, -1));
 
-        jPanel9.setBackground(new java.awt.Color(54, 33, 89));
-        jPanel9.addMouseListener(new java.awt.event.MouseAdapter() {
+        LabResultsPanel.setBackground(new java.awt.Color(54, 33, 89));
+        LabResultsPanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel9MouseClicked(evt);
+                LabResultsPanelMouseClicked(evt);
             }
         });
-        jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        LabResultsPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cs162s21gid13/Test Results icon.png"))); // NOI18N
-        jPanel9.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, -1, 84));
+        LabResultsPanel.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, -1, 84));
 
-        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel12.setText("Lab Results");
-        jPanel9.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, 200, 73));
+        LabResultsLabel.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        LabResultsLabel.setForeground(new java.awt.Color(255, 255, 255));
+        LabResultsLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LabResultsLabel.setText("Lab Results");
+        LabResultsPanel.add(LabResultsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, 200, 73));
 
-        jPanel1.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 410, 390, -1));
+        jPanel1.add(LabResultsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 410, 390, -1));
 
         jPanel10.setBackground(new java.awt.Color(54, 33, 89));
         jPanel10.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -320,11 +453,16 @@ public class PatientFrame extends javax.swing.JFrame {
         jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cs162s21gid13/More Info icon.png"))); // NOI18N
         jPanel14.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, -1, 84));
 
-        jLabel18.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel18.setText("Account Info");
-        jPanel14.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, 200, 73));
+        AccountLabel.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        AccountLabel.setForeground(new java.awt.Color(255, 255, 255));
+        AccountLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        AccountLabel.setText("Account Info");
+        AccountLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                AccountLabelMouseClicked(evt);
+            }
+        });
+        jPanel14.add(AccountLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, 200, 73));
 
         jPanel1.add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 580, 390, -1));
 
@@ -524,31 +662,101 @@ public class PatientFrame extends javax.swing.JFrame {
 
         jPanel12.add(jPanel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 940, 110));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel6.setText("Prescription Tag");
+        jPanel12.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, -1, 30));
+
+        PresTestLabel.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jPanel12.add(PresTestLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 770, 210, 30));
+
+        jLabel18.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel18.setText("Date of Prescription");
+        jPanel12.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, 30));
+
+        jLabel49.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel49.setText("Test Recommended");
+        jPanel12.add(jLabel49, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 770, -1, 30));
+
+        PresDateLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jPanel12.add(PresDateLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 130, 210, 30));
+
+        NoDataLabel.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jPanel12.add(NoDataLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 340, 210, 30));
+
+        jLabel50.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel50.setText("Doctor ID");
+        jPanel12.add(jLabel50, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, -1, 30));
+
+        jLabel51.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel51.setText("Patient ID");
+        jPanel12.add(jLabel51, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 510, -1, 30));
+
+        jLabel52.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel52.setText("Diagnosis");
+        jPanel12.add(jLabel52, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 630, -1, 30));
+
+        PresDoctorIDLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jPanel12.add(PresDoctorIDLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 380, 210, 30));
+
+        PresPatientIDLabel.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jPanel12.add(PresPatientIDLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 510, 210, 30));
+
+        PresDiagnosisLabel.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jPanel12.add(PresDiagnosisLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 630, 210, 30));
+
+        PresMedicinetable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Medicine Name", "Potency"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        PresMedicinetable.setGridColor(new java.awt.Color(255, 255, 255));
+        jScrollPane13.setViewportView(PresMedicinetable);
 
-        jPanel12.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 340, -1, 240));
+        jPanel12.add(jScrollPane13, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 260, 340, 590));
 
-        jPanel11.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 940, 880));
+        PresTagLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jPanel12.add(PresTagLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, 210, 30));
+
+        jPanel11.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 940, 880));
 
         jTabbedPane1.addTab("tab2", jPanel11);
 
@@ -566,36 +774,54 @@ public class PatientFrame extends javax.swing.JFrame {
 
         jPanel34.add(jPanel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 940, 110));
 
-        jTable7.setModel(new javax.swing.table.DefaultTableModel(
+        MedicalHistoryTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Sr No.", "Doctor's Name", "Category", "Date and Time", "Prescription", "Symptoms"
+                "Doctor ID", "Patient ID", "Prescription ID", "Date"
             }
         ));
-        jTable7.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jTable7.setGridColor(new java.awt.Color(255, 255, 255));
-        jScrollPane7.setViewportView(jTable7);
-        if (jTable7.getColumnModel().getColumnCount() > 0) {
-            jTable7.getColumnModel().getColumn(2).setHeaderValue("Category");
-            jTable7.getColumnModel().getColumn(4).setHeaderValue("Prescription");
-            jTable7.getColumnModel().getColumn(5).setHeaderValue("Symptoms");
-        }
+        MedicalHistoryTable.setGridColor(new java.awt.Color(255, 255, 255));
+        jScrollPane12.setViewportView(MedicalHistoryTable);
 
-        jPanel34.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 270, 660, 240));
+        jPanel34.add(jScrollPane12, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, 620, 540));
 
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
@@ -634,8 +860,32 @@ public class PatientFrame extends javax.swing.JFrame {
 
         jPanel36.add(jPanel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 940, 110));
 
-        jTable8.setModel(new javax.swing.table.DefaultTableModel(
+        LabTestTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
@@ -651,14 +901,13 @@ public class PatientFrame extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Sr No.", "Test", "Results", "Date and Time"
+                "Lab Doctor ID", "Test", "Test Result", "Date"
             }
         ));
-        jTable8.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jTable8.setGridColor(new java.awt.Color(255, 255, 255));
-        jScrollPane8.setViewportView(jTable8);
+        LabTestTable.setGridColor(new java.awt.Color(255, 255, 255));
+        jScrollPane14.setViewportView(LabTestTable);
 
-        jPanel36.add(jScrollPane8, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 270, 660, 240));
+        jPanel36.add(jScrollPane14, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 180, 620, 540));
 
         javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
         jPanel16.setLayout(jPanel16Layout);
@@ -759,20 +1008,20 @@ public class PatientFrame extends javax.swing.JFrame {
 
         jLabel43.setText("Age");
 
-        jTextField2.setEditable(false);
-        jTextField2.setText("Age");
+        ageField.setEditable(false);
+        ageField.setText("Age");
 
-        jTextField3.setEditable(false);
-        jTextField3.setText("Address");
+        addressField.setEditable(false);
+        addressField.setText("Address");
 
-        jTextField4.setEditable(false);
-        jTextField4.setText("Email");
+        emailField.setEditable(false);
+        emailField.setText("Email");
 
-        jTextField5.setEditable(false);
-        jTextField5.setText("Password");
+        passwordField.setEditable(false);
+        passwordField.setText("Password");
 
-        jTextField6.setEditable(false);
-        jTextField6.setText("Name");
+        nameField.setEditable(false);
+        nameField.setText("Name");
 
         jLabel44.setText("Address");
 
@@ -798,15 +1047,15 @@ public class PatientFrame extends javax.swing.JFrame {
                             .addGroup(jPanel40Layout.createSequentialGroup()
                                 .addComponent(jLabel44)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(addressField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel40Layout.createSequentialGroup()
                                 .addComponent(jLabel47)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel40Layout.createSequentialGroup()
                                 .addComponent(jLabel43)
                                 .addGap(98, 98, 98)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(ageField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(jPanel40Layout.createSequentialGroup()
                             .addGroup(jPanel40Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel45)
@@ -815,8 +1064,8 @@ public class PatientFrame extends javax.swing.JFrame {
                                     .addComponent(jLabel46)))
                             .addGap(55, 55, 55)
                             .addGroup(jPanel40Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))))
         );
         jPanel40Layout.setVerticalGroup(
             jPanel40Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -825,23 +1074,23 @@ public class PatientFrame extends javax.swing.JFrame {
                 .addGap(90, 90, 90)
                 .addGroup(jPanel40Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel47, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(40, 40, 40)
                 .addGroup(jPanel40Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ageField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel43, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(52, 52, 52)
                 .addGroup(jPanel40Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addressField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel44, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(56, 56, 56)
                 .addGroup(jPanel40Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel45, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(62, 62, 62)
                 .addGroup(jPanel40Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel46, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(98, 98, 98)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(119, Short.MAX_VALUE))
@@ -1223,29 +1472,33 @@ public class PatientFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jPanel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseClicked
+    private void PrespanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PrespanelMouseClicked
         // TODO add your handling code here:
         jTabbedPane1.setSelectedIndex(1);
-    }//GEN-LAST:event_jPanel6MouseClicked
+        this.createPrescription(this.patient.viewHistory());
+        
+    }//GEN-LAST:event_PrespanelMouseClicked
 
     private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
         // TODO add your handling code here:
         jTabbedPane1.setSelectedIndex(0);
     }//GEN-LAST:event_jPanel5MouseClicked
 
-    private void jPanel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseClicked
+    private void MedicalHistoryPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MedicalHistoryPanelMouseClicked
         // TODO add your handling code here:
         jTabbedPane1.setSelectedIndex(2);
-    }//GEN-LAST:event_jPanel7MouseClicked
+        createMedicalHistoryTable(this.patient.viewHistory());
+    }//GEN-LAST:event_MedicalHistoryPanelMouseClicked
 
-    private void jPanel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel9MouseClicked
+    private void LabResultsPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabResultsPanelMouseClicked
         // TODO add your handling code here:
         jTabbedPane1.setSelectedIndex(3);
-    }//GEN-LAST:event_jPanel9MouseClicked
+    }//GEN-LAST:event_LabResultsPanelMouseClicked
 
     private void jPanel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel10MouseClicked
         // TODO add your handling code here:
         jTabbedPane1.setSelectedIndex(4);
+        createLabTestTable(this.patient.viewLabTestsHistory());
     }//GEN-LAST:event_jPanel10MouseClicked
 
     private void jPanel14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel14MouseClicked
@@ -1308,6 +1561,21 @@ public class PatientFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel6MouseClicked
 
+    private void AccountLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AccountLabelMouseClicked
+        this.jTabbedPane1.setSelectedIndex(5);
+        
+        this.nameField.setText(this.patient.getName());
+        this.ageField.setText(this.patient.getAge());
+        
+        this.addressField.setText(this.patient.getAddress());
+        this.emailField.setText(this.patient.getEmail());
+        
+        this.passwordField.setText(this.patient.getpassword());
+        
+        
+        
+    }//GEN-LAST:event_AccountLabelMouseClicked
+
 
 
     /**
@@ -1345,8 +1613,28 @@ public class PatientFrame extends javax.swing.JFrame {
             }
         });
     }
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel AccountLabel;
+    private javax.swing.JLabel LabResultsLabel;
+    private javax.swing.JPanel LabResultsPanel;
+    private javax.swing.JTable LabTestTable;
+    private javax.swing.JPanel MedicalHistoryPanel;
+    private javax.swing.JTable MedicalHistoryTable;
+    private javax.swing.JLabel NoDataLabel;
+    private javax.swing.JLabel PresDateLabel1;
+    private javax.swing.JLabel PresDiagnosisLabel;
+    private javax.swing.JLabel PresDoctorIDLabel1;
+    private javax.swing.JTable PresMedicinetable;
+    private javax.swing.JLabel PresPatientIDLabel;
+    private javax.swing.JLabel PresTagLabel2;
+    private javax.swing.JLabel PresTestLabel;
+    private javax.swing.JPanel Prespanel;
+    private javax.swing.JTextField addressField;
+    private javax.swing.JTextField ageField;
+    private javax.swing.JTextField emailField;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -1356,7 +1644,6 @@ public class PatientFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
@@ -1396,7 +1683,11 @@ public class PatientFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel47;
     private javax.swing.JLabel jLabel48;
+    private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel50;
+    private javax.swing.JLabel jLabel51;
+    private javax.swing.JLabel jLabel52;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -1443,36 +1734,28 @@ public class PatientFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel46;
     private javax.swing.JPanel jPanel47;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
+    private javax.swing.JScrollPane jScrollPane12;
+    private javax.swing.JScrollPane jScrollPane13;
+    private javax.swing.JScrollPane jScrollPane14;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JScrollPane jScrollPane7;
-    private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
     private javax.swing.JTable jTable4;
     private javax.swing.JTable jTable5;
     private javax.swing.JTable jTable6;
-    private javax.swing.JTable jTable7;
-    private javax.swing.JTable jTable8;
     private javax.swing.JTable jTable9;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField nameField;
+    private javax.swing.JTextField passwordField;
+    private javax.swing.JLabel presLabel;
     // End of variables declaration//GEN-END:variables
 }

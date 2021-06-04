@@ -15,6 +15,8 @@ public class PatientBill {
     private int doctorFees;
     private double medicineBill;
 
+    
+    
     public PatientBill() 
     {
         this.billTag = null;

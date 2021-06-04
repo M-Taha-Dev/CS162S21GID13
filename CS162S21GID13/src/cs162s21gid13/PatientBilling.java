@@ -12,9 +12,11 @@ import java.util.List;
  *
  * @author Ushher
  */
-public class PatientBlling {
+public class PatientBilling {
     
    private List <PatientBill> billList = new ArrayList<PatientBill>();
+   
+   
 
     // Getter for List
     public List<PatientBill> getBillList() {
@@ -101,6 +103,9 @@ public class PatientBlling {
             return null;
         }
     }
+   
     
     
+    
+        
 }

@@ -5,6 +5,7 @@
  */
 package cs162s21gid13;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -14,13 +15,17 @@ import java.util.List;
  */
 public class Prescription {
     private String DoctorID, PatientID, Diagnosis, TestRecommended, prescriptionTag;
-    Date dateofCheckup;
-    //private List<Medicines> medList = new ArrayList<Medicines>();
-    
-    
+    private Date dateofCheckup;
+    private List<Medicine> medList = new ArrayList<Medicine>();
+
     
 
     /// Getters and Setters
+    
+    public List<Medicine> getMedList() {
+        return medList;
+    }
+    
     public String getPrescriptionTag() {    
         return prescriptionTag;
     }

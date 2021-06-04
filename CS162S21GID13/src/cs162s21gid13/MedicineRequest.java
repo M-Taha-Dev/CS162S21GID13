@@ -11,7 +11,8 @@ package cs162s21gid13;
  */
 import java.sql.Timestamp;
 import java.util.*;
-public class MedicineRequest {
+public class MedicineRequest 
+{
 	private List<Medicine> medReqList = new ArrayList<>();
 	private String patientId;
 	private String doctorIdString;
