@@ -1,14 +1,14 @@
 package cs162s21gid13;
 
-<<<<<<< Updated upstream
+
 import java.util.*;
 
 
    
-=======
+
 
 import java.util.*;
->>>>>>> Stashed changes
+
     
 
 

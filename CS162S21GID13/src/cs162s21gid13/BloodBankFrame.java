@@ -61,6 +61,7 @@ public class BloodBankFrame extends javax.swing.JFrame {
         }
     }
     
+    /*
     void createDonorTable(Stack<Transfusion> stack)
     {
         if(stack.isEmpty())
