@@ -1,4 +1,7 @@
 package cs162s21gid13;
+
+import java.util.List;
+
 public class SpecialistDocotr extends SimpleDoctor implements Doctor,LabDoctor,GeneralDoctor  {
 	
 	@Override
@@ -28,13 +31,23 @@ public class SpecialistDocotr extends SimpleDoctor implements Doctor,LabDoctor,G
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+  // @Override
+    //public String getHistory() {
+       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+   // }
+
     @Override
-    public String getHistory() {
+    public void performTest(String testId) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void performTest(String testId) {
+    public void printPrescription() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Prescription> getHistory() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 	

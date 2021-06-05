@@ -11,11 +11,14 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Ushher
  */
+import java.util.*;
 public class DoctorMain extends javax.swing.JFrame {
 
     /**
      * Creates new form DoctorMain
      */
+    static List<Doctor>dList = new ArrayList<>() ;
+    
     public DoctorMain() {
         initComponents();
     }
