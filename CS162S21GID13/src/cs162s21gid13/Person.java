@@ -12,13 +12,13 @@ package cs162s21gid13;
 public abstract class Person 
 {
 
-     public String name = null;
-     public String cnic = null;
-     public String phoneNumber = null;
-     public String dateofBirth = null;
-     public String email = null;
-    private String address = null;
-    private String age = null;
+     protected String name = null;
+     protected String cnic = null;
+     protected String phoneNumber = null;
+     protected String dateofBirth = null;
+    protected String email = null;
+    protected String address = null;
+    protected String age = null;
 
     public String getAge() {
         return age;
@@ -27,8 +27,6 @@ public abstract class Person
     public void setAge(String age) {
         this.age = age;
     }
-    
-    
 
     public String getAddress() {
         return address;

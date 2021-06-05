@@ -75,9 +75,9 @@ public class MedicineRequest
 		this.reqDate = dateTimestamp;
 	}
 
-    /*public void setReqDate(Timestamp reqDate) {
+    public void setReqDate(Timestamp reqDate) {
         this.reqDate = reqDate;
-    }*/
+    }
         
 
 }

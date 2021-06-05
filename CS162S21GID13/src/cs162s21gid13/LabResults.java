@@ -1,16 +1,23 @@
 package cs162s21gid13;
 
+<<<<<<< Updated upstream
 import java.util.*;
 
 
    
+=======
+
+import java.util.*;
+>>>>>>> Stashed changes
     
 
 
 public class LabResults {
      String PatientID;
     List<LabTest> testList = new ArrayList<>();
-    // add test
+    
+
+// add test
     public void addResult(LabTest obj){
         if(obj != null && obj.getStatus().equals("Tested")){
             testList.add(obj);

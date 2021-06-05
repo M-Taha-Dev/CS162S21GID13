@@ -5,12 +5,239 @@
  */
 package cs162s21gid13;
 
+import java.util.Stack;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author DELL
  */
 public class BloodBankFrame extends javax.swing.JFrame {
 
+    /**
+     * Objects with which the frame will interact
+     */
+    
+    DonorLog donorlog = new DonorLog();
+    BloodrequestLog bloodRequestlog = new BloodrequestLog();
+    TransfusionLog transfusionLog = new TransfusionLog();
+    
+    /**
+     * functions  to populate tables
+     */
+    
+    void createBloodRequesttable(Stack<BloodRequest> bloodrequestStack)
+    {
+        if(bloodrequestStack.isEmpty())
+        {
+            Object rowData[] = new Object[5]; 
+            DefaultTableModel model = (DefaultTableModel) this.BloodRequestTable.getModel();
+            model.getDataVector().removeAllElements();
+            
+            rowData[1] = "No Data";
+            rowData[2] = "Available";
+            
+            model.addRow(rowData);
+                   
+        }
+        else
+        {
+            Object rowData[] = new Object[5];
+            DefaultTableModel model = (DefaultTableModel) this.BloodRequestTable.getModel();
+            model.getDataVector().removeAllElements();
+            for (int i = 0; i < bloodrequestStack.size(); i++) 
+            {
+                BloodRequest req = bloodrequestStack.pop();
+                rowData[0] = "" + (i+1);
+                rowData[1] = req.getReciepientName();
+                rowData[2] = req.getBloodType();
+                rowData[3] = req.getAmountofBlood();
+                rowData[4] = req.getTimestamp() + "";
+                model.addRow(rowData);
+            }
+        }
+    }
+    
+    void createDonorTable(Stack<Transfusion> stack)
+    {
+        if(stack.isEmpty())
+        {
+            Object rowData[] = new Object[7]; 
+            DefaultTableModel model = (DefaultTableModel) this.BloodRequestTable.getModel();
+            model.getDataVector().removeAllElements();
+            
+            rowData[1] = "No Data";
+            rowData[2] = "Available";
+            
+            model.addRow(rowData);
+                   
+        }
+        else
+        {
+            Object rowData[] = new Object[7];
+            DefaultTableModel model = (DefaultTableModel) this.BloodRequestTable.getModel();
+            model.getDataVector().removeAllElements();
+            for (int i = 0; i < stack.size(); i++) 
+            {
+                Transfusion req = stack.pop();
+                rowData[0] = "" + (i+1);
+                rowData[1] = req.getDonor().getName();
+                rowData[2] = req.getDonor().getCnic();
+                rowData[3] = req.getDonor().getBloodType();
+                rowData[4] = req.getDonor().getPhoneNumber();
+                rowData[5] = req.getTimeofTransfusion();
+                rowData[6] = req.getReciepientName();
+                model.addRow(rowData);
+            }
+        }
+    }
+    
+    
+    /**
+     * Input validation Functions
+     */
+    
+    public boolean CNICinput(String str)
+    {
+        boolean valid = false;
+		
+		if(str.length() == 13)
+		{
+			char array [] = str.toCharArray();
+			
+			for(int i = 0; i < array.length; i++)
+			{
+				if(array[i] >= '0' && array[i] <= '9')
+				{
+					valid = true;
+				}
+				else
+				{
+					valid = false;
+					break;
+				}
+			}
+		}
+                
+                else
+               {
+                   JOptionPane.showMessageDialog(null, "Invalid Input! \n You Have Entered Wrong Input!", "Input CNIC Failure", 0);
+               }
+		
+		
+		return valid;
+    }
+    
+    public boolean emailInput(String str)
+    {
+        boolean valid = false;
+        String emailRegex = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
+        
+        Pattern emailPat = Pattern.compile(emailRegex,Pattern.CASE_INSENSITIVE);
+        Matcher matcher = emailPat.matcher(str);
+        
+        valid = matcher.find();
+        
+        if(!valid)
+        {
+            JOptionPane.showMessageDialog(null, "Invalid Input! \n You Have Entered Wrong Format! \n Please Enter a Valid Email Address", "Input Email Failure", 0);
+        }
+
+        return valid;
+    }
+    
+    public boolean PhoneNumInput(String str)
+    {
+        boolean valid = false;
+        char [] array = str.toCharArray();
+        
+        if(array.length == 11)
+        {
+            if(array[0] == '0')
+            {
+                for (int i = 1; i < array.length; i++) 
+                {
+                    if(array[i] >= '0' && array[i] <= '9')
+                    {
+                        valid = true;
+                    }
+                    else
+                    {
+                        valid = false;
+                        break;
+                    }
+
+                }
+            }
+            else
+            {
+                valid = false;
+            }
+            
+            
+        }
+        else
+        {
+            valid = false;
+        }
+        
+        
+        
+        if(!valid)
+        {
+            JOptionPane.showMessageDialog(null, "Invalid Input! \n You Have Entered Wrong Format!", "Input Phone Number Failure", 0);
+        }
+        
+        
+        return valid;
+    }
+        
+    public boolean BloodGroupInput(String str)
+    {
+        boolean valid = false;
+        
+        if(str.equals("A+") || str.equals("A-") || str.equals("B+") || str.equals("B-") || str.equals("O+") || str.equals("O-")
+                || str.equals("AB+") || str.equals("AB-"))
+        {
+            valid = true;
+        }
+        
+        if(!valid)
+        {
+            JOptionPane.showMessageDialog(null, "Invalid Input! \n You Have Entered Wrong Format!", "Input ID Failure", 0);
+        }
+        
+        return valid;
+    }   
+    
+    public boolean nameInput(String str)
+    {
+        boolean valid = false;
+        char [] arr = str.toCharArray();
+        
+        for (int i = 0; i < arr.length; i++) 
+        {
+            if( (arr[i] >= 'a' && arr[i] <= 'z') || (arr[i] >= 'A' && arr[i] <= 'Z') || arr[i] == ' ' )
+            {
+                valid = true;
+            }
+            else
+            {
+                valid = false;
+                break;
+            }
+        }
+        if(!valid)
+        {
+            JOptionPane.showMessageDialog(null, "Invalid Input! \n Only Characters and Space is allowed", "Input Name Failure", 0);
+        }
+        
+        return valid;
+    }
+    
     /**
      * Creates new form BloodBankFrame
      */
@@ -31,7 +258,7 @@ public class BloodBankFrame extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jPanel6 = new javax.swing.JPanel();
+        BloodReqPanel = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
@@ -39,8 +266,8 @@ public class BloodBankFrame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel12 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jPanel13 = new javax.swing.JPanel();
+        TransfusionHistoryPanel = new javax.swing.JLabel();
+        AddDonorPanel = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
@@ -59,27 +286,26 @@ public class BloodBankFrame extends javax.swing.JFrame {
         jPanel10 = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        BloodRequestTable = new javax.swing.JTable();
+        jPanel33 = new javax.swing.JPanel();
+        jLabel40 = new javax.swing.JLabel();
+        jLabel41 = new javax.swing.JLabel();
+        jPanel34 = new javax.swing.JPanel();
+        jLabel44 = new javax.swing.JLabel();
+        jLabel45 = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
         jPanel21 = new javax.swing.JPanel();
-        jTextField13 = new javax.swing.JTextField();
-        jLabel28 = new javax.swing.JLabel();
+        lastnameField = new javax.swing.JTextField();
         jLabel29 = new javax.swing.JLabel();
         jPanel22 = new javax.swing.JPanel();
         jLabel30 = new javax.swing.JLabel();
-        jSeparator16 = new javax.swing.JSeparator();
-        jPasswordField6 = new javax.swing.JPasswordField();
-        jButton6 = new javax.swing.JButton();
-        jTextField14 = new javax.swing.JTextField();
-        jLabel31 = new javax.swing.JLabel();
+        SignUpBtn = new javax.swing.JButton();
+        PhoneNumField = new javax.swing.JTextField();
         jLabel32 = new javax.swing.JLabel();
-        jTextField15 = new javax.swing.JTextField();
-        jTextField16 = new javax.swing.JTextField();
-        jTextField17 = new javax.swing.JTextField();
-        jTextField18 = new javax.swing.JTextField();
-        jTextField19 = new javax.swing.JTextField();
+        emailField = new javax.swing.JTextField();
+        CNICField = new javax.swing.JTextField();
+        BloodGroupField = new javax.swing.JTextField();
+        FirstnameField = new javax.swing.JTextField();
         jLabel33 = new javax.swing.JLabel();
         jLabel34 = new javax.swing.JLabel();
         jLabel35 = new javax.swing.JLabel();
@@ -90,16 +316,16 @@ public class BloodBankFrame extends javax.swing.JFrame {
         jSeparator20 = new javax.swing.JSeparator();
         jSeparator21 = new javax.swing.JSeparator();
         jSeparator22 = new javax.swing.JSeparator();
-        jTextField20 = new javax.swing.JTextField();
         jLabel37 = new javax.swing.JLabel();
-        jSeparator23 = new javax.swing.JSeparator();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        AddressField = new javax.swing.JTextArea();
+        jSeparator24 = new javax.swing.JSeparator();
         jPanel14 = new javax.swing.JPanel();
         jPanel16 = new javax.swing.JPanel();
         jPanel17 = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable4 = new javax.swing.JTable();
-        jButton4 = new javax.swing.JButton();
+        DonorTable = new javax.swing.JTable();
         jTextField1 = new javax.swing.JTextField();
         jButton5 = new javax.swing.JButton();
         jPanel15 = new javax.swing.JPanel();
@@ -135,24 +361,24 @@ public class BloodBankFrame extends javax.swing.JFrame {
 
         jPanel3.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, 390, -1));
 
-        jPanel6.setBackground(new java.awt.Color(255, 0, 0));
-        jPanel6.addMouseListener(new java.awt.event.MouseAdapter() {
+        BloodReqPanel.setBackground(new java.awt.Color(255, 0, 0));
+        BloodReqPanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel6MouseClicked(evt);
+                BloodReqPanelMouseClicked(evt);
             }
         });
-        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        BloodReqPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cs162s21gid13/RequestIcon.png"))); // NOI18N
-        jPanel6.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, -1, 84));
+        BloodReqPanel.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, -1, 84));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("Blood Requests");
-        jPanel6.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, 190, 73));
+        BloodReqPanel.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, 190, 73));
 
-        jPanel3.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 370, 390, -1));
+        jPanel3.add(BloodReqPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 370, 390, -1));
 
         jPanel7.setBackground(new java.awt.Color(255, 0, 0));
         jPanel7.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -184,32 +410,32 @@ public class BloodBankFrame extends javax.swing.JFrame {
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cs162s21gid13/TransfusionHistoryIcon.png"))); // NOI18N
         jPanel12.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, -1, 84));
 
-        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel12.setText("Transfusion History");
-        jPanel12.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, 240, 73));
+        TransfusionHistoryPanel.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        TransfusionHistoryPanel.setForeground(new java.awt.Color(255, 255, 255));
+        TransfusionHistoryPanel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        TransfusionHistoryPanel.setText("Transfusion History");
+        jPanel12.add(TransfusionHistoryPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, 240, 73));
 
         jPanel3.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 580, 390, -1));
 
-        jPanel13.setBackground(new java.awt.Color(255, 0, 0));
-        jPanel13.addMouseListener(new java.awt.event.MouseAdapter() {
+        AddDonorPanel.setBackground(new java.awt.Color(255, 0, 0));
+        AddDonorPanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel13MouseClicked(evt);
+                AddDonorPanelMouseClicked(evt);
             }
         });
-        jPanel13.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        AddDonorPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cs162s21gid13/addDonor.png"))); // NOI18N
-        jPanel13.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, -1, 84));
+        AddDonorPanel.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, -1, 84));
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel14.setText("Add Donor");
-        jPanel13.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, 200, 73));
+        AddDonorPanel.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, 200, 73));
 
-        jPanel3.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 480, 390, -1));
+        jPanel3.add(AddDonorPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 480, 390, -1));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 390, 900));
 
@@ -325,11 +551,11 @@ public class BloodBankFrame extends javax.swing.JFrame {
         jLabel20.setForeground(new java.awt.Color(255, 255, 255));
         jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel20.setText("Blood Request");
-        jPanel10.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 0, 190, 110));
+        jPanel10.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 0, 190, 110));
 
         jPanel9.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 935, -1));
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        BloodRequestTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -346,30 +572,92 @@ public class BloodBankFrame extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Sr No.", "Patient ID", "Blood Group", "Quantity", "Date and Time"
+                "Sr No.", "Recipient Name", "Blood Group", "Quantity", "Date and Time"
             }
         ));
-        jTable3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jTable3.setGridColor(new java.awt.Color(255, 255, 255));
-        jScrollPane3.setViewportView(jTable3);
+        BloodRequestTable.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        BloodRequestTable.setGridColor(new java.awt.Color(255, 255, 255));
+        jScrollPane3.setViewportView(BloodRequestTable);
 
-        jPanel9.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 270, -1, 240));
+        jPanel9.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 140, 580, 640));
 
-        jButton1.setText("Reject");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+        jPanel33.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel33.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 255), 3));
+        jPanel33.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jPanel33MousePressed(evt);
             }
         });
-        jPanel9.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 560, 126, 43));
 
-        jButton2.setText("Accept");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+        jLabel40.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel40.setText("Approve Request");
+
+        jLabel41.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel41.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cs162s21gid13/Approval icon.png"))); // NOI18N
+
+        javax.swing.GroupLayout jPanel33Layout = new javax.swing.GroupLayout(jPanel33);
+        jPanel33.setLayout(jPanel33Layout);
+        jPanel33Layout.setHorizontalGroup(
+            jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel33Layout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addComponent(jLabel40, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel33Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel41)
+                .addGap(71, 71, 71))
+        );
+        jPanel33Layout.setVerticalGroup(
+            jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel33Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel40)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel41, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel9.add(jPanel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
+
+        jPanel34.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel34.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 255), 3));
+        jPanel34.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jPanel34MousePressed(evt);
             }
         });
-        jPanel9.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 560, 126, 43));
+
+        jLabel44.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel44.setText("Deny Request");
+
+        jLabel45.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel45.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cs162s21gid13/Cancel icon 2.png"))); // NOI18N
+
+        javax.swing.GroupLayout jPanel34Layout = new javax.swing.GroupLayout(jPanel34);
+        jPanel34.setLayout(jPanel34Layout);
+        jPanel34Layout.setHorizontalGroup(
+            jPanel34Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel34Layout.createSequentialGroup()
+                .addContainerGap(49, Short.MAX_VALUE)
+                .addComponent(jLabel44)
+                .addGap(40, 40, 40))
+            .addGroup(jPanel34Layout.createSequentialGroup()
+                .addGap(72, 72, 72)
+                .addComponent(jLabel45, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel34Layout.setVerticalGroup(
+            jPanel34Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel34Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel44)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel45, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel9.add(jPanel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(33, 580, 260, -1));
 
         jPanel8.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 810));
 
@@ -378,20 +666,16 @@ public class BloodBankFrame extends javax.swing.JFrame {
         jPanel21.setBackground(new java.awt.Color(255, 255, 255));
         jPanel21.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTextField13.addActionListener(new java.awt.event.ActionListener() {
+        lastnameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField13ActionPerformed(evt);
+                lastnameFieldActionPerformed(evt);
             }
         });
-        jPanel21.add(jTextField13, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 220, 240, 50));
-
-        jLabel28.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel28.setText("Password");
-        jPanel21.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 580, -1, 28));
+        jPanel21.add(lastnameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 220, 240, 50));
 
         jLabel29.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel29.setText("Last Name");
-        jPanel21.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 160, -1, 28));
+        jPanel21.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 160, -1, 28));
 
         jPanel22.setBackground(new java.awt.Color(51, 102, 255));
         jPanel22.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -404,68 +688,58 @@ public class BloodBankFrame extends javax.swing.JFrame {
 
         jPanel21.add(jPanel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 940, 110));
 
-        jSeparator16.setBackground(new java.awt.Color(51, 102, 255));
-        jPanel21.add(jSeparator16, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 570, 240, 17));
-        jPanel21.add(jPasswordField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 620, 240, 50));
-
-        jButton6.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jButton6.setText("Sign Up");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+        SignUpBtn.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        SignUpBtn.setText("Sign Up");
+        SignUpBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SignUpBtnMouseClicked(evt);
             }
         });
-        jPanel21.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 740, 159, 64));
-
-        jTextField14.addActionListener(new java.awt.event.ActionListener() {
+        SignUpBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField14ActionPerformed(evt);
+                SignUpBtnActionPerformed(evt);
             }
         });
-        jPanel21.add(jTextField14, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 420, 240, 50));
+        jPanel21.add(SignUpBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 720, 159, 64));
 
-        jLabel31.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel31.setText("Username");
-        jPanel21.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 480, -1, 28));
+        PhoneNumField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PhoneNumFieldActionPerformed(evt);
+            }
+        });
+        jPanel21.add(PhoneNumField, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 420, 240, 50));
 
         jLabel32.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel32.setText("Blood Group");
-        jPanel21.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 480, -1, 28));
+        jPanel21.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 500, -1, 28));
 
-        jTextField15.addActionListener(new java.awt.event.ActionListener() {
+        emailField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField15ActionPerformed(evt);
+                emailFieldActionPerformed(evt);
             }
         });
-        jPanel21.add(jTextField15, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 320, 240, 50));
+        jPanel21.add(emailField, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 320, 240, 50));
 
-        jTextField16.addActionListener(new java.awt.event.ActionListener() {
+        CNICField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField16ActionPerformed(evt);
+                CNICFieldActionPerformed(evt);
             }
         });
-        jPanel21.add(jTextField16, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 320, 240, 50));
+        jPanel21.add(CNICField, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 320, 240, 50));
 
-        jTextField17.addActionListener(new java.awt.event.ActionListener() {
+        BloodGroupField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField17ActionPerformed(evt);
+                BloodGroupFieldActionPerformed(evt);
             }
         });
-        jPanel21.add(jTextField17, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 520, 240, 50));
+        jPanel21.add(BloodGroupField, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 540, 240, 50));
 
-        jTextField18.addActionListener(new java.awt.event.ActionListener() {
+        FirstnameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField18ActionPerformed(evt);
+                FirstnameFieldActionPerformed(evt);
             }
         });
-        jPanel21.add(jTextField18, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 520, 240, 50));
-
-        jTextField19.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField19ActionPerformed(evt);
-            }
-        });
-        jPanel21.add(jTextField19, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 220, 240, 50));
+        jPanel21.add(FirstnameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 220, 240, 50));
 
         jLabel33.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel33.setText("First Name");
@@ -487,7 +761,7 @@ public class BloodBankFrame extends javax.swing.JFrame {
         jPanel21.add(jSeparator17, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 470, 240, 17));
 
         jSeparator18.setBackground(new java.awt.Color(51, 102, 255));
-        jPanel21.add(jSeparator18, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 570, 240, 17));
+        jPanel21.add(jSeparator18, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 630, 260, 20));
 
         jSeparator19.setBackground(new java.awt.Color(51, 102, 255));
         jPanel21.add(jSeparator19, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 370, 240, 17));
@@ -501,19 +775,18 @@ public class BloodBankFrame extends javax.swing.JFrame {
         jSeparator22.setBackground(new java.awt.Color(51, 102, 255));
         jPanel21.add(jSeparator22, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 270, 240, 17));
 
-        jTextField20.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField20ActionPerformed(evt);
-            }
-        });
-        jPanel21.add(jTextField20, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 420, 240, 50));
-
         jLabel37.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel37.setText("Address");
         jPanel21.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 380, -1, 28));
 
-        jSeparator23.setBackground(new java.awt.Color(51, 102, 255));
-        jPanel21.add(jSeparator23, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 470, 240, 17));
+        AddressField.setColumns(20);
+        AddressField.setRows(5);
+        jScrollPane1.setViewportView(AddressField);
+
+        jPanel21.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 420, 260, 210));
+
+        jSeparator24.setBackground(new java.awt.Color(51, 102, 255));
+        jPanel21.add(jSeparator24, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 590, 240, 20));
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
@@ -537,44 +810,36 @@ public class BloodBankFrame extends javax.swing.JFrame {
         jLabel21.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(255, 255, 255));
         jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel21.setText("Search Donor");
-        jPanel17.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 0, 190, 110));
+        jLabel21.setText("Transfusion History");
+        jPanel17.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 0, 240, 110));
 
         jPanel16.add(jPanel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 935, -1));
 
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+        DonorTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Sr No.", "Name", "CNIC", "Blood Group", "Contact Number", "Date and Time"
+                "Sr No.", "Name", "CNIC", "Blood Group", "Contact Number", "Date and Time", "Recipient Namel"
             }
         ));
-        jTable4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jTable4.setGridColor(new java.awt.Color(255, 255, 255));
-        jScrollPane4.setViewportView(jTable4);
+        DonorTable.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        DonorTable.setGridColor(new java.awt.Color(255, 255, 255));
+        jScrollPane4.setViewportView(DonorTable);
 
-        jPanel16.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 270, 640, 240));
-
-        jButton4.setText("Edit");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-        jPanel16.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 560, 126, 43));
+        jPanel16.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 270, 680, 270));
 
         jTextField1.setText("Search Donor");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
@@ -678,10 +943,11 @@ public class BloodBankFrame extends javax.swing.JFrame {
         jTabbedPane1.setSelectedIndex(0);
     }//GEN-LAST:event_jPanel5MouseClicked
 
-    private void jPanel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseClicked
+    private void BloodReqPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BloodReqPanelMouseClicked
         // TODO add your handling code here:
         jTabbedPane1.setSelectedIndex(1);
-    }//GEN-LAST:event_jPanel6MouseClicked
+        this.createBloodRequesttable(bloodRequestlog.viewBloodRequestLog());
+    }//GEN-LAST:event_BloodReqPanelMouseClicked
 
     private void jPanel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseClicked
         // TODO add your handling code here:
@@ -690,51 +956,43 @@ public class BloodBankFrame extends javax.swing.JFrame {
         frame.setVisible(true);
     }//GEN-LAST:event_jPanel7MouseClicked
 
-    private void jTextField13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField13ActionPerformed
+    private void lastnameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lastnameFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField13ActionPerformed
+    }//GEN-LAST:event_lastnameFieldActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void SignUpBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SignUpBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_SignUpBtnActionPerformed
 
-    private void jTextField14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField14ActionPerformed
+    private void PhoneNumFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PhoneNumFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField14ActionPerformed
+    }//GEN-LAST:event_PhoneNumFieldActionPerformed
 
-    private void jTextField15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField15ActionPerformed
+    private void emailFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField15ActionPerformed
+    }//GEN-LAST:event_emailFieldActionPerformed
 
-    private void jTextField16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField16ActionPerformed
+    private void CNICFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNICFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField16ActionPerformed
+    }//GEN-LAST:event_CNICFieldActionPerformed
 
-    private void jTextField17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField17ActionPerformed
+    private void BloodGroupFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BloodGroupFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField17ActionPerformed
+    }//GEN-LAST:event_BloodGroupFieldActionPerformed
 
-    private void jTextField18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField18ActionPerformed
+    private void FirstnameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FirstnameFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField18ActionPerformed
-
-    private void jTextField19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField19ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField19ActionPerformed
-
-    private void jTextField20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField20ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField20ActionPerformed
+    }//GEN-LAST:event_FirstnameFieldActionPerformed
 
     private void jPanel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel12MouseClicked
         // TODO add your handling code here:
         jTabbedPane1.setSelectedIndex(3);
     }//GEN-LAST:event_jPanel12MouseClicked
 
-    private void jPanel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel13MouseClicked
+    private void AddDonorPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddDonorPanelMouseClicked
         // TODO add your handling code here:
         jTabbedPane1.setSelectedIndex(2);
-    }//GEN-LAST:event_jPanel13MouseClicked
+    }//GEN-LAST:event_AddDonorPanelMouseClicked
 
     private void jPanel23MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel23MousePressed
         // TODO add your handling code here:
@@ -746,18 +1004,6 @@ public class BloodBankFrame extends javax.swing.JFrame {
         jTabbedPane1.setSelectedIndex(4);
     }//GEN-LAST:event_jPanel24MousePressed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
-
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
@@ -765,6 +1011,64 @@ public class BloodBankFrame extends javax.swing.JFrame {
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jPanel33MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel33MousePressed
+        // TODO add your handling code here:
+        jTabbedPane1.setSelectedIndex(7);
+    }//GEN-LAST:event_jPanel33MousePressed
+
+    private void jPanel34MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel34MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel34MousePressed
+
+    private void SignUpBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SignUpBtnMouseClicked
+        
+      boolean inputsValid = false;
+      
+      inputsValid = this.nameInput(this.FirstnameField.getText());
+      
+        if(inputsValid)
+        {
+            inputsValid = this.nameInput(this.lastnameField.getText());
+            
+            if(inputsValid)
+            {
+                inputsValid = this.emailInput(this.emailField.getText());
+                
+                if(inputsValid)
+                {
+                    inputsValid = this.CNICinput(this.CNICField.getText());
+                    
+                    if(inputsValid)
+                    {
+                        inputsValid = this.PhoneNumInput(this.PhoneNumField.getText());
+                        
+                        if(inputsValid)
+                        {
+                            inputsValid = BloodGroupInput(this.BloodGroupField.getText());
+                            
+                            if(inputsValid)
+                            {
+                                Donor donor = new Donor();
+                                
+                                donor.setName(this.FirstnameField.getText() + this.lastnameField.getText());
+                                donor.setAddress(this.AddressField.getText());
+                                
+                                donor.setEmail(this.emailField.getText());
+                                donor.setPhoneNumber(this.PhoneNumField.getText());
+                                
+                                donor.setBloodType(this.BloodGroupField.getText());
+                                donor.setCnic(this.CNICField.getText());
+                            }
+                        }
+                    }
+                    
+                }
+            }
+        }
+      
+      
+    }//GEN-LAST:event_SignUpBtnMouseClicked
 
     /**
      * @param args the command line arguments
@@ -802,26 +1106,31 @@ public class BloodBankFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JPanel AddDonorPanel;
+    private javax.swing.JTextArea AddressField;
+    private javax.swing.JTextField BloodGroupField;
+    private javax.swing.JPanel BloodReqPanel;
+    private javax.swing.JTable BloodRequestTable;
+    private javax.swing.JTextField CNICField;
+    private javax.swing.JTable DonorTable;
+    private javax.swing.JTextField FirstnameField;
+    private javax.swing.JTextField PhoneNumField;
+    private javax.swing.JButton SignUpBtn;
+    private javax.swing.JLabel TransfusionHistoryPanel;
+    private javax.swing.JTextField emailField;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
@@ -830,8 +1139,12 @@ public class BloodBankFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
+    private javax.swing.JLabel jLabel40;
+    private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
+    private javax.swing.JLabel jLabel44;
+    private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -840,7 +1153,6 @@ public class BloodBankFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
@@ -853,36 +1165,27 @@ public class BloodBankFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel23;
     private javax.swing.JPanel jPanel24;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel33;
+    private javax.swing.JPanel jPanel34;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JPasswordField jPasswordField6;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JSeparator jSeparator16;
     private javax.swing.JSeparator jSeparator17;
     private javax.swing.JSeparator jSeparator18;
     private javax.swing.JSeparator jSeparator19;
     private javax.swing.JSeparator jSeparator20;
     private javax.swing.JSeparator jSeparator21;
     private javax.swing.JSeparator jSeparator22;
-    private javax.swing.JSeparator jSeparator23;
+    private javax.swing.JSeparator jSeparator24;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable3;
-    private javax.swing.JTable jTable4;
     private javax.swing.JTable jTable5;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField13;
-    private javax.swing.JTextField jTextField14;
-    private javax.swing.JTextField jTextField15;
-    private javax.swing.JTextField jTextField16;
-    private javax.swing.JTextField jTextField17;
-    private javax.swing.JTextField jTextField18;
-    private javax.swing.JTextField jTextField19;
-    private javax.swing.JTextField jTextField20;
+    private javax.swing.JTextField lastnameField;
     // End of variables declaration//GEN-END:variables
 }

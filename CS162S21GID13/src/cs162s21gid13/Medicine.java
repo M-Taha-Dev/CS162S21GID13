@@ -16,7 +16,7 @@ public class Medicine {
 
     private String medicineName;
     private Timestamp expiryDate;
-   // private int noOfTablets;
+    private int noOfTablets;
     static private String medicineTag;
     private String status;
     private int medicineCost;
@@ -29,6 +29,7 @@ public class Medicine {
     public String getStatus() {
 		return status;
     }
+<<<<<<< Updated upstream
     //Getters
     public String getMedicineName() {
 		return medicineName;
@@ -38,15 +39,23 @@ public class Medicine {
    /* public String getMedicineName() {
         return medicineName;
     }*/
+=======
+
+    //Getters
+    public String getMedicineName() {
+		return medicineName;
+
+    }
+
+>>>>>>> Stashed changes
     public Timestamp getExpiryDate() {
 		return expiryDate;
 	}
-   // public int getNoOfTablets() {
-	//	return noOfTablets;
-	//}
+   
     public String getMedicineTag() {
 		return medicineTag;
 	}
+    
     public int getMedicineCost() {
 		return medicineCost;
 	}
@@ -77,7 +86,12 @@ public class Medicine {
 		this.medicineCost = medicineCost;
 	}
 
+<<<<<<< Updated upstream
        static public String generateID() {
+=======
+       static public String generateID() 
+       {
+>>>>>>> Stashed changes
         char arr[] = new char[9];
         boolean flag = false;
         String var = "";
