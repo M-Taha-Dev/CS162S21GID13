@@ -21,6 +21,7 @@ public class PharmicyManagerForm extends javax.swing.JFrame {
      * Creates new form PharmicyManagerForm
      */
     String varString;
+    int c;
 
     public PharmicyManagerForm() {
         initComponents();
@@ -110,7 +111,7 @@ public class PharmicyManagerForm extends javax.swing.JFrame {
     void createCartTable() {
         List<MedicineRequest> mList = PharmacyManager.getInstance().requestLog.medReqList;
         Object rowData[] = new Object[4];
-        String var = "Hello";
+
         DefaultTableModel model = (DefaultTableModel) viewCartTable.getModel();
         model.getDataVector().removeAllElements();
         for (int i = 0; i < mList.size(); i++) {
@@ -123,17 +124,86 @@ public class PharmicyManagerForm extends javax.swing.JFrame {
                     var = var + ",";
                 }
             }*/
+                //JOptionPane.showMessageDialog(null, mList.get(i).getReqStatus());
                 rowData[2] = "20-10-19";
                 rowData[3] = mList.get(i).getReqStatus();
                 model.addRow(rowData);
             }
         }
     }
+    
+    
+       void viewCartMedicine(List<Medicine> mList) {
+        Object rowData[] = new Object[4];
+        //String var = "Hello";
+        DefaultTableModel model = (DefaultTableModel) viewCartMedicineTable.getModel();
+        System.out.println(mList.size());
+        int cost = 0;
+        model.getDataVector().removeAllElements();
+        for (int i = 0; i < mList.size(); i++) {
+            rowData[0] = mList.get(i).getMedicineTag();
+            rowData[1] = mList.get(i).getMedicineName();
+            rowData[2] = mList.get(i).getMedicineCost();
+            cost = cost + mList.get(i).getMedicineCost();
+            model.addRow(rowData);
+        }
+        totalCostLabel.setText("Total Cost: " + cost + "-/");
+        c = cost;
+    }
+    
+    
+    //********************************************Billing*************************************
+        void createMedicineBillTable() {
+        List<MedicineBill> mList = PharmacyManager.getInstance().billLogObj.billList;
+        Object rowData[] = new Object[4];
+        String var = "Hello";
+        DefaultTableModel model = (DefaultTableModel) MedicineTableSell1.getModel();
+        model.getDataVector().removeAllElements();
+        for (int i = 0; i < mList.size(); i++) {
+         
+                rowData[0] = mList.get(i).getBillTag();
+                rowData[1] = mList.get(i).getPatientID();
+                rowData[2] = mList.get(i).getTotalCost();
+                rowData[3] = "28/06/21";
+                model.addRow(rowData);
+        }
+    }
+
+    /*void viewBillMedicine(List<Medicine> mList) {
+        Object rowData[] = new Object[4];
+        String var = "Hello";
+        DefaultTableModel model = (DefaultTableModel) createMedicineBillTable();.getModel();
+        System.out.println(mList.size());
+        model.getDataVector().removeAllElements();
+        for (int i = 0; i < mList.size(); i++) {
+            rowData[0] = "" + (i + 1);
+            rowData[1] = mList.get(i).getMedicineName();
+            model.addRow(rowData);
+        }
+
+    }
+*/
+    
+    
+    
 
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        viewRequestPanel2 = new javax.swing.JPanel();
+        jLabel56 = new javax.swing.JLabel();
+        viewRequestDate2 = new javax.swing.JTextField();
+        viewRequestID2 = new javax.swing.JTextField();
+        jLabel57 = new javax.swing.JLabel();
+        jScrollPane14 = new javax.swing.JScrollPane();
+        jScrollPane15 = new javax.swing.JScrollPane();
+        viewRequestTable2 = new javax.swing.JTable();
+        requestAcceptButton2 = new javax.swing.JButton();
+        jLabel58 = new javax.swing.JLabel();
+        viewPatientID2 = new javax.swing.JTextField();
+        requestCloseButton2 = new javax.swing.JButton();
+        requestRejectButton2 = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel12 = new javax.swing.JPanel();
@@ -184,9 +254,12 @@ public class PharmicyManagerForm extends javax.swing.JFrame {
         jPanel26 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         MedicineTableSell1 = new javax.swing.JTable();
+        jButton13 = new javax.swing.JButton();
         jPanel15 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
+        jPanel16 = new javax.swing.JPanel();
+        jLabel44 = new javax.swing.JLabel();
         jPanel27 = new javax.swing.JPanel();
         jButton4 = new javax.swing.JButton();
         SearchMedicineSell9 = new javax.swing.JTextField();
@@ -204,8 +277,6 @@ public class PharmicyManagerForm extends javax.swing.JFrame {
         searchMedicineScrollPane = new javax.swing.JScrollPane();
         jScrollPane6 = new javax.swing.JScrollPane();
         MedicineSearchTable = new javax.swing.JTable();
-        jPanel16 = new javax.swing.JPanel();
-        jLabel44 = new javax.swing.JLabel();
         jPanel13 = new javax.swing.JPanel();
         cartPanel = new javax.swing.JPanel();
         jScrollPane10 = new javax.swing.JScrollPane();
@@ -214,8 +285,8 @@ public class PharmicyManagerForm extends javax.swing.JFrame {
         loadCartButton = new javax.swing.JButton();
         viewCartPanel = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
-        viewRequestDate1 = new javax.swing.JTextField();
-        viewRequestID1 = new javax.swing.JTextField();
+        viewCartPatientName = new javax.swing.JTextField();
+        viewCartRequestID = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
         cartProceedButton = new javax.swing.JButton();
         jLabel21 = new javax.swing.JLabel();
@@ -224,8 +295,8 @@ public class PharmicyManagerForm extends javax.swing.JFrame {
         jScrollPane12 = new javax.swing.JScrollPane();
         viewCartMedicineTable = new javax.swing.JTable();
         totalCostLabel = new javax.swing.JLabel();
-        viewPatientID2 = new javax.swing.JTextField();
-        viewPatientID3 = new javax.swing.JTextField();
+        viewCartPatientID = new javax.swing.JTextField();
+        viewCartPatientAddress = new javax.swing.JTextField();
         jLabel32 = new javax.swing.JLabel();
         cartHeaderPanel = new javax.swing.JPanel();
         jLabel53 = new javax.swing.JLabel();
@@ -285,6 +356,84 @@ public class PharmicyManagerForm extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
 
+        viewRequestPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        viewRequestPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel56.setText("Request ID");
+        viewRequestPanel2.add(jLabel56, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 13, -1, 41));
+        viewRequestPanel2.add(viewRequestDate2, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 140, 212, 41));
+        viewRequestPanel2.add(viewRequestID2, new org.netbeans.lib.awtextra.AbsoluteConstraints(219, 13, 209, 41));
+
+        jLabel57.setText("Patient ID");
+        viewRequestPanel2.add(jLabel57, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 72, -1, 41));
+
+        jScrollPane14.setBackground(new java.awt.Color(255, 255, 255));
+
+        viewRequestTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Sr No.", "Medicine"
+            }
+        ));
+        viewRequestTable2.setGridColor(new java.awt.Color(255, 255, 255));
+        jScrollPane15.setViewportView(viewRequestTable2);
+
+        jScrollPane14.setViewportView(jScrollPane15);
+
+        viewRequestPanel2.add(jScrollPane14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 440, 410));
+
+        requestAcceptButton2.setText("Accept");
+        requestAcceptButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                requestAcceptButton2ActionPerformed(evt);
+            }
+        });
+        viewRequestPanel2.add(requestAcceptButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 667, 117, 54));
+
+        jLabel58.setText("Date");
+        viewRequestPanel2.add(jLabel58, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 117, -1, 41));
+        viewRequestPanel2.add(viewPatientID2, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 81, 212, 41));
+
+        requestCloseButton2.setText("Close");
+        requestCloseButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                requestCloseButton2ActionPerformed(evt);
+            }
+        });
+        viewRequestPanel2.add(requestCloseButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(299, 667, 117, 54));
+
+        requestRejectButton2.setText("Reject");
+        requestRejectButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                requestRejectButton2ActionPerformed(evt);
+            }
+        });
+        viewRequestPanel2.add(requestRejectButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(164, 667, 117, 54));
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -312,9 +461,9 @@ public class PharmicyManagerForm extends javax.swing.JFrame {
                 jLabel1MouseClicked(evt);
             }
         });
-        jPanel12.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 20, 338, 60));
+        jPanel12.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 20, 338, 60));
 
-        jPanel1.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1340, 100));
+        jPanel1.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1420, 100));
 
         jPanel21.setBackground(new java.awt.Color(255, 255, 255));
         jPanel21.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -357,7 +506,7 @@ public class PharmicyManagerForm extends javax.swing.JFrame {
                 .addContainerGap(47, Short.MAX_VALUE))
         );
 
-        jPanel21.add(jPanel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 400, 380, 260));
+        jPanel21.add(jPanel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 390, 380, 260));
 
         jPanel25.setBackground(new java.awt.Color(255, 255, 255));
         jPanel25.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 255), 3));
@@ -396,7 +545,7 @@ public class PharmicyManagerForm extends javax.swing.JFrame {
                 .addContainerGap(53, Short.MAX_VALUE))
         );
 
-        jPanel21.add(jPanel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 80, 380, 260));
+        jPanel21.add(jPanel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 90, 380, 260));
 
         jPanel24.setBackground(new java.awt.Color(255, 255, 255));
         jPanel24.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 255), 3));
@@ -436,7 +585,7 @@ public class PharmicyManagerForm extends javax.swing.JFrame {
                 .addContainerGap(48, Short.MAX_VALUE))
         );
 
-        jPanel21.add(jPanel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, 380, 260));
+        jPanel21.add(jPanel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 90, 380, 260));
 
         jPanel22.setBackground(new java.awt.Color(255, 255, 255));
         jPanel22.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 255), 3));
@@ -469,16 +618,16 @@ public class PharmicyManagerForm extends javax.swing.JFrame {
         jPanel22Layout.setVerticalGroup(
             jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel22Layout.createSequentialGroup()
-                .addContainerGap(30, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel37)
                 .addGap(30, 30, 30)
                 .addComponent(jLabel38)
                 .addGap(45, 45, 45))
         );
 
-        jPanel21.add(jPanel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 400, 380, 260));
+        jPanel21.add(jPanel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 390, 380, 260));
 
-        jPanel1.add(jPanel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 1340, 780));
+        jPanel1.add(jPanel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 1410, 780));
 
         jTabbedPane1.addTab("tab1", jPanel1);
 
@@ -500,9 +649,9 @@ public class PharmicyManagerForm extends javax.swing.JFrame {
         jPanel11Layout.setHorizontalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
-                .addContainerGap(397, Short.MAX_VALUE)
+                .addContainerGap(534, Short.MAX_VALUE)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(117, 117, 117))
+                .addGap(410, 410, 410))
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -512,7 +661,7 @@ public class PharmicyManagerForm extends javax.swing.JFrame {
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
-        jPanel3.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 980, 100));
+        jPanel3.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1410, 100));
 
         jPanel19.setBackground(new java.awt.Color(255, 255, 255));
         jPanel19.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -577,7 +726,7 @@ public class PharmicyManagerForm extends javax.swing.JFrame {
         });
         jPanel19.add(GenerateTagButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 210, 130, 40));
 
-        jPanel3.add(jPanel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 1080, 770));
+        jPanel3.add(jPanel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 1410, 770));
 
         jTabbedPane1.addTab("tab2", jPanel3);
 
@@ -601,7 +750,7 @@ public class PharmicyManagerForm extends javax.swing.JFrame {
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addGap(404, 404, 404)
                 .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(494, Short.MAX_VALUE))
+                .addContainerGap(814, Short.MAX_VALUE))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -611,7 +760,7 @@ public class PharmicyManagerForm extends javax.swing.JFrame {
                 .addContainerGap(26, Short.MAX_VALUE))
         );
 
-        jPanel5.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1080, 100));
+        jPanel5.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1400, 100));
 
         jPanel20.setBackground(new java.awt.Color(255, 255, 255));
         jPanel20.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -719,7 +868,7 @@ public class PharmicyManagerForm extends javax.swing.JFrame {
         jButton3.setText("Remove");
         jPanel20.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 70, 100, 40));
 
-        jPanel5.add(jPanel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 1070, 780));
+        jPanel5.add(jPanel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 1410, 780));
 
         jTabbedPane1.addTab("tab3", jPanel5);
 
@@ -745,17 +894,34 @@ public class PharmicyManagerForm extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Bill ID", "Medicines", "Cost", "Date"
+                "Bill ID", "Patient ID", "Cost", "Date"
             }
         ));
         MedicineTableSell1.setGridColor(new java.awt.Color(255, 255, 255));
+        MedicineTableSell1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                MedicineTableSell1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                MedicineTableSell1MouseEntered(evt);
+            }
+        });
         jScrollPane2.setViewportView(MedicineTableSell1);
 
-        jPanel26.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 210, 790, 240));
+        jPanel26.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 240, 790, 240));
 
-        jPanel2.add(jPanel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 1070, 780));
+        jButton13.setText("Load Bills");
+        jButton13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton13ActionPerformed(evt);
+            }
+        });
+        jPanel26.add(jButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, -1, 40));
+
+        jPanel2.add(jPanel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 1410, 780));
 
         jPanel15.setBackground(new java.awt.Color(73, 222, 195));
+        jPanel15.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
@@ -765,29 +931,43 @@ public class PharmicyManagerForm extends javax.swing.JFrame {
                 jLabel13MouseClicked(evt);
             }
         });
+        jPanel15.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(404, 24, -1, 50));
 
-        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
-        jPanel15.setLayout(jPanel15Layout);
-        jPanel15Layout.setHorizontalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel15Layout.createSequentialGroup()
-                .addGap(404, 404, 404)
-                .addComponent(jLabel13)
-                .addContainerGap(475, Short.MAX_VALUE))
-        );
-        jPanel15Layout.setVerticalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel15Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
-        );
-
-        jPanel2.add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1080, 100));
+        jPanel2.add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1400, 100));
 
         jTabbedPane1.addTab("tab4", jPanel2);
 
         jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel16.setBackground(new java.awt.Color(73, 222, 195));
+
+        jLabel44.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jLabel44.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel44.setText("Search Medicine");
+        jLabel44.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel44MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
+        jPanel16.setLayout(jPanel16Layout);
+        jPanel16Layout.setHorizontalGroup(
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel16Layout.createSequentialGroup()
+                .addGap(404, 404, 404)
+                .addComponent(jLabel44)
+                .addContainerGap(710, Short.MAX_VALUE))
+        );
+        jPanel16Layout.setVerticalGroup(
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel16Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jLabel44, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(26, Short.MAX_VALUE))
+        );
+
+        jPanel10.add(jPanel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1410, 100));
 
         jPanel27.setBackground(new java.awt.Color(255, 255, 255));
         jPanel27.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -875,7 +1055,7 @@ public class PharmicyManagerForm extends javax.swing.JFrame {
                             .addComponent(jLabel48)
                             .addComponent(jLabel49)
                             .addComponent(jLabel50))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(EditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(EditBestBefore, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(EditCostField, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -936,37 +1116,7 @@ public class PharmicyManagerForm extends javax.swing.JFrame {
 
         jPanel27.add(searchMedicineScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 490, 360));
 
-        jPanel10.add(jPanel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 1070, 780));
-
-        jPanel16.setBackground(new java.awt.Color(73, 222, 195));
-
-        jLabel44.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        jLabel44.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel44.setText("Search Medicine");
-        jLabel44.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel44MouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
-        jPanel16.setLayout(jPanel16Layout);
-        jPanel16Layout.setHorizontalGroup(
-            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel16Layout.createSequentialGroup()
-                .addGap(404, 404, 404)
-                .addComponent(jLabel44)
-                .addContainerGap(380, Short.MAX_VALUE))
-        );
-        jPanel16Layout.setVerticalGroup(
-            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel16Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(jLabel44, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
-        );
-
-        jPanel10.add(jPanel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1080, 100));
+        jPanel10.add(jPanel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 1370, 780));
 
         jTabbedPane1.addTab("tab5", jPanel10);
 
@@ -1000,6 +1150,9 @@ public class PharmicyManagerForm extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 viewCartTableMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                viewCartTableMouseEntered(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 viewCartTableMousePressed(evt);
             }
@@ -1014,7 +1167,7 @@ public class PharmicyManagerForm extends javax.swing.JFrame {
                 viewCartButtonActionPerformed(evt);
             }
         });
-        cartPanel.add(viewCartButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 450, 100, 40));
+        cartPanel.add(viewCartButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 450, 100, 40));
 
         loadCartButton.setText("Load Carts");
         loadCartButton.addActionListener(new java.awt.event.ActionListener() {
@@ -1029,8 +1182,8 @@ public class PharmicyManagerForm extends javax.swing.JFrame {
 
         jLabel19.setText("Request ID");
         viewCartPanel.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 13, -1, 41));
-        viewCartPanel.add(viewRequestDate1, new org.netbeans.lib.awtextra.AbsoluteConstraints(246, 140, 212, 41));
-        viewCartPanel.add(viewRequestID1, new org.netbeans.lib.awtextra.AbsoluteConstraints(249, 13, 209, 41));
+        viewCartPanel.add(viewCartPatientName, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 140, 212, 41));
+        viewCartPanel.add(viewCartRequestID, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 20, 209, 41));
 
         jLabel20.setText("Patient ID");
         viewCartPanel.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 72, -1, 41));
@@ -1099,8 +1252,14 @@ public class PharmicyManagerForm extends javax.swing.JFrame {
 
         totalCostLabel.setText("Total Cost: ");
         viewCartPanel.add(totalCostLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(286, 610, -1, -1));
-        viewCartPanel.add(viewPatientID2, new org.netbeans.lib.awtextra.AbsoluteConstraints(246, 81, 212, 41));
-        viewCartPanel.add(viewPatientID3, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 190, 212, 41));
+        viewCartPanel.add(viewCartPatientID, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 80, 212, 41));
+
+        viewCartPatientAddress.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewCartPatientAddressActionPerformed(evt);
+            }
+        });
+        viewCartPanel.add(viewCartPatientAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 190, 212, 41));
 
         jLabel32.setText("Patient Name:");
         viewCartPanel.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 117, -1, 41));
@@ -1178,10 +1337,15 @@ public class PharmicyManagerForm extends javax.swing.JFrame {
         jPanel28.add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, -1, 40));
 
         viewRequestPanel.setBackground(new java.awt.Color(255, 255, 255));
+        viewRequestPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel8.setText("Request ID");
+        viewRequestPanel.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 13, -1, 41));
+        viewRequestPanel.add(viewRequestDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 140, 212, 41));
+        viewRequestPanel.add(viewRequestID, new org.netbeans.lib.awtextra.AbsoluteConstraints(219, 13, 209, 41));
 
         jLabel17.setText("Patient ID");
+        viewRequestPanel.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 72, -1, 41));
 
         jScrollPane7.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -1220,14 +1384,19 @@ public class PharmicyManagerForm extends javax.swing.JFrame {
 
         jScrollPane7.setViewportView(jScrollPane3);
 
+        viewRequestPanel.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 440, 410));
+
         requestAcceptButton.setText("Accept");
         requestAcceptButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 requestAcceptButtonActionPerformed(evt);
             }
         });
+        viewRequestPanel.add(requestAcceptButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 667, 117, 54));
 
         jLabel18.setText("Date");
+        viewRequestPanel.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 117, -1, 41));
+        viewRequestPanel.add(viewPatientID, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 81, 212, 41));
 
         requestCloseButton.setText("Close");
         requestCloseButton.addActionListener(new java.awt.event.ActionListener() {
@@ -1235,6 +1404,7 @@ public class PharmicyManagerForm extends javax.swing.JFrame {
                 requestCloseButtonActionPerformed(evt);
             }
         });
+        viewRequestPanel.add(requestCloseButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(299, 667, 117, 54));
 
         requestRejectButton.setText("Reject");
         requestRejectButton.addActionListener(new java.awt.event.ActionListener() {
@@ -1242,64 +1412,7 @@ public class PharmicyManagerForm extends javax.swing.JFrame {
                 requestRejectButtonActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout viewRequestPanelLayout = new javax.swing.GroupLayout(viewRequestPanel);
-        viewRequestPanel.setLayout(viewRequestPanelLayout);
-        viewRequestPanelLayout.setHorizontalGroup(
-            viewRequestPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-            .addGroup(viewRequestPanelLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(requestAcceptButton, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(requestRejectButton, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(requestCloseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24))
-            .addGroup(viewRequestPanelLayout.createSequentialGroup()
-                .addGap(60, 60, 60)
-                .addGroup(viewRequestPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(viewRequestPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
-                        .addComponent(viewRequestID, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(viewRequestPanelLayout.createSequentialGroup()
-                        .addGroup(viewRequestPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel17)
-                            .addComponent(jLabel18))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(viewRequestPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(viewRequestDate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(viewPatientID, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap())
-        );
-        viewRequestPanelLayout.setVerticalGroup(
-            viewRequestPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(viewRequestPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(viewRequestPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(viewRequestID, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(viewRequestPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(viewRequestPanelLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(4, 4, 4)
-                        .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(viewRequestPanelLayout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(viewPatientID, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(viewRequestDate, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(29, 29, 29)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
-                .addGroup(viewRequestPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(requestAcceptButton, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(requestCloseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(requestRejectButton, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(59, 59, 59))
-        );
+        viewRequestPanel.add(requestRejectButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(164, 667, 117, 54));
 
         jPanel28.add(viewRequestPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 20, 440, 780));
 
@@ -1445,7 +1558,7 @@ public class PharmicyManagerForm extends javax.swing.JFrame {
         jButton9.setText("Remove");
         jPanel29.add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 70, 100, 40));
 
-        jPanel18.add(jPanel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 1340, 780));
+        jPanel18.add(jPanel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 1340, 780));
 
         jPanel30.setBackground(new java.awt.Color(73, 222, 195));
 
@@ -1481,10 +1594,10 @@ public class PharmicyManagerForm extends javax.swing.JFrame {
 
         getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 0, 1410, 910));
 
-        jPanel6.setBackground(new java.awt.Color(54, 33, 89));
+        jPanel6.setBackground(new java.awt.Color(0, 153, 153));
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        LogoutPanel.setBackground(new java.awt.Color(54, 33, 89));
+        LogoutPanel.setBackground(new java.awt.Color(0, 153, 153));
         LogoutPanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 LogoutPanelMouseClicked(evt);
@@ -1503,7 +1616,7 @@ public class PharmicyManagerForm extends javax.swing.JFrame {
 
         jPanel6.add(LogoutPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 500, 390, -1));
 
-        HomePanel.setBackground(new java.awt.Color(54, 33, 89));
+        HomePanel.setBackground(new java.awt.Color(0, 153, 153));
         HomePanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 HomePanelMouseClicked(evt);
@@ -1522,7 +1635,7 @@ public class PharmicyManagerForm extends javax.swing.JFrame {
 
         jPanel6.add(HomePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, 140, 390, -1));
 
-        AddMedicinePanel.setBackground(new java.awt.Color(54, 33, 89));
+        AddMedicinePanel.setBackground(new java.awt.Color(0, 153, 153));
         AddMedicinePanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 AddMedicinePanelMouseClicked(evt);
@@ -1541,7 +1654,7 @@ public class PharmicyManagerForm extends javax.swing.JFrame {
 
         jPanel6.add(AddMedicinePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 390, -1));
 
-        SellMedicinePanel.setBackground(new java.awt.Color(54, 33, 89));
+        SellMedicinePanel.setBackground(new java.awt.Color(0, 153, 153));
         SellMedicinePanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 SellMedicinePanelMouseClicked(evt);
@@ -1574,7 +1687,7 @@ public class PharmicyManagerForm extends javax.swing.JFrame {
 
         jPanel6.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 390, -1));
 
-        BillHistoryPanel.setBackground(new java.awt.Color(54, 33, 89));
+        BillHistoryPanel.setBackground(new java.awt.Color(0, 153, 153));
         BillHistoryPanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 BillHistoryPanelMouseClicked(evt);
@@ -1679,7 +1792,7 @@ public class PharmicyManagerForm extends javax.swing.JFrame {
 
     private void jPanel23MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel23MousePressed
         // TODO add your handling code here:
-        jTabbedPane1.setSelectedIndex(7);
+        jTabbedPane1.setSelectedIndex(5);
     }//GEN-LAST:event_jPanel23MousePressed
 
     private void jPanel25MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel25MousePressed
@@ -1864,7 +1977,9 @@ public class PharmicyManagerForm extends javax.swing.JFrame {
         // TODO add your handling code here:
         String var = viewRequestID.getText();
         MedicineRequest obj = PharmacyManager.getInstance().requestLog.getReqDetails(var);
-        PharmacyManager.getInstance().medLog.buildCart(obj);
+      PharmacyManager.getInstance().medLog.buildCart(obj);
+        int index = PharmacyManager.getInstance().requestLog.getRequestIndex(var);
+        PharmacyManager.getInstance().requestLog.updateRequest(index, obj);
        // PharmacyManager.getInstance().requestLog.acceptRequest(var);
         viewRequestPanel.setVisible(false);
         // viewRequestTable.setselected
@@ -1886,6 +2001,23 @@ public class PharmicyManagerForm extends javax.swing.JFrame {
 
     private void viewCartTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewCartTableMouseClicked
         // TODO add your handling code here:
+                DefaultTableModel model = (DefaultTableModel) viewCartTable.getModel();
+        int index = viewCartTable.getSelectedRow();
+        int count = 0;
+        String var = "";
+        for (int i = 0; i < PharmacyManager.getInstance().requestLog.medReqList.size(); i++) {
+            if (PharmacyManager.getInstance().requestLog.medReqList.get(index).getReqStatus().equals("Added to Cart")) {
+                count++;
+            }
+        }
+        if (count > 0) {
+           var = "" + model.getValueAt(index, 0);
+        }
+        MedicineRequest obj = PharmacyManager.getInstance().requestLog.getReqDetails(var);
+        viewCartRequestID.setText(obj.getRequestId());
+        viewCartPatientID.setText(obj.getPatientId());       
+        viewRequestDate.setText("" + obj.getReqDate());
+        viewCartMedicine(obj.getMedReqList());
     }//GEN-LAST:event_viewCartTableMouseClicked
 
     private void viewCartTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewCartTableMousePressed
@@ -1895,6 +2027,7 @@ public class PharmicyManagerForm extends javax.swing.JFrame {
     private void viewCartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewCartButtonActionPerformed
         // TODO add your handling code here:
         viewCartPanel.setVisible(true);
+        
     }//GEN-LAST:event_viewCartButtonActionPerformed
 
     private void loadCartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadCartButtonActionPerformed
@@ -1904,6 +2037,15 @@ public class PharmicyManagerForm extends javax.swing.JFrame {
 
     private void cartProceedButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cartProceedButtonActionPerformed
         // TODO add your handling code here:
+        String var = viewCartRequestID.getText();
+        MedicineRequest obj = PharmacyManager.getInstance().requestLog.getReqDetails(var);
+        MedicineBill billObj = new MedicineBill();
+        billObj.setBillTag(obj.getRequestId());
+        billObj.setMedList(obj.getMedReqList());
+        billObj.setTotalCost(c);
+        billObj.setPatientID(obj.getPatientId());
+        billObj.setBillDate();
+        PharmacyManager.getInstance().billLogObj.addBill(billObj);
         viewCartPanel.setVisible(false);
     }//GEN-LAST:event_cartProceedButtonActionPerformed
 
@@ -1920,6 +2062,58 @@ public class PharmicyManagerForm extends javax.swing.JFrame {
     private void jLabel53MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel53MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel53MouseClicked
+
+    private void viewCartPatientAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewCartPatientAddressActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_viewCartPatientAddressActionPerformed
+
+    private void viewCartTableMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewCartTableMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_viewCartTableMouseEntered
+
+    private void MedicineTableSell1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MedicineTableSell1MouseClicked
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) MedicineTableSell1.getModel();
+        int index = viewCartTable.getSelectedRow();
+        int count = 0;
+        String var = "";
+        for (int i = 0; i < PharmacyManager.getInstance().requestLog.medReqList.size(); i++) {
+            if (PharmacyManager.getInstance().requestLog.medReqList.get(index).getReqStatus().equals("Added to Cart")) {
+                count++;
+            }
+        }
+        if (count > 0) {
+           var = "" + model.getValueAt(index, 0);
+        }
+        MedicineRequest obj = PharmacyManager.getInstance().requestLog.getReqDetails(var);
+        viewCartRequestID.setText(obj.getRequestId());
+        viewCartPatientID.setText(obj.getPatientId());       
+        viewRequestDate.setText("" + obj.getReqDate());
+       // viewBillMedicine(obj.getMedReqList());
+
+    }//GEN-LAST:event_MedicineTableSell1MouseClicked
+
+    private void MedicineTableSell1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MedicineTableSell1MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MedicineTableSell1MouseEntered
+
+    private void requestAcceptButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestAcceptButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_requestAcceptButton2ActionPerformed
+
+    private void requestCloseButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestCloseButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_requestCloseButton2ActionPerformed
+
+    private void requestRejectButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestRejectButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_requestRejectButton2ActionPerformed
+
+    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+        // TODO add your handling code here:
+        createMedicineBillTable();
+    }//GEN-LAST:event_jButton13ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1991,6 +2185,7 @@ public class PharmicyManagerForm extends javax.swing.JFrame {
     private javax.swing.JButton cartRemoveButton;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton12;
+    private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -2044,6 +2239,9 @@ public class PharmicyManagerForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel51;
     private javax.swing.JLabel jLabel52;
     private javax.swing.JLabel jLabel53;
+    private javax.swing.JLabel jLabel56;
+    private javax.swing.JLabel jLabel57;
+    private javax.swing.JLabel jLabel58;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -2079,6 +2277,8 @@ public class PharmicyManagerForm extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane12;
+    private javax.swing.JScrollPane jScrollPane14;
+    private javax.swing.JScrollPane jScrollPane15;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -2090,22 +2290,30 @@ public class PharmicyManagerForm extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JButton loadCartButton;
     private javax.swing.JButton requestAcceptButton;
+    private javax.swing.JButton requestAcceptButton2;
     private javax.swing.JButton requestCloseButton;
+    private javax.swing.JButton requestCloseButton2;
     private javax.swing.JButton requestRejectButton;
+    private javax.swing.JButton requestRejectButton2;
     private javax.swing.JScrollPane searchMedicineScrollPane;
     private javax.swing.JLabel totalCostLabel;
     private javax.swing.JButton viewCartButton;
     private javax.swing.JTable viewCartMedicineTable;
     private javax.swing.JPanel viewCartPanel;
+    private javax.swing.JTextField viewCartPatientAddress;
+    private javax.swing.JTextField viewCartPatientID;
+    private javax.swing.JTextField viewCartPatientName;
+    private javax.swing.JTextField viewCartRequestID;
     private javax.swing.JTable viewCartTable;
     private javax.swing.JTextField viewPatientID;
     private javax.swing.JTextField viewPatientID2;
-    private javax.swing.JTextField viewPatientID3;
     private javax.swing.JTextField viewRequestDate;
-    private javax.swing.JTextField viewRequestDate1;
+    private javax.swing.JTextField viewRequestDate2;
     private javax.swing.JTextField viewRequestID;
-    private javax.swing.JTextField viewRequestID1;
+    private javax.swing.JTextField viewRequestID2;
     private javax.swing.JPanel viewRequestPanel;
+    private javax.swing.JPanel viewRequestPanel2;
     private javax.swing.JTable viewRequestTable;
+    private javax.swing.JTable viewRequestTable2;
     // End of variables declaration//GEN-END:variables
 }

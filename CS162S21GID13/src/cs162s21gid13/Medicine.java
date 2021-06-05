@@ -23,21 +23,21 @@ public class Medicine {
     private String Potency;
     
     
-<<<<<<< Updated upstream
+
     //getters
     
     public String getStatus() {
 		return status;
-=======
+    }
     //Getters
     public String getMedicineName() {
 		return medicineName;
->>>>>>> Stashed changes
+
 	}
 
-    public String getMedicineName() {
+   /* public String getMedicineName() {
         return medicineName;
-    }
+    }*/
     public Timestamp getExpiryDate() {
 		return expiryDate;
 	}
@@ -76,7 +76,7 @@ public class Medicine {
     public void setMedicineCost(int medicineCost) {
 		this.medicineCost = medicineCost;
 	}
-<<<<<<< Updated upstream
+
        static public String generateID() {
         char arr[] = new char[9];
         boolean flag = false;
@@ -98,7 +98,7 @@ public class Medicine {
         }
         return var;
     }
-=======
+
 
 
     public void setPotency(String Potency) {
@@ -106,5 +106,5 @@ public class Medicine {
     }
     
     
->>>>>>> Stashed changes
+
 }

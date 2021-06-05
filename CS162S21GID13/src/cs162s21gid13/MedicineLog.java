@@ -77,20 +77,20 @@ public class MedicineLog {
         return count;
     }
 
-    public MedicineRequest buildCart(MedicineRequest obj) {
-        MedicineRequest rObj = new MedicineRequest();
-        rObj.setReqStatus("Added to cart");
+    public void buildCart(MedicineRequest obj) {
+       
+        obj.setReqStatus("Added to cart");
         boolean check = false;
         for (int i = 0; i < obj.getMedReqList().size(); i++) {
             if (medicineCount(obj.getMedReqList().get(i).getMedicineName()) > 0) {
-                //check = true;
+                check = true;
             } else {
                 check = false;
                 break;
             }
         }
         if (check) {
-            rObj.setReqStatus("Added to cart");
+            obj.setReqStatus("Added to Cart");
             for (int i = 0; i < obj.getMedReqList().size(); i++) {
                 for (int k = 0; k < medicineList.size(); k++) {
 
@@ -99,15 +99,14 @@ public class MedicineLog {
                         obj.getMedReqList().get(i).setMedicineName(medicineList.get(k).getMedicineName());
                         obj.getMedReqList().get(i).setMedicineTag(medicineList.get(k).getMedicineTag());
                         obj.getMedReqList().get(i).setExpiryDate(medicineList.get(k).getExpiryDate());
-                        medicineList.get(k).setStatus("Added to cart");
+                        medicineList.get(k).setStatus("Added to Cart");
                         break;
                     }
                 }
             }
         } else {
-            rObj.setReqStatus("Failed to process the request");
+            obj.setReqStatus("Failed to process the request");
         }
-        return obj;
     }
 
 }

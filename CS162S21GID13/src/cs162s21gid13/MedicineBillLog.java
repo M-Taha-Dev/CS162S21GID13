@@ -34,4 +34,18 @@ public class MedicineBillLog {
         }
         return check;
     }
+            
+            //get bill lsit for patients
+        List<MedicineBill>retrunBill(String id){
+            List<MedicineBill>strList = new ArrayList<>();
+            for(int i=0;i<billList.size();i++){
+                if(billList.get(i).getPatientID().equals(id)){
+                    strList.add(billList.get(i));
+                }
+            }
+            return strList;
+        }
+        
+        
+       
 }

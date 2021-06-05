@@ -1,10 +1,12 @@
 package cs162s21gid13;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 
 public class AppointmentLog {
-	List<Appointment>appointmentList = new ArrayList<>();
+	static List<Appointment>appointmentList = new ArrayList<>();
 	// add appointment 
 	public void addAppointment(Appointment obj) {
 		if(obj != null) {
@@ -22,8 +24,7 @@ public class AppointmentLog {
 		}
 	}
 	
-	// reject appointment request
-	
+	// reject appointment reque
 	public void rejectAppointment(String appNo) {
 		for (int i= 0;i<appointmentList.size();i++) {
 			if(appointmentList.get(i).getAppointmentNumber().equals(appNo)) {
@@ -65,6 +66,42 @@ public class AppointmentLog {
 	public void updateAppointmentIndex (int index, Appointment obj) {
 		appointmentList.set(index, obj);
 	}
+        
+        void readAppointmentRequest(){
+            try{
+                FileReader fr = new FileReader("AppointmentRequest.txt");
+                BufferedReader br = new BufferedReader(fr);
+                String line = br.readLine();
+                while(line != null){
+                    String arr[] = line.split(",");
+                    Appointment obj = new Appointment();
+                    obj.setAppointmentNumber(arr[0]);
+                    obj.setPatientId(arr[1]);      
+                    appointmentList.add(obj);
+                    line = br.readLine();
+                  //  obj.setDateOfAppointmen(arr[2]);
+                }
+            }catch(Exception ex){
+        }
+        }
+        
+                void readPatientData(){
+            try{
+                FileReader fr = new FileReader("PatientData.txt");
+                BufferedReader br = new BufferedReader(fr);
+                String line = br.readLine();
+                while(line != null){
+                    String arr[] = line.split(",");
+                    Patient obj = new Patient();
+                    obj.setId(arr[0]);
+                    obj.setName(arr[1]);
+                    SimpleDoctor.patientList.add(obj);
+                  //obj.setDateOfAppointmen(arr[2]);
+                }
+            }catch(Exception ex){
+        }
+        }
+        
 	
 	
 	

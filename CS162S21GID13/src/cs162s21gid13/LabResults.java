@@ -1,15 +1,14 @@
 package cs162s21gid13;
 
-<<<<<<< Updated upstream
 import java.util.*;
-=======
-public class LabResults 
-{
-    String PatientID;
+
+
+   
     
->>>>>>> Stashed changes
+
 
 public class LabResults {
+     String PatientID;
     List<LabTest> testList = new ArrayList<>();
     // add test
     public void addResult(LabTest obj){

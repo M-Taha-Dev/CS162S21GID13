@@ -59,7 +59,7 @@ public class MedicineBill {
         Date dtDate = new Date();
         String varString = "";
         varString += dtDate;
-        this.billDate = Timestamp.valueOf(varString);
+//        this.billDate = Timestamp.valueOf(varString);
     }
 
     public void setDoctorID(String doctorID) {
