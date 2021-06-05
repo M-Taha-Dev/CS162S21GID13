@@ -8,17 +8,25 @@ package cs162s21gid13;
 import java.util.List;
 import java.util.Stack;
 import javax.swing.table.DefaultTableModel;
-
+import java.util.*;
 /**
  *
  * @author DELL
  */
 public class PatientFrame extends javax.swing.JFrame {
-
+static List<Doctor>dList = new ArrayList<>();
+static List<Prescription>pList = new ArrayList<>();
+static String selectedID = "";
+static Prescription o = new Prescription();
+Patient p = new Patient();
+ void s(){
+     p.setId("PID-1234");
+ }
     
     /**
      * Objects which the frame will interact with
      */
+    
     
     Patient patient = new Patient();
     
@@ -130,6 +138,26 @@ public class PatientFrame extends javax.swing.JFrame {
         }    
     }
     
+    //********************************Create Doctor Table****************************
+    void createDoctorTable(){
+        DefaultTableModel model = (DefaultTableModel) DoctorTable.getModel();
+        Object rowData[] = new Object[4];
+        model.getDataVector().removeAllElements();
+        for (int i=0;i<dList.size();i++){
+            rowData[0] = "" + (i+1);
+            rowData[1] = dList.get(i).DataDoctor.name;
+            rowData[2] = dList.get(i).DataDoctor.doctorId;
+            rowData[3] = dList.get(i).DataDoctor.email;
+            model.addRow(rowData);
+        }
+    }
+    //*******************************Create Prescription*************************
+    
+    
+    
+    
+    
+    
     
     /**
      * Creates new form Patient
@@ -210,6 +238,13 @@ public class PatientFrame extends javax.swing.JFrame {
         jScrollPane13 = new javax.swing.JScrollPane();
         PresMedicinetable = new javax.swing.JTable();
         PresTagLabel2 = new javax.swing.JLabel();
+        pID = new javax.swing.JTextField();
+        jTextField3 = new javax.swing.JTextField();
+        jTextField4 = new javax.swing.JTextField();
+        dID = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        prsArea = new javax.swing.JTextArea();
+        jButton6 = new javax.swing.JButton();
         jPanel15 = new javax.swing.JPanel();
         jPanel34 = new javax.swing.JPanel();
         jPanel35 = new javax.swing.JPanel();
@@ -261,11 +296,12 @@ public class PatientFrame extends javax.swing.JFrame {
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel39 = new javax.swing.JLabel();
         jScrollPane6 = new javax.swing.JScrollPane();
-        jTable6 = new javax.swing.JTable();
+        DoctorTable = new javax.swing.JTable();
         jLabel40 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel41 = new javax.swing.JLabel();
         jLabel42 = new javax.swing.JLabel();
+        jButton5 = new javax.swing.JButton();
         jPanel25 = new javax.swing.JPanel();
         jPanel29 = new javax.swing.JPanel();
         jPanel45 = new javax.swing.JPanel();
@@ -664,7 +700,7 @@ public class PatientFrame extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel6.setText("Prescription Tag");
-        jPanel12.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, -1, 30));
+        jPanel12.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, -1, 30));
 
         PresTestLabel.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jPanel12.add(PresTestLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 770, 210, 30));
@@ -755,8 +791,26 @@ public class PatientFrame extends javax.swing.JFrame {
 
         PresTagLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jPanel12.add(PresTagLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, 210, 30));
+        jPanel12.add(pID, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 570, 220, 30));
+        jPanel12.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 220, 30));
+        jPanel12.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 220, 30));
+        jPanel12.add(dID, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 220, 30));
 
-        jPanel11.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 940, 880));
+        prsArea.setColumns(20);
+        prsArea.setRows(5);
+        jScrollPane1.setViewportView(prsArea);
+
+        jPanel12.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 670, 330, -1));
+
+        jButton6.setText("Load");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+        jPanel12.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 190, 80, 30));
+
+        jPanel11.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 930, 880));
 
         jTabbedPane1.addTab("tab2", jPanel11);
 
@@ -1201,33 +1255,26 @@ public class PatientFrame extends javax.swing.JFrame {
         jPanel28.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 280, -1, -1));
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel28.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 150, 140, -1));
+        jPanel28.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 150, 180, 30));
 
         jLabel39.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel39.setText("Category");
         jPanel28.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 350, -1, -1));
 
-        jTable6.setModel(new javax.swing.table.DefaultTableModel(
+        DoctorTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Sr No.", "Name", "ID", "Email"
             }
         ));
-        jScrollPane6.setViewportView(jTable6);
+        DoctorTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                DoctorTableMouseClicked(evt);
+            }
+        });
+        jScrollPane6.setViewportView(DoctorTable);
 
         jPanel28.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, 450, 240));
 
@@ -1253,6 +1300,14 @@ public class PatientFrame extends javax.swing.JFrame {
         jLabel42.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel42.setText("Name");
         jPanel28.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 320, -1, -1));
+
+        jButton5.setText("Load");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        jPanel28.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, -1, -1));
 
         javax.swing.GroupLayout jPanel24Layout = new javax.swing.GroupLayout(jPanel24);
         jPanel24.setLayout(jPanel24Layout);
@@ -1545,6 +1600,11 @@ public class PatientFrame extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+       Appointment obj = new Appointment();
+       obj.setDoctorId(selectedID);
+       obj.setPatientId("ABC-1234");
+       obj.setStatus("Pending");
+       AppointmentLog.appointmentList.add(obj);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -1575,6 +1635,26 @@ public class PatientFrame extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_AccountLabelMouseClicked
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        PatientLog.readDoctor();
+        createDoctorTable();
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void DoctorTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DoctorTableMouseClicked
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) DoctorTable.getModel();
+        int index = DoctorTable.getSelectedRow();
+        selectedID = "" +model.getValueAt(index, 2);
+    }//GEN-LAST:event_DoctorTableMouseClicked
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        dID.setText(o.getDoctorID());
+        pID.setText(o.getPatientID());
+        prsArea.setText(o.getDiagnosis());
+    }//GEN-LAST:event_jButton6ActionPerformed
 
 
 
@@ -1618,6 +1698,7 @@ public class PatientFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AccountLabel;
+    private javax.swing.JTable DoctorTable;
     private javax.swing.JLabel LabResultsLabel;
     private javax.swing.JPanel LabResultsPanel;
     private javax.swing.JTable LabTestTable;
@@ -1634,11 +1715,14 @@ public class PatientFrame extends javax.swing.JFrame {
     private javax.swing.JPanel Prespanel;
     private javax.swing.JTextField addressField;
     private javax.swing.JTextField ageField;
+    private javax.swing.JTextField dID;
     private javax.swing.JTextField emailField;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton8;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
@@ -1735,6 +1819,7 @@ public class PatientFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel47;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JScrollPane jScrollPane13;
@@ -1750,12 +1835,15 @@ public class PatientFrame extends javax.swing.JFrame {
     private javax.swing.JTable jTable3;
     private javax.swing.JTable jTable4;
     private javax.swing.JTable jTable5;
-    private javax.swing.JTable jTable6;
     private javax.swing.JTable jTable9;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField nameField;
+    private javax.swing.JTextField pID;
     private javax.swing.JTextField passwordField;
     private javax.swing.JLabel presLabel;
+    private javax.swing.JTextArea prsArea;
     // End of variables declaration//GEN-END:variables
 }
