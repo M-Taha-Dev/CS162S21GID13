@@ -15,9 +15,26 @@ import java.util.List;
  */
 public class DonorLog 
 {
-    List<Donor> DonorList = new ArrayList<Donor>();
+    List<Donor> DonorList;
 
+    private static DonorLog object = new DonorLog();
+
+    private DonorLog() 
+    {
+        DonorList = new ArrayList<Donor>();
+    }
     
+    
+    ////GET Object
+    public static DonorLog getInstance()
+    {
+        if(object == null)
+        {
+            object = new DonorLog();
+        }
+        
+        return object;
+    }
     
     //Getter
     public List<Donor> getDonorList() {

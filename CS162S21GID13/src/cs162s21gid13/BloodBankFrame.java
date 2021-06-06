@@ -5,6 +5,8 @@
  */
 package cs162s21gid13;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -19,11 +21,9 @@ public class BloodBankFrame extends javax.swing.JFrame {
 
     /**
      * Objects with which the frame will interact
+     * BloodRequestLog, DonorLog, TransfusionLog
      */
     
-    DonorLog donorlog = new DonorLog();
-    BloodrequestLog bloodRequestlog = new BloodrequestLog();
-    TransfusionLog transfusionLog = new TransfusionLog();
     
     /**
      * functions  to populate tables
@@ -51,18 +51,20 @@ public class BloodBankFrame extends javax.swing.JFrame {
             for (int i = 0; i < bloodrequestStack.size(); i++) 
             {
                 BloodRequest req = bloodrequestStack.pop();
-                rowData[0] = "" + (i+1);
-                rowData[1] = req.getReciepientName();
-                rowData[2] = req.getBloodType();
-                rowData[3] = req.getAmountofBlood();
-                rowData[4] = req.getTimestamp() + "";
+                
+                rowData[0] = req.getReciepientName();
+                rowData[1] = req.getBloodType();
+                rowData[2] = req.getAmountofBlood();
+                rowData[3] = req.getTimestamp() + "";
+                rowData[4] = req.getStatus();
+                
                 model.addRow(rowData);
             }
         }
     }
     
-    /*
-    void createDonorTable(Stack<Transfusion> stack)
+    
+    void createTransfusionTable(Stack<Transfusion> stack)
     {
         if(stack.isEmpty())
         {
@@ -95,6 +97,7 @@ public class BloodBankFrame extends javax.swing.JFrame {
             }
         }
     }
+    
     
     
     /**
@@ -265,9 +268,9 @@ public class BloodBankFrame extends javax.swing.JFrame {
         jPanel7 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jPanel12 = new javax.swing.JPanel();
+        TransfusionHistoryPanel = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
-        TransfusionHistoryPanel = new javax.swing.JLabel();
+        TransfusionHistoryLabel = new javax.swing.JLabel();
         AddDonorPanel = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
@@ -288,10 +291,10 @@ public class BloodBankFrame extends javax.swing.JFrame {
         jLabel20 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         BloodRequestTable = new javax.swing.JTable();
-        jPanel33 = new javax.swing.JPanel();
+        ApproveRequestPanel = new javax.swing.JPanel();
         jLabel40 = new javax.swing.JLabel();
         jLabel41 = new javax.swing.JLabel();
-        jPanel34 = new javax.swing.JPanel();
+        DenyRequestPanel = new javax.swing.JPanel();
         jLabel44 = new javax.swing.JLabel();
         jLabel45 = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
@@ -326,9 +329,9 @@ public class BloodBankFrame extends javax.swing.JFrame {
         jPanel17 = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        DonorTable = new javax.swing.JTable();
-        jTextField1 = new javax.swing.JTextField();
-        jButton5 = new javax.swing.JButton();
+        TransfusionTable = new javax.swing.JTable();
+        donornameSearchField = new javax.swing.JTextField();
+        searchTransfusion_ByDonor = new javax.swing.JButton();
         jPanel15 = new javax.swing.JPanel();
         jPanel18 = new javax.swing.JPanel();
         jPanel19 = new javax.swing.JPanel();
@@ -400,24 +403,24 @@ public class BloodBankFrame extends javax.swing.JFrame {
 
         jPanel3.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 680, 390, -1));
 
-        jPanel12.setBackground(new java.awt.Color(255, 0, 0));
-        jPanel12.addMouseListener(new java.awt.event.MouseAdapter() {
+        TransfusionHistoryPanel.setBackground(new java.awt.Color(255, 0, 0));
+        TransfusionHistoryPanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel12MouseClicked(evt);
+                TransfusionHistoryPanelMouseClicked(evt);
             }
         });
-        jPanel12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        TransfusionHistoryPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cs162s21gid13/TransfusionHistoryIcon.png"))); // NOI18N
-        jPanel12.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, -1, 84));
+        TransfusionHistoryPanel.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, -1, 84));
 
-        TransfusionHistoryPanel.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        TransfusionHistoryPanel.setForeground(new java.awt.Color(255, 255, 255));
-        TransfusionHistoryPanel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        TransfusionHistoryPanel.setText("Transfusion History");
-        jPanel12.add(TransfusionHistoryPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, 240, 73));
+        TransfusionHistoryLabel.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        TransfusionHistoryLabel.setForeground(new java.awt.Color(255, 255, 255));
+        TransfusionHistoryLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        TransfusionHistoryLabel.setText("Transfusion History");
+        TransfusionHistoryPanel.add(TransfusionHistoryLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, 240, 73));
 
-        jPanel3.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 580, 390, -1));
+        jPanel3.add(TransfusionHistoryPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 580, 390, -1));
 
         AddDonorPanel.setBackground(new java.awt.Color(255, 0, 0));
         AddDonorPanel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -573,7 +576,7 @@ public class BloodBankFrame extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Sr No.", "Recipient Name", "Blood Group", "Quantity", "Date and Time"
+                "Recipient Name", "Blood Group", "Quantity", "Date and Time", "Status"
             }
         ));
         BloodRequestTable.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -582,11 +585,14 @@ public class BloodBankFrame extends javax.swing.JFrame {
 
         jPanel9.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 140, 580, 640));
 
-        jPanel33.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel33.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 255), 3));
-        jPanel33.addMouseListener(new java.awt.event.MouseAdapter() {
+        ApproveRequestPanel.setBackground(new java.awt.Color(255, 255, 255));
+        ApproveRequestPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 255), 3));
+        ApproveRequestPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ApproveRequestPanelMouseClicked(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jPanel33MousePressed(evt);
+                ApproveRequestPanelMousePressed(evt);
             }
         });
 
@@ -596,22 +602,22 @@ public class BloodBankFrame extends javax.swing.JFrame {
         jLabel41.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel41.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cs162s21gid13/Approval icon.png"))); // NOI18N
 
-        javax.swing.GroupLayout jPanel33Layout = new javax.swing.GroupLayout(jPanel33);
-        jPanel33.setLayout(jPanel33Layout);
-        jPanel33Layout.setHorizontalGroup(
-            jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel33Layout.createSequentialGroup()
+        javax.swing.GroupLayout ApproveRequestPanelLayout = new javax.swing.GroupLayout(ApproveRequestPanel);
+        ApproveRequestPanel.setLayout(ApproveRequestPanelLayout);
+        ApproveRequestPanelLayout.setHorizontalGroup(
+            ApproveRequestPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ApproveRequestPanelLayout.createSequentialGroup()
                 .addGap(41, 41, 41)
                 .addComponent(jLabel40, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel33Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ApproveRequestPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel41)
                 .addGap(71, 71, 71))
         );
-        jPanel33Layout.setVerticalGroup(
-            jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel33Layout.createSequentialGroup()
+        ApproveRequestPanelLayout.setVerticalGroup(
+            ApproveRequestPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ApproveRequestPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel40)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -619,13 +625,13 @@ public class BloodBankFrame extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel9.add(jPanel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
+        jPanel9.add(ApproveRequestPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
 
-        jPanel34.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel34.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 255), 3));
-        jPanel34.addMouseListener(new java.awt.event.MouseAdapter() {
+        DenyRequestPanel.setBackground(new java.awt.Color(255, 255, 255));
+        DenyRequestPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 255), 3));
+        DenyRequestPanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jPanel34MousePressed(evt);
+                DenyRequestPanelMousePressed(evt);
             }
         });
 
@@ -635,22 +641,22 @@ public class BloodBankFrame extends javax.swing.JFrame {
         jLabel45.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel45.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cs162s21gid13/Cancel icon 2.png"))); // NOI18N
 
-        javax.swing.GroupLayout jPanel34Layout = new javax.swing.GroupLayout(jPanel34);
-        jPanel34.setLayout(jPanel34Layout);
-        jPanel34Layout.setHorizontalGroup(
-            jPanel34Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel34Layout.createSequentialGroup()
+        javax.swing.GroupLayout DenyRequestPanelLayout = new javax.swing.GroupLayout(DenyRequestPanel);
+        DenyRequestPanel.setLayout(DenyRequestPanelLayout);
+        DenyRequestPanelLayout.setHorizontalGroup(
+            DenyRequestPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(DenyRequestPanelLayout.createSequentialGroup()
                 .addContainerGap(49, Short.MAX_VALUE)
                 .addComponent(jLabel44)
                 .addGap(40, 40, 40))
-            .addGroup(jPanel34Layout.createSequentialGroup()
+            .addGroup(DenyRequestPanelLayout.createSequentialGroup()
                 .addGap(72, 72, 72)
                 .addComponent(jLabel45, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel34Layout.setVerticalGroup(
-            jPanel34Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel34Layout.createSequentialGroup()
+        DenyRequestPanelLayout.setVerticalGroup(
+            DenyRequestPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(DenyRequestPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel44)
                 .addGap(18, 18, 18)
@@ -658,7 +664,7 @@ public class BloodBankFrame extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel9.add(jPanel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(33, 580, 260, -1));
+        jPanel9.add(DenyRequestPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(33, 580, 260, -1));
 
         jPanel8.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 810));
 
@@ -816,7 +822,7 @@ public class BloodBankFrame extends javax.swing.JFrame {
 
         jPanel16.add(jPanel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 935, -1));
 
-        DonorTable.setModel(new javax.swing.table.DefaultTableModel(
+        TransfusionTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -836,22 +842,27 @@ public class BloodBankFrame extends javax.swing.JFrame {
                 "Sr No.", "Name", "CNIC", "Blood Group", "Contact Number", "Date and Time", "Recipient Namel"
             }
         ));
-        DonorTable.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        DonorTable.setGridColor(new java.awt.Color(255, 255, 255));
-        jScrollPane4.setViewportView(DonorTable);
+        TransfusionTable.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        TransfusionTable.setGridColor(new java.awt.Color(255, 255, 255));
+        jScrollPane4.setViewportView(TransfusionTable);
 
         jPanel16.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 270, 680, 270));
 
-        jTextField1.setText("Search Donor");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        donornameSearchField.setText("Search Donor");
+        donornameSearchField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                donornameSearchFieldActionPerformed(evt);
             }
         });
-        jPanel16.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 210, 260, 40));
+        jPanel16.add(donornameSearchField, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 210, 260, 40));
 
-        jButton5.setText("Search");
-        jPanel16.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 210, 110, 40));
+        searchTransfusion_ByDonor.setText("Search");
+        searchTransfusion_ByDonor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                searchTransfusion_ByDonorMouseClicked(evt);
+            }
+        });
+        jPanel16.add(searchTransfusion_ByDonor, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 210, 110, 40));
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
@@ -947,7 +958,7 @@ public class BloodBankFrame extends javax.swing.JFrame {
     private void BloodReqPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BloodReqPanelMouseClicked
         // TODO add your handling code here:
         jTabbedPane1.setSelectedIndex(1);
-        this.createBloodRequesttable(bloodRequestlog.viewBloodRequestLog());
+        this.createBloodRequesttable(BloodrequestLog.getInstance().viewBloodRequestLog());
     }//GEN-LAST:event_BloodReqPanelMouseClicked
 
     private void jPanel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseClicked
@@ -985,10 +996,11 @@ public class BloodBankFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_FirstnameFieldActionPerformed
 
-    private void jPanel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel12MouseClicked
+    private void TransfusionHistoryPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TransfusionHistoryPanelMouseClicked
         // TODO add your handling code here:
         jTabbedPane1.setSelectedIndex(3);
-    }//GEN-LAST:event_jPanel12MouseClicked
+        createTransfusionTable(TransfusionLog.getInstance().viewTransfusionHistory());
+    }//GEN-LAST:event_TransfusionHistoryPanelMouseClicked
 
     private void AddDonorPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddDonorPanelMouseClicked
         // TODO add your handling code here:
@@ -1005,22 +1017,22 @@ public class BloodBankFrame extends javax.swing.JFrame {
         jTabbedPane1.setSelectedIndex(4);
     }//GEN-LAST:event_jPanel24MousePressed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void donornameSearchFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_donornameSearchFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_donornameSearchFieldActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton7ActionPerformed
 
-    private void jPanel33MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel33MousePressed
-        // TODO add your handling code here:
+    private void ApproveRequestPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ApproveRequestPanelMousePressed
+       
         jTabbedPane1.setSelectedIndex(7);
-    }//GEN-LAST:event_jPanel33MousePressed
+    }//GEN-LAST:event_ApproveRequestPanelMousePressed
 
-    private void jPanel34MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel34MousePressed
+    private void DenyRequestPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DenyRequestPanelMousePressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jPanel34MousePressed
+    }//GEN-LAST:event_DenyRequestPanelMousePressed
 
     private void SignUpBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SignUpBtnMouseClicked
         
@@ -1071,6 +1083,28 @@ public class BloodBankFrame extends javax.swing.JFrame {
       
     }//GEN-LAST:event_SignUpBtnMouseClicked
 
+    private void searchTransfusion_ByDonorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchTransfusion_ByDonorMouseClicked
+        String donorName = this.donornameSearchField.getText();
+        
+        Stack<Transfusion> stack = new Stack<Transfusion>();
+        
+        for (int i = 0; i < TransfusionLog.getInstance().getTransfusionLog().size(); i++) 
+        {
+            Transfusion get = TransfusionLog.getInstance().getTransfusionObj(i);
+            if (get.getDonor().getName().equals(donorName)) 
+            {
+                stack.push(get);
+            }
+        }
+        
+        createTransfusionTable(stack);
+        
+    }//GEN-LAST:event_searchTransfusion_ByDonorMouseClicked
+
+    private void ApproveRequestPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ApproveRequestPanelMouseClicked
+        
+    }//GEN-LAST:event_ApproveRequestPanelMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1109,17 +1143,20 @@ public class BloodBankFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel AddDonorPanel;
     private javax.swing.JTextArea AddressField;
+    private javax.swing.JPanel ApproveRequestPanel;
     private javax.swing.JTextField BloodGroupField;
     private javax.swing.JPanel BloodReqPanel;
     private javax.swing.JTable BloodRequestTable;
     private javax.swing.JTextField CNICField;
-    private javax.swing.JTable DonorTable;
+    private javax.swing.JPanel DenyRequestPanel;
     private javax.swing.JTextField FirstnameField;
     private javax.swing.JTextField PhoneNumField;
     private javax.swing.JButton SignUpBtn;
-    private javax.swing.JLabel TransfusionHistoryPanel;
+    private javax.swing.JLabel TransfusionHistoryLabel;
+    private javax.swing.JPanel TransfusionHistoryPanel;
+    private javax.swing.JTable TransfusionTable;
+    private javax.swing.JTextField donornameSearchField;
     private javax.swing.JTextField emailField;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -1153,7 +1190,6 @@ public class BloodBankFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
@@ -1166,8 +1202,6 @@ public class BloodBankFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel23;
     private javax.swing.JPanel jPanel24;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel33;
-    private javax.swing.JPanel jPanel34;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel7;
@@ -1186,7 +1220,7 @@ public class BloodBankFrame extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator24;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable5;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField lastnameField;
+    private javax.swing.JButton searchTransfusion_ByDonor;
     // End of variables declaration//GEN-END:variables
 }

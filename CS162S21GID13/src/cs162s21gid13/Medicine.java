@@ -31,12 +31,6 @@ public class Medicine {
     }
 
     //Getters
-    
-
-  
-
-
-    //Getters
     public String getMedicineName() {
 		return medicineName;
 
