@@ -5,6 +5,7 @@
  */
 package cs162s21gid13;
 
+import com.sun.javafx.scene.control.skin.VirtualFlow;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,7 +17,31 @@ public class Prescription {
     private String DoctorID, PatientID, Diagnosis, TestRecommended, prescriptionTag;
     private Date dateofCheckup;
     private List<Medicine> medList = new ArrayList<Medicine>();
+    private List<PrescribedMedicine> pMed = new ArrayList<>();
+    private String text;
 
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public String getText() {
+        return text;
+    }
+    
+    
+    
+    public void setMedList(List<Medicine> medList) {
+        this.medList = medList;
+    }
+
+    public List<PrescribedMedicine> getpMed() {
+        return pMed;
+    }
+
+    public void setpMed(List<PrescribedMedicine> pMed) {
+        this.pMed = pMed;
+    }
+    
     /// Getters and Setters
     
     public List<Medicine> getMedList() {

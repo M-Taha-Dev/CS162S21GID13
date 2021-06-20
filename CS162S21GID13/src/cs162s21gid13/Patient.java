@@ -20,6 +20,7 @@ public class Patient extends Person {
   private MedicineRequestLog medRequests;
   private LabTestLog labTests;
   
+  
     /*public Patient(String Id, String password, PatientBilling finance, MedicalHistory history, Prescription latestPres, MedicineRequestLog medRequests) {
         this.Id = Id;
         this.finance = finance;
@@ -157,11 +158,5 @@ public class Patient extends Person {
     public List<MedicineRequest> getMedRequests() {
         return medRequests.getList();
     }
-  
-    
-    
-  
-  
-  
   
 }

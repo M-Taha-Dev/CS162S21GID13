@@ -6,6 +6,7 @@
 package cs162s21gid13;
 
 import java.io.FileWriter;
+import java.text.SimpleDateFormat;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -52,7 +53,25 @@ public class DoctorMain extends javax.swing.JFrame {
     
     
     
-    
+     public String generateID() {
+        char arr[] = new char[8];
+        boolean flag = false;
+        String var1 = "";
+        while(flag == false)
+        {
+        arr[0] = (char) (new Random().nextInt(90 - 65 + 1) + 65);
+        arr[1] = (char) (new Random().nextInt(90 - 65 + 1) + 65);
+        arr[2] = (char) (new Random().nextInt(90 - 65 + 1) + 65);
+        arr[3] = '-';
+        arr[4] = (char) (new Random().nextInt(57 - 48 + 1) + 48);
+        arr[5] = (char) (new Random().nextInt(57 - 48 + 1) + 48);
+        arr[6] = (char) (new Random().nextInt(57 - 48 + 1) + 48);
+        arr[7] = (char) (new Random().nextInt(57 - 48 + 1) + 48);
+        var1 = String.valueOf(arr);
+        flag = MedicalHistory.getInstance().checkPrescripiton(var1);
+        }
+        return var1;
+     }
     
     
     
@@ -1233,13 +1252,24 @@ public class DoctorMain extends javax.swing.JFrame {
         prsString = prs.getText();
         try{
             FileWriter fw = new FileWriter("PrescriptionInfo.txt");
+            fw.write(pres);
             fw.write(pPatientID.getText() + ";");
-            fw.write(prs.getText() + "\n");
+            fw.write(prs.getText());
+            fw.flush();
+            fw.close();
         }
         catch(Exception ex){
             
         }
-        
+        try{
+            FileWriter fr = new FileWriter("PrescriptionsDetails.txt");
+            fr.write(pPatientID.getText() + "," + generateID() + "," +new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
+            fr.flush();
+            fr.close();
+        }
+        catch(Exception ex){
+            
+        }
         
         //Prescription obj = new Prescription();
         //PatientFrame.o.setDiagnosis(prsString);

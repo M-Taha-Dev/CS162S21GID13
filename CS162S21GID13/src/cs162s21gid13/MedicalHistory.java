@@ -10,6 +10,7 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import sun.security.jca.GetInstance;
 
 /**
  *
@@ -17,7 +18,13 @@ import java.util.List;
  */
 public class MedicalHistory {
    private List<Prescription> presList = new ArrayList<Prescription>();
-
+   static MedicalHistory obj ;
+    static MedicalHistory getInstance(){
+        if(obj == null){
+            obj = new MedicalHistory();
+        }
+        return obj;
+    }
    
    //Getter
     public List<Prescription> getPresList() {
@@ -31,6 +38,18 @@ public class MedicalHistory {
     {
         this.presList.add(pres);
     }
+    
+    Patient getPatientIDByPresID(String id){
+        for(int i=0;i<presList.size();i++){
+            if(presList.get(i).getPrescriptionTag().equals(id)){
+                return  PatientLog.getInstatnce().returnPatient(presList.get(i).getPatientID());
+            }
+        }
+        return null;
+    }
+    
+    
+    
     
     public boolean editPrescription(Prescription pres, int index)
     {
@@ -122,39 +141,24 @@ public class MedicalHistory {
             return null;
         }
     }
-    void readPrescription(){
-        try{
-            FileReader fr = new FileReader("PrescriptionInfo.txt");
-            BufferedReader br = new BufferedReader(fr);
-            String line = br.readLine();
-            Prescription obj = new Prescription();
-            /* fw.write(pPatientID.getText() + ";");
-            fw.write(prs.getText() + "\n");*/
-            while(line != null){
-                String s1[] = line.split(";");
-                obj.setPatientID(s1[0]);
-                String s2[] = s1[1].split(":");
-                String[] s3;
-                try {
-                     
-                 for(int i=0;i<s2.length;i++)
-                 {
-                    s3 = s2[i].split(",");
-                    for(int j = 0;j<s3.length;j++){
-                        
-                    }
-                 }
-                    
-                } catch (Exception e) {
-                }
-                
+    
+    boolean checkPrescripiton(String tag){
+        for (int i=0;i<presList.size();i++){
+            if(presList.get(i).getPrescriptionTag().equals(tag)){
+                return false;
             }
         }
-        catch(Exception ex){
-            
-        }
+        return true;
     }
     
-    
+    Prescription getPrescriptionByEmail(String email){
+        for(int i=0;i<PatientLog.getInstatnce().pList.size();i++)
+        {
+            if(PatientLog.getInstatnce().pList.get(i).getEmail().equals(email)){
+                return PatientLog.getInstatnce().pList.get(i).getLatestPres();
+            }
+        }
+        return null;
+    }
     
 }

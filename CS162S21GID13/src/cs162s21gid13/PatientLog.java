@@ -39,9 +39,9 @@ public class PatientLog {
 
     Patient returnPatient(String IDString) {
         Patient obj = new Patient();
-        for (int i = 0; i < patientSet.size(); i++) {
-            obj = (Patient) patientSet.toArray()[i];
-            if (obj.getId().equals(IDString)) {
+        for (int i = 0; i < pList.size(); i++) {
+            obj = pList.get(i);
+            if (obj.getEmail().equals(IDString)) {
                 return obj;
             }
         }

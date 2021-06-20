@@ -21,6 +21,32 @@ public class Medicine {
     private String status;
     private int medicineCost;
     private String Potency;
+    //private String time;
+    //private String duration;
+
+    /*public void setDuration(String duration) {
+        this.duration = duration;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getDuration() {
+        return duration;
+    }
+*/
+ /*   public String getTime() {
+        return time;
+    }*/
+
+    public int getNoOfTablets() {
+        return noOfTablets;
+    }
+
+    public void setNoOfTablets(int noOfTablets) {
+        this.noOfTablets = noOfTablets;
+    }
     
     
 

@@ -76,9 +76,9 @@ Patient p = new Patient();
     }
     
     
-    void createPrescription(Stack<Prescription> presStack)
+    void createPrescription()
     {
-        if(presStack.isEmpty())
+        /*if(presStack.isEmpty())
         {
             this.NoDataLabel.setText("No Data Available");
         }
@@ -94,24 +94,20 @@ Patient p = new Patient();
             this.PresDiagnosisLabel.setText(pres.getDiagnosis());
             
             this.PresTestLabel.setText(pres.getTestRecommended());
-            
-            Object rowData[] = new Object[2];
+            */
+            Object rowData[] = new Object[3];
             DefaultTableModel model = (DefaultTableModel) this.PresMedicinetable.getModel();
+            Patient patient1 = PatientLog.getInstatnce().returnPatient(pEmail.getText());
+            Prescription ob = patient1.getLatestPres();
             model.getDataVector().removeAllElements();
             
-            for (int i = 0; i < pres.getMedList().size(); i++) 
+            for (int i = 0; i < ob.getpMed().size(); i++) 
             {
-                Medicine med = pres.getMedList().get(i);
-                
-                rowData[0] = med.getMedicineName();
-                rowData[1] = med.getPotency();
-                
-                
+                rowData[0] = ob.getpMed().get(i).getName();
+                rowData[1] = ob.getpMed().get(i).getTime();
+                rowData[2] = ob.getpMed().get(i).getDuration();
                 model.addRow(rowData);
             }
-            
-        }
-        
     }
     
     void createLabTestTable(Stack<LabTest> labtestStack)
@@ -228,7 +224,7 @@ Patient p = new Patient();
         jLabel32 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
-        jPanel12 = new javax.swing.JPanel();
+        pDID = new javax.swing.JPanel();
         jPanel33 = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -247,8 +243,8 @@ Patient p = new Patient();
         PresMedicinetable = new javax.swing.JTable();
         PresTagLabel2 = new javax.swing.JLabel();
         pID = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        dP = new javax.swing.JTextField();
+        pT = new javax.swing.JTextField();
         dID = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         prsArea = new javax.swing.JTextArea();
@@ -698,8 +694,8 @@ Patient p = new Patient();
         jPanel11.setBackground(new java.awt.Color(255, 255, 255));
         jPanel11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel12.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pDID.setBackground(new java.awt.Color(255, 255, 255));
+        pDID.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel33.setBackground(new java.awt.Color(0, 0, 0));
         jPanel33.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -710,111 +706,111 @@ Patient p = new Patient();
         jLabel20.setText("Prescription");
         jPanel33.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 0, 170, 110));
 
-        jPanel12.add(jPanel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 940, 110));
+        pDID.add(jPanel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 940, 110));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel6.setText("Prescription Tag");
-        jPanel12.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, -1, 30));
+        pDID.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, -1, 30));
 
         PresTestLabel.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jPanel12.add(PresTestLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 770, 210, 30));
+        pDID.add(PresTestLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 770, 210, 30));
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel18.setText("Date of Prescription");
-        jPanel12.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, 30));
+        pDID.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, 30));
 
         jLabel49.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel49.setText("Test Recommended");
-        jPanel12.add(jLabel49, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 770, -1, 30));
+        pDID.add(jLabel49, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 770, -1, 30));
 
         PresDateLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jPanel12.add(PresDateLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 130, 210, 30));
+        pDID.add(PresDateLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 130, 210, 30));
 
         NoDataLabel.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jPanel12.add(NoDataLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 340, 210, 30));
+        pDID.add(NoDataLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 340, 210, 30));
 
         jLabel50.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel50.setText("Doctor ID");
-        jPanel12.add(jLabel50, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, -1, 30));
+        pDID.add(jLabel50, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, -1, 30));
 
         jLabel51.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel51.setText("Patient ID");
-        jPanel12.add(jLabel51, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 510, -1, 30));
+        pDID.add(jLabel51, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 510, -1, 30));
 
         jLabel52.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel52.setText("Diagnosis");
-        jPanel12.add(jLabel52, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 630, -1, 30));
+        pDID.add(jLabel52, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 620, -1, 30));
 
         PresDoctorIDLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jPanel12.add(PresDoctorIDLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 380, 210, 30));
+        pDID.add(PresDoctorIDLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 380, 210, 30));
 
         PresPatientIDLabel.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jPanel12.add(PresPatientIDLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 510, 210, 30));
+        pDID.add(PresPatientIDLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 510, 210, 30));
 
         PresDiagnosisLabel.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jPanel12.add(PresDiagnosisLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 630, 210, 30));
+        pDID.add(PresDiagnosisLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 630, 210, 30));
 
         PresMedicinetable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Medicine Name", "Potency"
+                "Medicine Name", "Timing", "Duration"
             }
         ));
         PresMedicinetable.setGridColor(new java.awt.Color(255, 255, 255));
         jScrollPane13.setViewportView(PresMedicinetable);
 
-        jPanel12.add(jScrollPane13, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 260, 340, 590));
+        pDID.add(jScrollPane13, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 230, 390, 590));
 
         PresTagLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jPanel12.add(PresTagLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, 210, 30));
-        jPanel12.add(pID, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 570, 220, 30));
-        jPanel12.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 220, 30));
-        jPanel12.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 220, 30));
-        jPanel12.add(dID, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 220, 30));
+        pDID.add(PresTagLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, 210, 30));
+        pDID.add(pID, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 570, 220, 30));
+        pDID.add(dP, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 220, 30));
+        pDID.add(pT, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 220, 30));
+        pDID.add(dID, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 220, 30));
 
         prsArea.setColumns(20);
         prsArea.setRows(5);
         jScrollPane1.setViewportView(prsArea);
 
-        jPanel12.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 670, 330, -1));
+        pDID.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 660, 330, -1));
 
         jButton6.setText("Load");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -822,9 +818,9 @@ Patient p = new Patient();
                 jButton6ActionPerformed(evt);
             }
         });
-        jPanel12.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 190, 80, 30));
+        pDID.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 190, 80, 30));
 
-        jPanel11.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 930, 880));
+        jPanel11.add(pDID, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 930, 880));
 
         jTabbedPane1.addTab("tab2", jPanel11);
 
@@ -1544,7 +1540,7 @@ Patient p = new Patient();
     private void PrespanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PrespanelMouseClicked
         // TODO add your handling code here:
         jTabbedPane1.setSelectedIndex(1);
-        this.createPrescription(this.patient.viewHistory());
+      //  this.createPrescription(this.patient.viewHistory());
         
     }//GEN-LAST:event_PrespanelMouseClicked
 
@@ -1670,9 +1666,17 @@ Patient p = new Patient();
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-        dID.setText(o.getDoctorID());
-        pID.setText(o.getPatientID());
-        prsArea.setText(o.getDiagnosis());
+        //dID.setText(o.getDoctorID());
+        createPrescription();
+        pID.setText(pEmail.getText());
+      //  Patient obj = PatientLog.getInstatnce().returnPatient(pEmail.getText());
+        
+      //  prsArea.setText();
+        
+        
+        
+        
+        
     }//GEN-LAST:event_jButton6ActionPerformed
 
 
@@ -1735,6 +1739,7 @@ Patient p = new Patient();
     private javax.swing.JTextField addressField;
     private javax.swing.JTextField ageField;
     private javax.swing.JTextField dID;
+    private javax.swing.JTextField dP;
     private javax.swing.JComboBox<String> dSelectCategory;
     private javax.swing.JTextField emailField;
     private javax.swing.JButton jButton1;
@@ -1798,7 +1803,6 @@ Patient p = new Patient();
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
@@ -1857,11 +1861,11 @@ Patient p = new Patient();
     private javax.swing.JTable jTable9;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField nameField;
+    private javax.swing.JPanel pDID;
     private javax.swing.JLabel pEmail;
     private javax.swing.JTextField pID;
+    private javax.swing.JTextField pT;
     private javax.swing.JTextField passwordField;
     private javax.swing.JLabel presLabel;
     private javax.swing.JTextArea prsArea;
