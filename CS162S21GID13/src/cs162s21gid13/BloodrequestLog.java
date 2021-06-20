@@ -15,10 +15,28 @@ import java.util.Stack;
  */
 public class BloodrequestLog 
 {
-    private List<BloodRequest> bloodReqlog = new ArrayList<BloodRequest>();
+    private static List<BloodRequest> bloodReqlog;
+    
+    private static BloodrequestLog object = new BloodrequestLog();
+
+    private BloodrequestLog() 
+    {
+        bloodReqlog = new ArrayList<BloodRequest>();
+    }
+    
+    
+    ////GET Object
+    public static BloodrequestLog getInstance()
+    {
+        if(object == null)
+        {
+            object = new BloodrequestLog();
+        }
+        
+        return object;
+    }
     
     //Getter
-
     public List<BloodRequest> getBloodReqlog() 
     {
         return bloodReqlog;
@@ -26,16 +44,16 @@ public class BloodrequestLog
     
     public BloodRequest getBloodRequest(int index)
     {
-        return this.bloodReqlog.get(index);
+        return BloodrequestLog.bloodReqlog.get(index);
     }
     
     //View
     
-    public Stack<BloodRequest> viewBloodRequestLog()
+    public static Stack<BloodRequest> viewBloodRequestLog()
     {
         Stack<BloodRequest> stack = new Stack<BloodRequest>();
         
-        for (int i = 0; i < this.bloodReqlog.size(); i++) 
+        for (int i = 0; i < BloodrequestLog.bloodReqlog.size(); i++) 
         {
             BloodRequest get = bloodReqlog.get(i);
             stack.push(get);
@@ -56,7 +74,7 @@ public class BloodrequestLog
     {
         if (index >= 0 && index <= this.bloodReqlog.size() ) 
         {
-            this.bloodReqlog.set(index, bloodreq);
+            BloodrequestLog.bloodReqlog.set(index, bloodreq);
             return true;
         }
         else
@@ -67,9 +85,9 @@ public class BloodrequestLog
     
     public boolean deletePrescription(int index)
     {
-        if (index >= 0 && index <= this.bloodReqlog.size() ) 
+        if (index >= 0 && index <= BloodrequestLog.bloodReqlog.size() ) 
         {
-            this.bloodReqlog.remove(index);
+            BloodrequestLog.bloodReqlog.remove(index);
             return true;
         }
         else
@@ -90,7 +108,7 @@ public class BloodrequestLog
     {
         List<BloodRequest> list = new ArrayList<>();
         
-        for (int i = 0; i < this.bloodReqlog.size(); i++) 
+        for (int i = 0; i < BloodrequestLog.bloodReqlog.size(); i++) 
         {
             BloodRequest get = list.get(i);
             
@@ -112,7 +130,7 @@ public class BloodrequestLog
     {
         List<BloodRequest> list = new ArrayList<>();
         
-        for (int i = 0; i < this.bloodReqlog.size(); i++) 
+        for (int i = 0; i < BloodrequestLog.bloodReqlog.size(); i++) 
         {
             BloodRequest get = list.get(i);
             
@@ -134,7 +152,7 @@ public class BloodrequestLog
     {
         List<BloodRequest> list = new ArrayList<>();
         
-        for (int i = 0; i < this.bloodReqlog.size(); i++) 
+        for (int i = 0; i < BloodrequestLog.bloodReqlog.size(); i++) 
         {
             BloodRequest get = list.get(i);
             

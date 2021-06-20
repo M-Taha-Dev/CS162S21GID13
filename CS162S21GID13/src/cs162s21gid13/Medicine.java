@@ -30,6 +30,7 @@ public class Medicine {
 		return status;
     }
 
+
    /* //Getters
     public String getMedicineName() {
 		return medicineName;
@@ -39,6 +40,7 @@ public class Medicine {
    /* public String getMedicineName() {
         return medicineName;
     }*/
+
 
 
     //Getters
@@ -88,8 +90,13 @@ public class Medicine {
 
 
 
-       static public String generateID() 
-       {
+
+      
+
+       static public String generateID() {
+
+       
+
 
         char arr[] = new char[9];
         boolean flag = false;
