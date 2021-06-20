@@ -191,22 +191,22 @@ Patient p = new Patient();
         MedicalHistoryPanel = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jPanel8 = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
         LabResultsPanel = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         LabResultsLabel = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jPanel13 = new javax.swing.JPanel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
+        BloodReqOptionPanel = new javax.swing.JPanel();
+        BloodReqLabel = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
         jPanel14 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
         AccountLabel = new javax.swing.JLabel();
         pEmail = new javax.swing.JLabel();
+        jPanel32 = new javax.swing.JPanel();
+        jLabel53 = new javax.swing.JLabel();
+        jLabel54 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -327,6 +327,24 @@ Patient p = new Patient();
         jScrollPane5 = new javax.swing.JScrollPane();
         jTable5 = new javax.swing.JTable();
         jButton8 = new javax.swing.JButton();
+        BloodReqPanel = new javax.swing.JPanel();
+        jPanel48 = new javax.swing.JPanel();
+        jLabel55 = new javax.swing.JLabel();
+        jPanel13 = new javax.swing.JPanel();
+        jPanel49 = new javax.swing.JPanel();
+        jLabel56 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel57 = new javax.swing.JLabel();
+        jLabel59 = new javax.swing.JLabel();
+        jLabel60 = new javax.swing.JLabel();
+        pID1 = new javax.swing.JTextField();
+        RecipientNameField = new javax.swing.JTextField();
+        RecipientCNICField = new javax.swing.JTextField();
+        dID1 = new javax.swing.JTextField();
+        bloodTypeField = new javax.swing.JTextField();
+        jLabel61 = new javax.swing.JLabel();
+        AmountofBloodField = new javax.swing.JTextField();
+        BloodReqButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -369,9 +387,9 @@ Patient p = new Patient();
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Home");
-        jPanel5.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, 170, 73));
+        jPanel5.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 0, 170, 73));
 
-        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, 140, 390, -1));
+        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 390, -1));
 
         Prespanel.setBackground(new java.awt.Color(54, 33, 89));
         Prespanel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -390,7 +408,7 @@ Patient p = new Patient();
         presLabel.setText("Prescription");
         Prespanel.add(presLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, 170, 73));
 
-        jPanel1.add(Prespanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 390, -1));
+        jPanel1.add(Prespanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 390, -1));
 
         MedicalHistoryPanel.setBackground(new java.awt.Color(54, 33, 89));
         MedicalHistoryPanel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -409,21 +427,7 @@ Patient p = new Patient();
         jLabel8.setText("Medical History");
         MedicalHistoryPanel.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, 200, 73));
 
-        jPanel1.add(MedicalHistoryPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 390, -1));
-
-        jPanel8.setBackground(new java.awt.Color(54, 33, 89));
-        jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cs162s21gid13/Home-48.png"))); // NOI18N
-        jPanel8.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, -1, 84));
-
-        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel10.setText("Medical History");
-        jPanel8.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, 200, 73));
-
-        jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 390, -1));
+        jPanel1.add(MedicalHistoryPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 390, -1));
 
         LabResultsPanel.setBackground(new java.awt.Color(54, 33, 89));
         LabResultsPanel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -442,7 +446,7 @@ Patient p = new Patient();
         LabResultsLabel.setText("Lab Results");
         LabResultsPanel.add(LabResultsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, 200, 73));
 
-        jPanel1.add(LabResultsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 410, 390, -1));
+        jPanel1.add(LabResultsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 330, 390, -1));
 
         jPanel10.setBackground(new java.awt.Color(54, 33, 89));
         jPanel10.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -461,26 +465,26 @@ Patient p = new Patient();
         jLabel14.setText("Billing");
         jPanel10.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, 200, 73));
 
-        jPanel1.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 500, 390, -1));
+        jPanel1.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 410, 390, -1));
 
-        jPanel13.setBackground(new java.awt.Color(54, 33, 89));
-        jPanel13.addMouseListener(new java.awt.event.MouseAdapter() {
+        BloodReqOptionPanel.setBackground(new java.awt.Color(54, 33, 89));
+        BloodReqOptionPanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel13MouseClicked(evt);
+                BloodReqOptionPanelMouseClicked(evt);
             }
         });
-        jPanel13.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        BloodReqOptionPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cs162s21gid13/Contact icon.png"))); // NOI18N
-        jPanel13.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, -1, 84));
+        BloodReqLabel.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        BloodReqLabel.setForeground(new java.awt.Color(255, 255, 255));
+        BloodReqLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        BloodReqLabel.setText("Blood Request");
+        BloodReqOptionPanel.add(BloodReqLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, 200, 73));
 
-        jLabel16.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel16.setText("Contact");
-        jPanel13.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, 200, 73));
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cs162s21gid13/Prescription-48.png"))); // NOI18N
+        BloodReqOptionPanel.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, -1, 84));
 
-        jPanel1.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 670, 390, -1));
+        jPanel1.add(BloodReqOptionPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 670, 390, -1));
 
         jPanel14.setBackground(new java.awt.Color(54, 33, 89));
         jPanel14.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -504,13 +508,32 @@ Patient p = new Patient();
         });
         jPanel14.add(AccountLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, 200, 73));
 
-        jPanel1.add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 580, 390, -1));
+        jPanel1.add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 490, 390, -1));
 
         pEmail.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         pEmail.setForeground(new java.awt.Color(255, 255, 255));
         pEmail.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         pEmail.setText("Email");
-        jPanel1.add(pEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, 240, 73));
+        jPanel1.add(pEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, 240, 50));
+
+        jPanel32.setBackground(new java.awt.Color(54, 33, 89));
+        jPanel32.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel32MouseClicked(evt);
+            }
+        });
+        jPanel32.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel53.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cs162s21gid13/Contact icon.png"))); // NOI18N
+        jPanel32.add(jLabel53, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, -1, 84));
+
+        jLabel54.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel54.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel54.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel54.setText("Contact");
+        jPanel32.add(jLabel54, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, 200, 73));
+
+        jPanel1.add(jPanel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 570, 390, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 390, 910));
 
@@ -642,7 +665,7 @@ Patient p = new Patient();
             .addGroup(jPanel22Layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(jLabel30)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addComponent(jLabel31)
                 .addGap(49, 49, 49))
         );
@@ -682,7 +705,7 @@ Patient p = new Patient();
             .addGroup(jPanel23Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(jLabel32)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addComponent(jLabel33)
                 .addGap(49, 49, 49))
         );
@@ -1532,6 +1555,153 @@ Patient p = new Patient();
 
         jTabbedPane1.addTab("tab11", jPanel27);
 
+        BloodReqPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel48.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel48.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel55.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel55.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel55.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel55.setText("Blood Request Application");
+        jPanel48.add(jLabel55, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 0, 330, 110));
+
+        BloodReqPanel.add(jPanel48, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 940, 110));
+
+        jPanel13.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel49.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel49.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel56.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel56.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel56.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel56.setText("Prescription");
+        jPanel49.add(jLabel56, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 0, 170, 110));
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel9.setText("Recipient CNIC");
+
+        jLabel57.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel57.setText("Recipient Name");
+
+        jLabel59.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel59.setText("Blood Type");
+
+        jLabel60.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel60.setText("Time Stamp");
+
+        jLabel61.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel61.setText("Amount of Blood");
+
+        BloodReqButton.setText("Send Request");
+        BloodReqButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BloodReqButtonMouseClicked(evt);
+            }
+        });
+        BloodReqButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BloodReqButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
+        jPanel13.setLayout(jPanel13Layout);
+        jPanel13Layout.setHorizontalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel49, javax.swing.GroupLayout.PREFERRED_SIZE, 940, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(jLabel57)
+                        .addGap(361, 361, 361)
+                        .addComponent(jLabel9))
+                    .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addGap(570, 570, 570)
+                        .addComponent(pID1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
+                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel59)
+                            .addComponent(bloodTypeField, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel13Layout.createSequentialGroup()
+                                .addComponent(jLabel60)
+                                .addGap(18, 18, 18)
+                                .addComponent(dID1, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel13Layout.createSequentialGroup()
+                                .addComponent(RecipientNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(320, 320, 320)
+                                .addComponent(RecipientCNICField, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addGap(322, 322, 322)
+                .addComponent(BloodReqButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
+                    .addContainerGap(540, Short.MAX_VALUE)
+                    .addComponent(jLabel61)
+                    .addGap(212, 212, 212)))
+            .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
+                    .addContainerGap(540, Short.MAX_VALUE)
+                    .addComponent(AmountofBloodField, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(192, 192, 192)))
+        );
+        jPanel13Layout.setVerticalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addComponent(jPanel49, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel57, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel13Layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(RecipientNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(RecipientCNICField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(70, 70, 70)
+                        .addComponent(jLabel59, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(pID1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(bloodTypeField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(75, 75, 75)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel60, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dID1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(182, 182, 182)
+                .addComponent(BloodReqButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel13Layout.createSequentialGroup()
+                    .addGap(290, 290, 290)
+                    .addComponent(jLabel61, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(560, Short.MAX_VALUE)))
+            .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel13Layout.createSequentialGroup()
+                    .addGap(338, 338, 338)
+                    .addComponent(AmountofBloodField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(512, Short.MAX_VALUE)))
+        );
+
+        BloodReqPanel.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 930, 880));
+
+        jTabbedPane1.addTab("tab12", BloodReqPanel);
+
         getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 0, 930, 910));
 
         pack();
@@ -1571,10 +1741,10 @@ Patient p = new Patient();
         jTabbedPane1.setSelectedIndex(5);
     }//GEN-LAST:event_jPanel14MouseClicked
 
-    private void jPanel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel13MouseClicked
+    private void BloodReqOptionPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BloodReqOptionPanelMouseClicked
         // TODO add your handling code here:
-        jTabbedPane1.setSelectedIndex(6);
-    }//GEN-LAST:event_jPanel13MouseClicked
+        jTabbedPane1.setSelectedIndex(11);
+    }//GEN-LAST:event_BloodReqOptionPanelMouseClicked
 
     private void jPanel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseClicked
         // TODO add your handling code here:
@@ -1679,6 +1849,21 @@ Patient p = new Patient();
         
     }//GEN-LAST:event_jButton6ActionPerformed
 
+    private void jPanel32MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel32MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel32MouseClicked
+
+    private void BloodReqButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BloodReqButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BloodReqButtonActionPerformed
+
+    private void BloodReqButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BloodReqButtonMouseClicked
+        
+        BloodRequest BldReq = new BloodRequest();
+        
+       
+    }//GEN-LAST:event_BloodReqButtonMouseClicked
+
 
 
     /**
@@ -1721,6 +1906,11 @@ Patient p = new Patient();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AccountLabel;
+    private javax.swing.JTextField AmountofBloodField;
+    private javax.swing.JButton BloodReqButton;
+    private javax.swing.JLabel BloodReqLabel;
+    private javax.swing.JPanel BloodReqOptionPanel;
+    private javax.swing.JPanel BloodReqPanel;
     private javax.swing.JTable DoctorTable;
     private javax.swing.JLabel LabResultsLabel;
     private javax.swing.JPanel LabResultsPanel;
@@ -1736,10 +1926,17 @@ Patient p = new Patient();
     private javax.swing.JLabel PresTagLabel2;
     private javax.swing.JLabel PresTestLabel;
     private javax.swing.JPanel Prespanel;
+    private javax.swing.JTextField RecipientCNICField;
+    private javax.swing.JTextField RecipientNameField;
     private javax.swing.JTextField addressField;
     private javax.swing.JTextField ageField;
+    private javax.swing.JTextField bloodTypeField;
     private javax.swing.JTextField dID;
+<<<<<<< Updated upstream
     private javax.swing.JTextField dP;
+=======
+    private javax.swing.JTextField dID1;
+>>>>>>> Stashed changes
     private javax.swing.JComboBox<String> dSelectCategory;
     private javax.swing.JTextField emailField;
     private javax.swing.JButton jButton1;
@@ -1750,12 +1947,10 @@ Patient p = new Patient();
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
@@ -1796,7 +1991,15 @@ Patient p = new Patient();
     private javax.swing.JLabel jLabel50;
     private javax.swing.JLabel jLabel51;
     private javax.swing.JLabel jLabel52;
+    private javax.swing.JLabel jLabel53;
+    private javax.swing.JLabel jLabel54;
+    private javax.swing.JLabel jLabel55;
+    private javax.swing.JLabel jLabel56;
+    private javax.swing.JLabel jLabel57;
+    private javax.swing.JLabel jLabel59;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel60;
+    private javax.swing.JLabel jLabel61;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -1824,6 +2027,7 @@ Patient p = new Patient();
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel30;
     private javax.swing.JPanel jPanel31;
+    private javax.swing.JPanel jPanel32;
     private javax.swing.JPanel jPanel33;
     private javax.swing.JPanel jPanel34;
     private javax.swing.JPanel jPanel35;
@@ -1840,8 +2044,9 @@ Patient p = new Patient();
     private javax.swing.JPanel jPanel45;
     private javax.swing.JPanel jPanel46;
     private javax.swing.JPanel jPanel47;
+    private javax.swing.JPanel jPanel48;
+    private javax.swing.JPanel jPanel49;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane12;
@@ -1865,7 +2070,11 @@ Patient p = new Patient();
     private javax.swing.JPanel pDID;
     private javax.swing.JLabel pEmail;
     private javax.swing.JTextField pID;
+<<<<<<< Updated upstream
     private javax.swing.JTextField pT;
+=======
+    private javax.swing.JTextField pID1;
+>>>>>>> Stashed changes
     private javax.swing.JTextField passwordField;
     private javax.swing.JLabel presLabel;
     private javax.swing.JTextArea prsArea;
