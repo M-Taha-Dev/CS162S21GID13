@@ -56,6 +56,18 @@ public class MedicineLog {
         return medicineList.get(index);
     }
 
+    //For checking medicines
+    
+    public boolean checkMedicine(String name){
+        for(int i=0;i<medicineList.size();i++){
+            if(medicineList.get(i).getMedicineName().equals(name)){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    
     // for searching medicine
     public List<Medicine> searchMedicineByName(String name) {
         List<Medicine> medList = new ArrayList<>();

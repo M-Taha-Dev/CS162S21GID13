@@ -1,8 +1,10 @@
 package cs162s21gid13;
 import java.util.*;
-public interface Doctor {
-	String getId();
+public class Doctor {
+	//String getId();
         SimpleDoctor DataDoctor = new SimpleDoctor();
-	List<Prescription> getHistory();
-        void printPrescription();
+	//List<Prescription> getHistory();
+        //void printPrescription();
+        
+        
 }

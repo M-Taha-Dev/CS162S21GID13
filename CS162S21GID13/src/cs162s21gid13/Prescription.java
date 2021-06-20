@@ -17,8 +17,6 @@ public class Prescription {
     private Date dateofCheckup;
     private List<Medicine> medList = new ArrayList<Medicine>();
 
-    
-
     /// Getters and Setters
     
     public List<Medicine> getMedList() {

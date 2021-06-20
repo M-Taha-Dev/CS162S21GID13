@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package cs162s21gid13;
-
+import java.util.*;
 /**
  *
  * @author Ushher
@@ -14,6 +14,16 @@ public class AdminForm extends javax.swing.JFrame {
     /**
      * Creates new form AdminForm
      */
+    private List<SimpleDoctor>strList = new ArrayList<>();
+
+    public List<SimpleDoctor> getStrList() {
+        return strList;
+    }
+
+    public void setStrList(List<SimpleDoctor> strList) {
+        this.strList = strList;
+    }
+    
     public AdminForm() {
         initComponents();
     }
@@ -53,6 +63,9 @@ public class AdminForm extends javax.swing.JFrame {
         jPanel31 = new javax.swing.JPanel();
         jPanel32 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
+        jPanel35 = new javax.swing.JPanel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
         jPanel20 = new javax.swing.JPanel();
@@ -100,6 +113,34 @@ public class AdminForm extends javax.swing.JFrame {
         jLabel25 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jPanel36 = new javax.swing.JPanel();
+        jPanel37 = new javax.swing.JPanel();
+        dLastName = new javax.swing.JTextField();
+        jLabel28 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
+        jPanel38 = new javax.swing.JPanel();
+        jLabel31 = new javax.swing.JLabel();
+        jSeparator16 = new javax.swing.JSeparator();
+        dPassword = new javax.swing.JPasswordField();
+        dAddButton = new javax.swing.JButton();
+        dPhoneNumber = new javax.swing.JTextField();
+        jLabel34 = new javax.swing.JLabel();
+        jLabel36 = new javax.swing.JLabel();
+        dEmail = new javax.swing.JTextField();
+        dCnic = new javax.swing.JTextField();
+        dUsername = new javax.swing.JTextField();
+        dAddress = new javax.swing.JTextField();
+        dFirstName = new javax.swing.JTextField();
+        jLabel37 = new javax.swing.JLabel();
+        jLabel38 = new javax.swing.JLabel();
+        jLabel39 = new javax.swing.JLabel();
+        jLabel40 = new javax.swing.JLabel();
+        jSeparator17 = new javax.swing.JSeparator();
+        jSeparator18 = new javax.swing.JSeparator();
+        jSeparator19 = new javax.swing.JSeparator();
+        jSeparator20 = new javax.swing.JSeparator();
+        jSeparator21 = new javax.swing.JSeparator();
+        jSeparator22 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -162,7 +203,7 @@ public class AdminForm extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("View Data");
+        jLabel4.setText("Add Docter");
         jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel4MouseClicked(evt);
@@ -170,10 +211,10 @@ public class AdminForm extends javax.swing.JFrame {
         });
         jPanel8.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 0, 182, 50));
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cs162s21gid13/View icon.png"))); // NOI18N
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cs162s21gid13/Doctor Male icon 2.png"))); // NOI18N
         jPanel8.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 6, -1, 40));
 
-        jPanel2.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 290, 50));
+        jPanel2.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 440, 290, 50));
 
         jPanel10.setBackground(new java.awt.Color(88, 79, 171));
         jPanel10.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -346,6 +387,29 @@ public class AdminForm extends javax.swing.JFrame {
         jPanel10.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 6, -1, 40));
 
         jPanel2.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, 290, 50));
+
+        jPanel35.setBackground(new java.awt.Color(88, 79, 171));
+        jPanel35.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel35MouseClicked(evt);
+            }
+        });
+        jPanel35.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel15.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setText("View Data");
+        jLabel15.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel15MouseClicked(evt);
+            }
+        });
+        jPanel35.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 0, 182, 50));
+
+        jLabel27.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cs162s21gid13/View icon.png"))); // NOI18N
+        jPanel35.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 6, -1, 40));
+
+        jPanel2.add(jPanel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 290, 50));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 780));
 
@@ -853,9 +917,9 @@ public class AdminForm extends javax.swing.JFrame {
         jPanel18Layout.setHorizontalGroup(
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel18Layout.createSequentialGroup()
-                .addContainerGap(24, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel23)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel18Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel22)
@@ -883,9 +947,9 @@ public class AdminForm extends javax.swing.JFrame {
         jPanel19Layout.setHorizontalGroup(
             jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel19Layout.createSequentialGroup()
-                .addContainerGap(24, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel25)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel19Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel24)
@@ -993,7 +1057,146 @@ public class AdminForm extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("tab3", jPanel12);
 
-        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 10, 930, 780));
+        jPanel37.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel37.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        dLastName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dLastNameActionPerformed(evt);
+            }
+        });
+        jPanel37.add(dLastName, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 220, 240, 50));
+
+        jLabel28.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel28.setText("Password");
+        jPanel37.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 580, -1, 28));
+
+        jLabel29.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel29.setText("Last Name");
+        jPanel37.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 160, -1, 28));
+
+        jPanel38.setBackground(new java.awt.Color(73, 222, 195));
+        jPanel38.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel31.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel31.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel31.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel31.setText("Add Docotr");
+        jPanel38.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 0, 170, 110));
+
+        jPanel37.add(jPanel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 940, 110));
+
+        jSeparator16.setBackground(new java.awt.Color(51, 102, 255));
+        jPanel37.add(jSeparator16, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 570, 240, 17));
+        jPanel37.add(dPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 620, 240, 50));
+
+        dAddButton.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        dAddButton.setText("Add");
+        dAddButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dAddButtonActionPerformed(evt);
+            }
+        });
+        jPanel37.add(dAddButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 620, 159, 64));
+
+        dPhoneNumber.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dPhoneNumberActionPerformed(evt);
+            }
+        });
+        jPanel37.add(dPhoneNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 420, 240, 50));
+
+        jLabel34.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel34.setText("Username");
+        jPanel37.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 480, -1, 28));
+
+        jLabel36.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel36.setText("Address");
+        jPanel37.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 380, -1, 28));
+
+        dEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dEmailActionPerformed(evt);
+            }
+        });
+        jPanel37.add(dEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 320, 240, 50));
+
+        dCnic.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dCnicActionPerformed(evt);
+            }
+        });
+        jPanel37.add(dCnic, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 320, 240, 50));
+
+        dUsername.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dUsernameActionPerformed(evt);
+            }
+        });
+        jPanel37.add(dUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 520, 240, 50));
+
+        dAddress.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dAddressActionPerformed(evt);
+            }
+        });
+        jPanel37.add(dAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 420, 240, 50));
+
+        dFirstName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dFirstNameActionPerformed(evt);
+            }
+        });
+        jPanel37.add(dFirstName, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 220, 240, 50));
+
+        jLabel37.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel37.setText("First Name");
+        jPanel37.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 160, -1, 28));
+
+        jLabel38.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel38.setText("Email");
+        jPanel37.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 280, -1, 28));
+
+        jLabel39.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel39.setText("CNIC");
+        jPanel37.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 280, -1, 28));
+
+        jLabel40.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel40.setText("Phone Number");
+        jPanel37.add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 380, -1, 28));
+
+        jSeparator17.setBackground(new java.awt.Color(51, 102, 255));
+        jPanel37.add(jSeparator17, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 470, 240, 17));
+
+        jSeparator18.setBackground(new java.awt.Color(51, 102, 255));
+        jPanel37.add(jSeparator18, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 470, 240, 17));
+
+        jSeparator19.setBackground(new java.awt.Color(51, 102, 255));
+        jPanel37.add(jSeparator19, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 370, 240, 17));
+
+        jSeparator20.setBackground(new java.awt.Color(51, 102, 255));
+        jPanel37.add(jSeparator20, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 370, 240, 17));
+
+        jSeparator21.setBackground(new java.awt.Color(51, 102, 255));
+        jPanel37.add(jSeparator21, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 270, 240, 17));
+
+        jSeparator22.setBackground(new java.awt.Color(51, 102, 255));
+        jPanel37.add(jSeparator22, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 270, 240, 17));
+
+        javax.swing.GroupLayout jPanel36Layout = new javax.swing.GroupLayout(jPanel36);
+        jPanel36.setLayout(jPanel36Layout);
+        jPanel36Layout.setHorizontalGroup(
+            jPanel36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel37, javax.swing.GroupLayout.PREFERRED_SIZE, 925, Short.MAX_VALUE)
+        );
+        jPanel36Layout.setVerticalGroup(
+            jPanel36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel37, javax.swing.GroupLayout.DEFAULT_SIZE, 750, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("tab4", jPanel36);
+
+        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 930, 780));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -1012,6 +1215,7 @@ public class AdminForm extends javax.swing.JFrame {
 
     private void jPanel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseClicked
         this.setVisible(false);
+        Admin.getInstance().saveDoctorInfo();
         LoginFrame frame = new LoginFrame();
         frame.setVisible(true);
     }//GEN-LAST:event_jPanel7MouseClicked
@@ -1021,7 +1225,7 @@ public class AdminForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel4MouseClicked
 
     private void jPanel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MouseClicked
-        jTabbedPane1.setSelectedIndex(2);
+        jTabbedPane1.setSelectedIndex(3);
     }//GEN-LAST:event_jPanel8MouseClicked
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
@@ -1081,6 +1285,54 @@ public class AdminForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel12MouseClicked
 
+    private void jLabel15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel15MouseClicked
+
+    private void jPanel35MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel35MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel35MouseClicked
+
+    private void dLastNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dLastNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dLastNameActionPerformed
+
+    private void dAddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dAddButtonActionPerformed
+        // TODO add your handling code here:
+        SimpleDoctor obj = new SimpleDoctor();
+        obj.setAddress(dAddress.getText());
+        obj.setName(dFirstName.getText() + " " + dLastName.getText());
+        obj.setCnic(dCnic.getText());
+        obj.setCategory("General Doctor");
+        obj.setEmail(dEmail.getText());
+        obj.setPassword(String.valueOf(dPassword.getPassword()));
+        Admin.getInstance().getStrList().add(obj);
+    }//GEN-LAST:event_dAddButtonActionPerformed
+
+    private void dPhoneNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dPhoneNumberActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dPhoneNumberActionPerformed
+
+    private void dEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dEmailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dEmailActionPerformed
+
+    private void dCnicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dCnicActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dCnicActionPerformed
+
+    private void dUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dUsernameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dUsernameActionPerformed
+
+    private void dAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dAddressActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dAddressActionPerformed
+
+    private void dFirstNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dFirstNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dFirstNameActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1117,6 +1369,15 @@ public class AdminForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton dAddButton;
+    private javax.swing.JTextField dAddress;
+    private javax.swing.JTextField dCnic;
+    private javax.swing.JTextField dEmail;
+    private javax.swing.JTextField dFirstName;
+    private javax.swing.JTextField dLastName;
+    private javax.swing.JPasswordField dPassword;
+    private javax.swing.JTextField dPhoneNumber;
+    private javax.swing.JTextField dUsername;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -1124,6 +1385,7 @@ public class AdminForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
@@ -1136,12 +1398,22 @@ public class AdminForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -1175,6 +1447,10 @@ public class AdminForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel32;
     private javax.swing.JPanel jPanel33;
     private javax.swing.JPanel jPanel34;
+    private javax.swing.JPanel jPanel35;
+    private javax.swing.JPanel jPanel36;
+    private javax.swing.JPanel jPanel37;
+    private javax.swing.JPanel jPanel38;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
@@ -1182,10 +1458,16 @@ public class AdminForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JSeparator jSeparator16;
+    private javax.swing.JSeparator jSeparator17;
+    private javax.swing.JSeparator jSeparator18;
+    private javax.swing.JSeparator jSeparator19;
+    private javax.swing.JSeparator jSeparator20;
+    private javax.swing.JSeparator jSeparator21;
+    private javax.swing.JSeparator jSeparator22;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTable jTable1;

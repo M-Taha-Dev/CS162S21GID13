@@ -19,10 +19,16 @@ public abstract class Person
     protected String email = null;
     protected String address = null;
     protected String age = null;
+    protected String password = null;
 
     public String getAge() {
         return age;
     }
+
+    public String getPassword() {
+        return password;
+    }
+    
 
     public void setAge(String age) {
         this.age = age;
@@ -56,6 +62,7 @@ public abstract class Person
     public String getPhoneNumber() {
         return phoneNumber;
     }
+    
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
@@ -73,10 +80,15 @@ public abstract class Person
         return email;
     }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    
+
     public void setEmail(String email) {
         this.email = email;
     }
-
+     
    
   
 }

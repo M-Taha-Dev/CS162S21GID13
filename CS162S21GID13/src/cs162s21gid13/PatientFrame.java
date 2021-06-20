@@ -22,6 +22,13 @@ Patient p = new Patient();
  void s(){
      p.setId("PID-1234");
  }
+ public PatientFrame(String email){
+    initComponents();
+    pEmail.setText(email);
+ }
+ 
+ 
+ 
     
     /**
      * Objects which the frame will interact with
@@ -143,11 +150,11 @@ Patient p = new Patient();
         DefaultTableModel model = (DefaultTableModel) DoctorTable.getModel();
         Object rowData[] = new Object[4];
         model.getDataVector().removeAllElements();
-        for (int i=0;i<dList.size();i++){
+        for (int i=0;i<Admin.getInstance().getStrList().size();i++){
             rowData[0] = "" + (i+1);
-            rowData[1] = dList.get(i).DataDoctor.name;
-            rowData[2] = dList.get(i).DataDoctor.doctorId;
-            rowData[3] = dList.get(i).DataDoctor.email;
+            rowData[1] = Admin.getInstance().getStrList().get(i).getName();
+            //rowData[2] = dList.get(i).DataDoctor.doctorId;
+            rowData[3] = Admin.getInstance().getStrList().get(i).getEmail();
             model.addRow(rowData);
         }
     }
@@ -203,6 +210,7 @@ Patient p = new Patient();
         jPanel14 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
         AccountLabel = new javax.swing.JLabel();
+        pEmail = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -293,7 +301,7 @@ Patient p = new Patient();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jLabel38 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        dSelectCategory = new javax.swing.JComboBox<>();
         jLabel39 = new javax.swing.JLabel();
         jScrollPane6 = new javax.swing.JScrollPane();
         DoctorTable = new javax.swing.JTable();
@@ -501,6 +509,12 @@ Patient p = new Patient();
         jPanel14.add(AccountLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, 200, 73));
 
         jPanel1.add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 580, 390, -1));
+
+        pEmail.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        pEmail.setForeground(new java.awt.Color(255, 255, 255));
+        pEmail.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        pEmail.setText("Email");
+        jPanel1.add(pEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, 240, 73));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 390, 910));
 
@@ -1254,8 +1268,8 @@ Patient p = new Patient();
         jLabel38.setText("Time Available");
         jPanel28.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 280, -1, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel28.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 150, 180, 30));
+        dSelectCategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "None", "General Doctor" }));
+        jPanel28.add(dSelectCategory, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 150, 180, 30));
 
         jLabel39.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel39.setText("Category");
@@ -1307,7 +1321,7 @@ Patient p = new Patient();
                 jButton5ActionPerformed(evt);
             }
         });
-        jPanel28.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, -1, -1));
+        jPanel28.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 120, 40));
 
         javax.swing.GroupLayout jPanel24Layout = new javax.swing.GroupLayout(jPanel24);
         jPanel24.setLayout(jPanel24Layout);
@@ -1602,9 +1616,11 @@ Patient p = new Patient();
         // TODO add your handling code here:
        Appointment obj = new Appointment();
        obj.setDoctorId(selectedID);
-       obj.setPatientId("ABC-1234");
+       obj.setPatientId(pEmail.getText());
        obj.setStatus("Pending");
-       AppointmentLog.appointmentList.add(obj);
+       obj.setDate(new Date());
+       AppointmentLog.getInstance().addAppointment(obj);
+      // AppointmentLog.appointmentList.add(obj);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -1630,7 +1646,7 @@ Patient p = new Patient();
         this.addressField.setText(this.patient.getAddress());
         this.emailField.setText(this.patient.getEmail());
         
-        this.passwordField.setText(this.patient.getpassword());
+        this.passwordField.setText(this.patient.getPassword());
         
         
         
@@ -1638,15 +1654,18 @@ Patient p = new Patient();
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        PatientLog.readDoctor();
-        createDoctorTable();
+        if(dSelectCategory.getSelectedItem().equals("General Doctor")){
+      
+        createDoctorTable(); 
+        }
+        
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void DoctorTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DoctorTableMouseClicked
         // TODO add your handling code here:
         DefaultTableModel model = (DefaultTableModel) DoctorTable.getModel();
         int index = DoctorTable.getSelectedRow();
-        selectedID = "" +model.getValueAt(index, 2);
+        selectedID = "" +model.getValueAt(index,3);
     }//GEN-LAST:event_DoctorTableMouseClicked
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -1716,6 +1735,7 @@ Patient p = new Patient();
     private javax.swing.JTextField addressField;
     private javax.swing.JTextField ageField;
     private javax.swing.JTextField dID;
+    private javax.swing.JComboBox<String> dSelectCategory;
     private javax.swing.JTextField emailField;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -1724,7 +1744,6 @@ Patient p = new Patient();
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton8;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1841,6 +1860,7 @@ Patient p = new Patient();
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField nameField;
+    private javax.swing.JLabel pEmail;
     private javax.swing.JTextField pID;
     private javax.swing.JTextField passwordField;
     private javax.swing.JLabel presLabel;

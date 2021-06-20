@@ -3,17 +3,45 @@ package cs162s21gid13;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class AppointmentLog {
-	static List<Appointment>appointmentList = new ArrayList<>();
+	private List<Appointment>appointmentList;
+        private static AppointmentLog obj;
+        
+        private AppointmentLog(){
+            appointmentList = new ArrayList<>();
+        }
+        
+        public static AppointmentLog getInstance(){
+            if(obj == null){
+                obj = new AppointmentLog();
+            }
+            return obj;
+        }
+        
 	// add appointment 
+    public List<Appointment> getAppointmentList() {
+        return appointmentList;
+    }
+
+    public void setAppointmentList(List<Appointment> appointmentList) {
+        this.appointmentList = appointmentList;
+    }
+        
+        
 	public void addAppointment(Appointment obj) {
 		if(obj != null) {
 			appointmentList.add(obj);
 		}
 	}
-	
+	/*String[] getAvailableTime(String id,){
+            String 
+        }
+        */
+        
+
+        
 	// accept appointment 
 	
 	public void acceptAppointment(String appNo) {
@@ -67,6 +95,19 @@ public class AppointmentLog {
 		appointmentList.set(index, obj);
 	}
         
+        Stack<Appointment>getAppointments(String id){
+            Stack<Appointment>appStack = new Stack();
+            for(int i=0;i<appointmentList.size();i++){
+                if(appointmentList.get(i).getDoctorId().equals(id)){
+                    appStack.push(appointmentList.get(i));
+                }
+            }
+            return appStack; 
+        }
+        
+        
+        
+        
         void readAppointmentRequest(){
             try{
                 FileReader fr = new FileReader("AppointmentRequest.txt");
@@ -95,7 +136,7 @@ public class AppointmentLog {
                     Patient obj = new Patient();
                     obj.setId(arr[0]);
                     obj.setName(arr[1]);
-                    SimpleDoctor.patientList.add(obj);
+                   // SimpleDoctor.getPatientList().add(obj);
                   //obj.setDateOfAppointmen(arr[2]);
                 }
             }catch(Exception ex){

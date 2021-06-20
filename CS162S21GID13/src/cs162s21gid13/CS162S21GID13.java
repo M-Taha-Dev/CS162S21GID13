@@ -16,15 +16,21 @@ public class CS162S21GID13 {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-      
+        Admin.getInstance().readData();
+        PatientLog.getInstatnce().readPatient();
         PharmacyManager.getInstance().readMedicine();
         PharmacyManager.getInstance().requestLog.readRequest();
         PharmacyManager.getInstance().requestLog.readMedicineRequest();
         LoginFrame obj1 = new LoginFrame();
         obj1.setVisible(true);
-        
-       
-        
+      /*  SimpleDoctor obj = new SimpleDoctor();
+        obj.setAddress("Lahore,Punjab");
+        obj.setAge("32");
+        obj.setName("Muhammad Taha");
+        obj.setCnic("4250141382629");
+        obj.setEmail("taha@gmail.com");
+        obj.setCategory("General Doctor");
+      //  obj.*/
     }
     
 }

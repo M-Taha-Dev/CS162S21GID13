@@ -5,6 +5,8 @@
  */
 package cs162s21gid13;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -120,7 +122,38 @@ public class MedicalHistory {
             return null;
         }
     }
-    
+    void readPrescription(){
+        try{
+            FileReader fr = new FileReader("PrescriptionInfo.txt");
+            BufferedReader br = new BufferedReader(fr);
+            String line = br.readLine();
+            Prescription obj = new Prescription();
+            /* fw.write(pPatientID.getText() + ";");
+            fw.write(prs.getText() + "\n");*/
+            while(line != null){
+                String s1[] = line.split(";");
+                obj.setPatientID(s1[0]);
+                String s2[] = s1[1].split(":");
+                String[] s3;
+                try {
+                     
+                 for(int i=0;i<s2.length;i++)
+                 {
+                    s3 = s2[i].split(",");
+                    for(int j = 0;j<s3.length;j++){
+                        
+                    }
+                 }
+                    
+                } catch (Exception e) {
+                }
+                
+            }
+        }
+        catch(Exception ex){
+            
+        }
+    }
     
     
     

@@ -4,11 +4,9 @@
  * and open the template in the editor.
  */
 package cs162s21gid13;
-
 import java.util.List;
 import java.util.Stack;
 import java.util.ArrayList;
-
 /**
  *
  * @author Ushher
@@ -16,42 +14,26 @@ import java.util.ArrayList;
 public class Patient extends Person {
     
   private String Id;
-  private String password;
   private PatientBilling finance;
   private MedicalHistory history;
   private Prescription latestPres;
   private MedicineRequestLog medRequests;
   private LabTestLog labTests;
-
   
-  
-
-    public Patient(String Id, String password, PatientBilling finance, MedicalHistory history, Prescription latestPres, MedicineRequestLog medRequests) {
+    /*public Patient(String Id, String password, PatientBilling finance, MedicalHistory history, Prescription latestPres, MedicineRequestLog medRequests) {
         this.Id = Id;
-        this.password = password;
         this.finance = finance;
         this.history = history;
         this.latestPres = latestPres;
         this.medRequests = medRequests;
-    }
-
-    public Patient() 
-    {
-        
-    }
+    }*/
   
     //Getters and Setters
-    
-    public String getpassword() {
-        return password;
-    }
 
     public void setpassword(String password) {
         this.password = password;
     }
-    
-    
-  
+
     public String getId() {
         return Id;
     }
@@ -156,8 +138,7 @@ public class Patient extends Person {
         
         for (int i = 0; i < this.medRequests.getList().size(); i++)
         {
-            medReqStack.push(this.medRequests.getRequest(i));
-            
+            medReqStack.push(this.medRequests.getRequest(i)); 
         }
         
         return medReqStack;
