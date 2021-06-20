@@ -9,62 +9,54 @@ import java.util.List;
 import java.util.Stack;
 import javax.swing.table.DefaultTableModel;
 import java.util.*;
+
 /**
  *
  * @author DELL
  */
 public class PatientFrame extends javax.swing.JFrame {
-static List<Doctor>dList = new ArrayList<>();
-static List<Prescription>pList = new ArrayList<>();
-static String selectedID = "";
-static Prescription o = new Prescription();
-Patient p = new Patient();
- void s(){
-     p.setId("PID-1234");
- }
- public PatientFrame(String email){
-    initComponents();
-    pEmail.setText(email);
- }
- 
- 
- 
-    
+
+    static List<Doctor> dList = new ArrayList<>();
+    static List<Prescription> pList = new ArrayList<>();
+    static String selectedID = "";
+    static Prescription o = new Prescription();
+    Patient p = new Patient();
+
+    void s() {
+        p.setId("PID-1234");
+    }
+
+    public PatientFrame(String email) {
+        initComponents();
+        pEmail.setText(email);
+    }
+
     /**
      * Objects which the frame will interact with
      */
-    
-    
     Patient patient = new Patient();
-    
+
     /**
      * Functions
      */
-    
     ////
-    
-    void createMedicalHistoryTable(Stack<Prescription> presStack) 
-    {
+    void createMedicalHistoryTable(Stack<Prescription> presStack) {
 
-        if(presStack.isEmpty())
-        {
-            Object rowData[] = new Object[4]; 
-            DefaultTableModel model = (DefaultTableModel) this.MedicalHistoryTable.getModel();
-            model.getDataVector().removeAllElements();
-            
-            rowData[1] = "No Data";
-            rowData[2] = "Available";
-            
-            model.addRow(rowData);
-                   
-        }
-        else
-        {
+        if (presStack.isEmpty()) {
             Object rowData[] = new Object[4];
             DefaultTableModel model = (DefaultTableModel) this.MedicalHistoryTable.getModel();
             model.getDataVector().removeAllElements();
-            for (int i = 0; i < presStack.size(); i++) 
-            {
+
+            rowData[1] = "No Data";
+            rowData[2] = "Available";
+
+            model.addRow(rowData);
+
+        } else {
+            Object rowData[] = new Object[4];
+            DefaultTableModel model = (DefaultTableModel) this.MedicalHistoryTable.getModel();
+            model.getDataVector().removeAllElements();
+            for (int i = 0; i < presStack.size(); i++) {
                 Prescription pres = presStack.pop();
                 rowData[0] = pres.getDoctorID();
                 rowData[1] = pres.getPatientID();
@@ -74,10 +66,8 @@ Patient p = new Patient();
             }
         }
     }
-    
-    
-    void createPrescription()
-    {
+
+    void createPrescription() {
         /*if(presStack.isEmpty())
         {
             this.NoDataLabel.setText("No Data Available");
@@ -94,43 +84,36 @@ Patient p = new Patient();
             this.PresDiagnosisLabel.setText(pres.getDiagnosis());
             
             this.PresTestLabel.setText(pres.getTestRecommended());
-            */
-            Object rowData[] = new Object[3];
-            DefaultTableModel model = (DefaultTableModel) this.PresMedicinetable.getModel();
-            Patient patient1 = PatientLog.getInstatnce().returnPatient(pEmail.getText());
-            Prescription ob = patient1.getLatestPres();
-            model.getDataVector().removeAllElements();
-            
-            for (int i = 0; i < ob.getpMed().size(); i++) 
-            {
-                rowData[0] = ob.getpMed().get(i).getName();
-                rowData[1] = ob.getpMed().get(i).getTime();
-                rowData[2] = ob.getpMed().get(i).getDuration();
-                model.addRow(rowData);
-            }
-    }
-    
-    void createLabTestTable(Stack<LabTest> labtestStack)
-    {
-        if(labtestStack.isEmpty())
-        {
-            Object rowData[] = new Object[4]; 
-            DefaultTableModel model = (DefaultTableModel) this.LabTestTable.getModel();
-            model.getDataVector().removeAllElements();
-            
-            rowData[1] = "No Data";
-            rowData[2] = "Available";
-            
-            
+         */
+        Object rowData[] = new Object[3];
+        DefaultTableModel model = (DefaultTableModel) this.PresMedicinetable.getModel();
+        Patient patient1 = PatientLog.getInstatnce().returnPatient(pEmail.getText());
+        Prescription ob = patient1.getLatestPres();
+        model.getDataVector().removeAllElements();
+
+        for (int i = 0; i < ob.getpMed().size(); i++) {
+            rowData[0] = ob.getpMed().get(i).getName();
+            rowData[1] = ob.getpMed().get(i).getTime();
+            rowData[2] = ob.getpMed().get(i).getDuration();
             model.addRow(rowData);
         }
-        else
-        {
+    }
+
+    void createLabTestTable(Stack<LabTest> labtestStack) {
+        if (labtestStack.isEmpty()) {
             Object rowData[] = new Object[4];
             DefaultTableModel model = (DefaultTableModel) this.LabTestTable.getModel();
             model.getDataVector().removeAllElements();
-            for (int i = 0; i < labtestStack.size(); i++) 
-            {
+
+            rowData[1] = "No Data";
+            rowData[2] = "Available";
+
+            model.addRow(rowData);
+        } else {
+            Object rowData[] = new Object[4];
+            DefaultTableModel model = (DefaultTableModel) this.LabTestTable.getModel();
+            model.getDataVector().removeAllElements();
+            for (int i = 0; i < labtestStack.size(); i++) {
                 LabTest labtest = labtestStack.pop();
                 rowData[0] = labtest.getLabDoctorId();
                 rowData[1] = labtest.getTestName();
@@ -138,16 +121,16 @@ Patient p = new Patient();
                 rowData[3] = labtest.getDateofTest();
                 model.addRow(rowData);
             }
-        }    
+        }
     }
-    
+
     //********************************Create Doctor Table****************************
-    void createDoctorTable(){
+    void createDoctorTable() {
         DefaultTableModel model = (DefaultTableModel) DoctorTable.getModel();
         Object rowData[] = new Object[4];
         model.getDataVector().removeAllElements();
-        for (int i=0;i<Admin.getInstance().getStrList().size();i++){
-            rowData[0] = "" + (i+1);
+        for (int i = 0; i < Admin.getInstance().getStrList().size(); i++) {
+            rowData[0] = "" + (i + 1);
             rowData[1] = Admin.getInstance().getStrList().get(i).getName();
             //rowData[2] = dList.get(i).DataDoctor.doctorId;
             rowData[3] = Admin.getInstance().getStrList().get(i).getEmail();
@@ -155,13 +138,7 @@ Patient p = new Patient();
         }
     }
     //*******************************Create Prescription*************************
-    
-    
-    
-    
-    
-    
-    
+
     /**
      * Creates new form Patient
      */
@@ -1710,8 +1687,8 @@ Patient p = new Patient();
     private void PrespanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PrespanelMouseClicked
         // TODO add your handling code here:
         jTabbedPane1.setSelectedIndex(1);
-      //  this.createPrescription(this.patient.viewHistory());
-        
+        //  this.createPrescription(this.patient.viewHistory());
+
     }//GEN-LAST:event_PrespanelMouseClicked
 
     private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
@@ -1753,10 +1730,7 @@ Patient p = new Patient();
         frame.setVisible(true);
     }//GEN-LAST:event_jPanel4MouseClicked
 
-
 //<<<<<<< Updated upstream
-
-
 
     private void jPanel22MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel22MousePressed
         // TODO add your handling code here:
@@ -1780,13 +1754,13 @@ Patient p = new Patient();
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-       Appointment obj = new Appointment();
-       obj.setDoctorId(selectedID);
-       obj.setPatientId(pEmail.getText());
-       obj.setStatus("Pending");
-       obj.setDate(new Date());
-       AppointmentLog.getInstance().addAppointment(obj);
-      // AppointmentLog.appointmentList.add(obj);
+        Appointment obj = new Appointment();
+        obj.setDoctorId(selectedID);
+        obj.setPatientId(pEmail.getText());
+        obj.setStatus("Pending");
+        obj.setDate(new Date());
+        AppointmentLog.getInstance().addAppointment(obj);
+        // AppointmentLog.appointmentList.add(obj);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -1805,33 +1779,32 @@ Patient p = new Patient();
 
     private void AccountLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AccountLabelMouseClicked
         this.jTabbedPane1.setSelectedIndex(5);
-        
+
         this.nameField.setText(this.patient.getName());
         this.ageField.setText(this.patient.getAge());
-        
+
         this.addressField.setText(this.patient.getAddress());
         this.emailField.setText(this.patient.getEmail());
-        
+
         this.passwordField.setText(this.patient.getPassword());
-        
-        
-        
+
+
     }//GEN-LAST:event_AccountLabelMouseClicked
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        if(dSelectCategory.getSelectedItem().equals("General Doctor")){
-      
-        createDoctorTable(); 
+        if (dSelectCategory.getSelectedItem().equals("General Doctor")) {
+
+            createDoctorTable();
         }
-        
+
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void DoctorTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DoctorTableMouseClicked
         // TODO add your handling code here:
         DefaultTableModel model = (DefaultTableModel) DoctorTable.getModel();
         int index = DoctorTable.getSelectedRow();
-        selectedID = "" +model.getValueAt(index,3);
+        selectedID = "" + model.getValueAt(index, 3);
     }//GEN-LAST:event_DoctorTableMouseClicked
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -1839,14 +1812,10 @@ Patient p = new Patient();
         //dID.setText(o.getDoctorID());
         createPrescription();
         pID.setText(pEmail.getText());
-      //  Patient obj = PatientLog.getInstatnce().returnPatient(pEmail.getText());
-        
-      //  prsArea.setText();
-        
-        
-        
-        
-        
+        //  Patient obj = PatientLog.getInstatnce().returnPatient(pEmail.getText());
+
+        //  prsArea.setText();
+
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jPanel32MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel32MouseClicked
@@ -1858,13 +1827,11 @@ Patient p = new Patient();
     }//GEN-LAST:event_BloodReqButtonActionPerformed
 
     private void BloodReqButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BloodReqButtonMouseClicked
-        
+
         BloodRequest BldReq = new BloodRequest();
-        
-       
+
+
     }//GEN-LAST:event_BloodReqButtonMouseClicked
-
-
 
     /**
      * @param args the command line arguments
@@ -1901,8 +1868,7 @@ Patient p = new Patient();
             }
         });
     }
-    
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AccountLabel;
