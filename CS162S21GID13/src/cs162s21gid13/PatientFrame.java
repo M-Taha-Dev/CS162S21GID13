@@ -1898,11 +1898,8 @@ public class PatientFrame extends javax.swing.JFrame {
     private javax.swing.JTextField ageField;
     private javax.swing.JTextField bloodTypeField;
     private javax.swing.JTextField dID;
-<<<<<<< Updated upstream
     private javax.swing.JTextField dP;
-=======
     private javax.swing.JTextField dID1;
->>>>>>> Stashed changes
     private javax.swing.JComboBox<String> dSelectCategory;
     private javax.swing.JTextField emailField;
     private javax.swing.JButton jButton1;
@@ -2036,11 +2033,8 @@ public class PatientFrame extends javax.swing.JFrame {
     private javax.swing.JPanel pDID;
     private javax.swing.JLabel pEmail;
     private javax.swing.JTextField pID;
-<<<<<<< Updated upstream
     private javax.swing.JTextField pT;
-=======
     private javax.swing.JTextField pID1;
->>>>>>> Stashed changes
     private javax.swing.JTextField passwordField;
     private javax.swing.JLabel presLabel;
     private javax.swing.JTextArea prsArea;
